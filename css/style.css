@@ -32,6 +32,13 @@ body {
     background-color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
+
+    /* Fix to scale the page */
+    transform: scale(0.67); /* Scale down to 67% */
+    transform-origin: top left; /* Anchor scaling to the top left */
+    width: 150%; /* Adjust width to counter scaling */
+    height: 150%; /* Adjust height to counter scaling */
+    overflow-x: hidden; /* Prevent x-axis overflow from scaling */
 }
 
 /* ============================================
