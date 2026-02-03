@@ -1,0 +1,226 @@
+????Worksheet
+ 
+Data??????????
+Tools: SQL, python/R, tableau.
+Knowledge: analyzing, statistics, modeling basics.
+Soft skills: communication, leadership.
+ 
+??????
+????
+??????????????,??????????????,???????????????,???????????
+1.1. ??:Originalis AI
+1.2. ????(1-2??):Originalis AI is a NYC-based tech start-up providing composable operating systems for the private capital markets. The project our team worked on is the deal sourcing feature of the product, helping venture capitalists to identify early-stage funding opportunities via a consolidated scraping pipeline and a dynamic recommender system.
+1.3. ????(??/??):Columbia Business School Co-op Program
+1.4. ?? & ??/??:Data Science Intern
+1.5. ?? & ????(YYYY.MM):2025.09 - 2025.12
+1.6. ??(City, State, Country):New York, NY
+1.7. ???????????:
+Data preprocessing/enrichment: numpy, pandas, sklearn, lxml, feedparser, levenshtein
+Data validation: pydantic
+Web scraping: bs4(beautifulsoup), selenium, apify
+Sentence Embedding: sentence-transformers
+
+
+
+1.8. ??????1?impact(?????):
+Built a real-time data ingestion pipeline using BeautifulSoup, Selenium and Apify Proxy, surfaced 200% more early-stage investment opportunities than Crunchbase and Pitchbook
+1.9. ??????2?impact(?????):
+Leveraged Pydantic type-hints and custom validators to normalize unstructured data from 20+ sources (e.g. Linkedin, X and Reddit), achieving 95% accuracy in a multi-stage refinement workflow
+1.10. ??????3?impact(?????):
+Evaluated company fit by comparing users' portfolio with sector/stage-wide taxonomy using sentence-transformers, matching highly-customized, top-k relevant deals; achieved 73.7% positive feedback from 19 test users
+1.11. ??????/?????1:
+practical engineering skill: Learned to devise web-scraping strategies that ensure satisfactory performance while managing company budget. Mixing engineering with real-world considerations.
+1.12. ??????/?????2:
+Stakeholder management skill: the experience of negotiating with course instructors (expecting more analytics) and company founders (expecting more scraping groundwork) to plan on deliverables that satisfy both parties without the team over-working
+1.13. ??????/?????3:
+Team-based code writing: Through frequent code change and strategic shifts,I have become conversant with version control, branching and other useful repository management techniques with git. 
+ 
+2.1. ??:CLP Power Hong Kong Limited
+2.2. ????(1-2??):The company is a primary electricity supplier in Hong Kong. I was deployed to the company to provide technical and coordination support in a large scale data migration project (SAP legacy data to Oracle ERM system)
+2.3. ????(??/??):Full-time (Contractor)
+2.4. ?? & ??/??:Data Migration Analyst (FDM Group Consultant)
+2.5. ?? & ????(YYYY.MM):2024.06 - 2025.06
+2.6. ??(City, State, Country):Hong Kong, HK
+2.7. ???????????:
+Data validation: Advanced Excel formulas,  VBA automation scripting, Lucidchart
+Defect management: Datadog, Jira, ServiceNow
+Data visualization: PowerBI
+
+2.8. ??????1?impact(?????):
+Optimized extraction, transformation and loading schedules for eight data objects via runtime and dependency graph analysis across QA environments using Lucidchart; incrementally improved migration coherency by 20-40% in each mock migration and helped propel a 90+% success rate in the final production run.
+2.9. ??????2?impact(?????):
+Enhanced rule-based data validation with Excel VBA scripts, provided clear user guidelines for 30 non-technical validators that boosted overall issue inspection efficiency by 400%
+2.10. ??????3?impact(?????):
+Integrated Jira API with Power Automate and designed 20+ progress tracking metrics; built an interactive PowerBI dashboard that cut triage-to-feedback cycle per ticket to within a day
+2.11. ??????/?????1:
+Business acumen: Fostered a capacity to visualize cross-functional data object dependencies with Lucidchart and a business sense to understand the intricate dependencies across supply chain, financial and human capital data.
+2.12. ??????/?????2:
+Technical communication: Taking accountability for cross-functional defect reconciliation, I tailored different communication approaches for data engineers and in-house business teams that ensured problems are acknowledged, worked on and resolved at each team's earliest convenience.
+2.13. ??????/?????3:
+Leadership and presentation: Consistently leading ? of the daily standup, I developed a great presentation skill that transforms multifaceted progress reporting into clear and concise executive summaries and action plans in three rounds of system integration testings and the 10-week hypercare after the final production load. 
+
+3.1. ??:HKUST StatMLGroup
+3.2. ????(1-2??):As a research intern at HKUST's StatML Group, led by Professor Tong Zhang, I focused on developing, modifying, and testing experimental setups for prompt-based evaluations in the field of textual stylistic transfer.
+???????????????????????????(?????) - ??
+3.3. ????(??/??):Research Intern
+3.4. ?? & ??/??:Resarch Intern
+3.5. ?? & ????(YYYY.MM):2023.06 - 2023.12
+3.6. ??(City, State, Country):Hong Kong, HK
+3.7. ???????????:
+Fine-tuning and experimentation: Pytorch, Hugging Face Transformers
+Synthetic data generation and preprocessing: Numpy, Pandas, OpenAI, Pydantic
+Optimization: reproducing algorithms using Python
+Evaluation Frameworks: BLEU
+3.8. ??????1?impact(?????):
+Built a synthetic data pipeline that generated fictional dialogues at scale, dynamically dispatching OpenAI GPT queries using a min-heap scheduling algorithm, which increased efficiency by 60% under a strict API cooling constraint.   
+3.9. ??????2?impact(?????):
+
+Developed a modular LLM-as-a-judge framework to support scalable evaluations for GPT-3.5, GPT-4, and Llama models, leveraging prompt-adjustable algorithms such as greedy search, simulated annealing, and genetic optimization. This setup enhanced evaluation flexibility and reduced workflow complexity by 50%.
+3.10. ??????/?????1:
+Reproducing Paper Ideas: Learned to design and implement python codes that seamlessly replicate the ideas of algorithm papers given their pseudocode. 
+3.11. ??????/?????2:
+Research communication: Strengthened skills in documenting and presenting experimental results, aligning expectations between academic mentors and peers to translate experimental findings into actionable research insights.  
+
+??????
+????
+??????????????,??????????????,???????????????,???????????
+1.1. ????:Start-up, MVP completed on Jan 17th will be seeking campus funding in Spring
+1.2. ????(?????): MorningTide: An application to facilitate therapist-client relationship through AI analytics.
+1.3. ?? & ????(YYYY.MM):2025.12 - present
+1.4. ??(City, State, Country):New York, NY
+1.5. ????????,??,???/??:
+Backend: Flask (API design, routing, app bootstrap), Pydantic (request/response schemas, validation), SQLAlchemy (data models, DB interaction), 
+Frontend: React (components, pages, app composition), Java Script, CSS, frontend service layer (API calls via axios), adobe illustrator (for front end art design)
+AI: Sentiment Analysis, valence score for emotional intensity, RAG
+Database: Relational DB setup (PostgreSQL via docker-compose), ORM models (User, JournalEntry), data preprocessing (pandas), centralized config management (env vars, project-level paths).
+Architecture & Patterns: modular monorepo structure (backend/app, training, models, tests; frontend/src), API versioning and separation of concerns (api, models, schemas, ml), RAG indexing module (AI retrieval layer decoupled from API)
+1.6. ????????1?impact(?????):
+Implemented a lightweight, low-latency DistillBERT model to analyze and quantify emotional intensity via valence scores (softmax over 20 labeled emotions). Retained 96% of the BERT model performance while cutting back inference latency by 5 fold. 
+1.7. ????????2?impact(?????):
+Designed and deployed a robust sentence importance model to measure the emotional weight of sentences in long journals or multi-sentence entries. Enabled 95% accuracy in identifying high-impact sentences within journals for therapy-focused analytics.
+1.8. ????????3?impact(?????):
+Developed an RAG indexing module to analyze client journals from the past week, cross-referenced with theoretical therapy documents for session planning. Achieved 60% reduction in manual prep time for clients with automated draft session suggestions.
+1.9. ??????/?????1:
+MLOps: Expertise in building an end-to-end web application, encompassing front-end design, back-end API setup, and scalable machine learning integrations.
+1.10. ??????/?????2:
+Model selection acumen: Practical evaluation of multiple pre-trained LLMs, balancing latency and performance for real-time user needs.
+1.11. ??????/?????3:
+Market Research skill: Collaborated with therapist organizations and tested user feedback to refine application design and usability.
+
+2.1. ????:AWS & AGI House Small Language Build Day (participated solo)
+2.2. ????(?????): 
+A children's story generator powered by a fine-tuned small language model (SLM) for safe, high-quality, and stable story generation. The project effectively captured target audience's demand: working parents that need to come up with sleep-time story quickly and effortlessly after a long day of exhausting work
+2.3. ?? & ????(YYYY.MM):2025.11 - 2025.11
+2.4. ??(City, State, Country):New York, NY
+2.5. ????????,??,???/??:
+Language Model Fine-Tuning: Trained Qwen3-1.7B, a small language model, on the TinyStories dataset (2,200,000+ stories).
+AWS Trainium & Optimum Neuron: Leveraged AWS' machine learning accelerator to optimize training speed in an intensive one-day delivery requirement.
+Content Safety: Implemented SLM safeguards to prevent inappropriate language and ensure child-friendly content output.
+2.6. ????????1?impact(?????):
+Designed and trained a fine-tuned small language model (Qwen3-1.7B) on over 2.2M stories from the TinyStories dataset, achieving recognition as a top 4 project out of 50+ teams. 
+2.7. ????????2?impact(?????):
+Developed a modular training framework to evaluate and compare the safety, performance, and efficiency between small language models (SLMs) and large language models (LLMs). Ensured stable and predictable generation performance, surpassing LLMs in reliability by 20% based on human evaluation. 
+2.8. ??????/?????1:
+Mastered Lora fine-tuning small language models (SLMs) for domain-specific applications using large-scale datasets and efficient optimization techniques.
+2.9. ??????/?????2:
+Developed expertise in leveraging AWS Trainium and Optimum Neuron for accelerating machine learning model training.
+2.10. ??????/?????3:
+Strengthened ability to deliver high-quality code under tight time constraints, balancing speed, stability, and functionality during competitive project development.
+3.1. ????:Personal Project
+3.2. ????(?????): An enterprise-grade, end-to-end MLOps solution for real-time credit card fraud detection with comprehensive feature engineering, multi-framework support, and production-ready streaming inference.
+3.3. ?? & ????(YYYY.MM):2025.07 - 2025.09
+3.4. ??(City, State, Country):Hong Kong, HK
+3.5. ????????,??,???/??:
+Real-Time Data Processing: Apache Spark + Kafka
+Storage: MinIO (S3-compatible) for model artifacts and data storage
+Experiment Tracking: MLflow for tracking metrics, parameters, and model versions
+Database: PostgreSQL for metadata management and model registry
+Task Processing: Distributed task execution with Redis and Celery
+Data Generation: Simulating realistic transaction data using Confluent Kafka
+Containerization: Docker and Docker Compose for service orchestration
+3.6. ????????1?impact(?????):
+Designed and implemented an Apache Spark Structured Streaming pipeline for real-time fraud detection with sub-second latency. Processed 10,000+ transactions/second with Spark's optimized partitioning, ensuring fraud alerts with minimal delays. Improved fraud detection rate by 15% through alignment of streaming features with the training pipeline.
+3.7. ????????2?impact(?????):
+Automated the end-to-end machine learning pipeline including training, hyperparameter tuning, experiment tracking, and model versioning. Leveraged MLflow to manage experiments, achieving AUC-PR of 0.92 with f_beta scoring optimization for recall focus. Reduced training time by 30% through optimized feature engineering workflows and lightweight models (e.g., LightGBM).
+
+3.8. ????????3?impact(?????):
+Simulated realistic transaction data with embedded fraud patterns using Confluent Kafka. Defined 6 distinct fraud patterns (e.g., card testing, geographic anomalies, account takeovers), generating 500,000+ labeled synthetic transactions. Enhanced production model robustness by 30% through enriched, balanced training data.
+
+
+
+3.9. ??????/?????1:
+MLOps workflow: Become conversant with real-time MLOps workflows, combining Spark for low-latency streaming and Kafka for event-driven data ingestion.
+3.10. ??????/?????2:
+Model testing: Gained practical experience in experiment tracking and model lifecycle management with MLflow, enabling reproducible training pipelines.
+3.11. ??????/?????3:
+Developed expertise in data engineering for fraud detection, including feature design, risk analysis, and balanced dataset creation for imbalanced classes.
+
+4.1. ????:Personal Project
+4.2. ????(?????):A deep learning-based news recommendation system that cross-compared multiple NLP models and embedding techniques to optimize real-time user engagement prediction.
+4.3. ?? & ????(YYYY.MM):2025.07 - 2025.08
+4.4. ??(City, State, Country):Hong Kong, HK
+4.5. ????????,??,???/??:
+Exploratory Data Analysis (EDA): NumPy, pandas, and matplotlib for visualizing and analyzing user engagement patterns.
+Deep Learning Frameworks: PyTorch.
+Word Embeddings: GloVe, Word2Vec, sentence-transformers
+Model Architectures: Experimentation with CNN, RNN, bidirectional RNN, LSTM, and transformer-based models for cross-evaluation.
+Application Deployment: Developed real-time prediction application with Streamlit.
+Cloud Infrastructure: AWS for model deployment and hosting environment.
+
+4.6. ????????1?impact(?????):
+Conducted exploratory data analysis on user engagement patterns using NumPy, pandas, and matplotlib, leading to strategic feature selection and optimization. Visualized key user behavior trends such as session frequency and click-through rates, improving dataset quality by removing redundant features. Enhanced data preprocessing pipeline, reducing missing value rates by 20% and enabling smoother ingestion for model training.
+4.7. ????????2?impact(?????):
+Designed and implemented a modular deep learning experimentation framework to evaluate multiple architectures, including CNN, RNN, bidirectional RNN, LSTM, and transformer-based models. Enabled seamless integration and testing of models with shared pipelines for data preprocessing, training, and evaluation. Identified the transformer-based model as the best-performing architecture, achieving an AUC score of 0.86, outperforming the original CNN model by 24%. Streamlined experimentation, reducing development iteration time by 40%, and providing detailed performance insights for each architecture.
+4.8. ????????3?impact(?????):
+Deployed a real-time recommendation system as a Streamlit application hosted on AWS infrastructure. Integrated optimized user interface for recommendation outputs, reducing the response latency for predictions to sub-second levels. Achieved high availability and scalability through seamless cloud deployment, serving 500+ simulated concurrent users.
+4.9. ??????/?????1:
+Developed expertise in end-to-end NLP pipelines, including data preprocessing, word embeddings, and training for multiple deep-learning architectures.
+4.10. ??????/?????2:
+Gained practical experience in evaluating model architectures (CNN, RNN, LSTM, transformers) and selecting optimal models for various sequence lengths and data complexities.
+4.11. ??????/?????3:
+Enhanced understanding of cloud deployment workflows by building, testing, and hosting a real-time Streamlit application on AWS, ensuring scalability and low latency.
+
+??Leadership/Academic/Research/Extracurricular Activities/Voluntary Work
+????
+??????????????,??????????????,???????????????,???????????
+1.1. ??(??context):HKUST Fitness Club Leadership Position - head coach
+1.2. ??(?????):Actively participated in the HKUST Fitness Club event organizing to promote health lifestyle and positive body image.
+1.3. ?? & ????(YYYY.MM):2023.02- 2023.12
+1.4. ??(City, State, Country):Hong Kong, HK
+1.5. ????????,??,???/??:This is a non-tech activity
+1.6. ????1?impact:
+Participated in the Asian National Bodybuilding Championship (ANBC) twice on behalf of the club and received 1st place in Open Classic Physique Division and 2nd place in Junior Class Classic Physique Division.
+1.7. ????2?impact:
+Designed customized training plans for three groups of students with varying levels of experience in fitness. 75% of the people continue to use the training plan 3 months after its initial distribution.
+1.8. ????3?impact:
+Plan and organize group classes weekly at the school gym, introduced 70+ students into the world of fitness
+1.9. ??????/?????1:
+Adaptive communication: skill gained through weekly coaching of students with very different personalities and goals, learnt to select coaching methods that accommodate their needs (encouraging, advising, motivating and etc)
+1.10. ??????/?????2:
+Resilience: The prep time before competition is normally 4-6 months of strict diet and structured training. I built great resilience through the bodybuilding competition that is applicable to my professional life
+
+2.1. ??(??context):Co-founder of ACEIB Tutors
+2.2. ??(?????): Built ACEIB Tutors alongside Fabian Cho (my undergraduate classmate), a global peer-mentoring company tailored for International Baccalaureate Diploma Programme (IBDP) students.
+2.3. ?? & ????(YYYY.MM):2019.10 - 2021.12
+2.4. ??(City, State, Country):Hong Kong, HK
+2.5. ????????,??,???/??:This is a non-tech activity
+2.6. ????1?impact:
+Established operations and directly contributed to securing 200+ students from over 10 countries, ensuring global reach and credibility. Designed mentorship programs that offered flexible, personalized tutoring, achieving a 92% satisfaction rate based on parent feedback.
+2.7. ????2?impact:
+Innovated and implemented online teaching strategies during the COVID-19 pandemic, providing uninterrupted learning services. Increased total student count by 72% within the first two months of the pandemic through adaptive digital offerings.
+2.8. ????3?impact:
+Collaborated with complementary businesses, including Tsing Mei Art Studio (art students application support), to create joint value propositions for students. Co-hosted a collaborative seminar series combining academic mentoring and creative enrichment, attended by 150+ participants locally and virtually. Strengthened community presence while enhancing brand visibility by 30%, leading to increased interest from both students and parents.
+2.9. ??????/?????1:
+Strengthened entrepreneurial skills, including business development, scaling niche markets, and leading cross-functional efforts in a startup environment.
+2.10. ??????/?????2:
+Developed ability to analyze and seize business opportunities, leveraging collaborative efforts with complementary enterprises to accelerate growth.
+
+
+??Technical Skills
+????
+????????
+Languages: Python (numpy, pandas, matplotlib, seaborn, scipy, scikit-Learn, pytorch, tensorflow, keras), R (ggplot2, tidyverse, plotly, caret, randomForest, xgboost, glmnet, e1071, nnet, mlr3), C++, SQL, Unix, VBA, CSS, React, Java Script
+Data Analytics & Visualization: Google Analytics (A/B Testing), Tableau, Power BI, Quarto, Looker Studio
+MLOps & Deployment: Docker, Airflow, MinIO, MLFlow, Flask, Streamlit, AWS (EC2, S3), CI/CD, Git
+ 
+
