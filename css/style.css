@@ -76,7 +76,7 @@ body {
     transition: var(--transition);
 }
 
-.nav-brand a:hover {
+.nav-brand a {
     transform: scale(1.05);
 }
 
@@ -105,7 +105,7 @@ body {
     transition: width 0.3s ease;
 }
 
-.nav-menu a:hover::after,
+.nav-menu a::after,
 .nav-menu a.active::after {
     width: 100%;
 }
@@ -264,7 +264,7 @@ body {
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-.btn-primary:hover {
+.btn-primary {
     transform: translateY(-3px);
     box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
 }
@@ -275,7 +275,7 @@ body {
     border: 2px solid var(--primary-color);
 }
 
-.btn-secondary:hover {
+.btn-secondary {
     background: var(--primary-color);
     color: var(--white);
 }
@@ -289,7 +289,7 @@ body {
     min-width: auto;
 }
 
-.btn-outline:hover {
+.btn-outline {
     background: var(--primary-color);
     color: var(--white);
 }
@@ -331,7 +331,7 @@ body {
     transition: var(--transition);
 }
 
-.project-card:hover {
+.project-card {
     transform: translateY(-10px);
     box-shadow: var(--shadow);
 }
@@ -343,7 +343,7 @@ body {
     transition: var(--transition);
 }
 
-.project-card:hover .project-image {
+.project-card .project-image {
     transform: scale(1.05);
 }
 
@@ -367,7 +367,7 @@ body {
     transition: var(--transition);
 }
 
-.project-link:hover {
+.project-link {
     transform: translateX(5px);
 }
 
@@ -489,7 +489,7 @@ body {
 }
 
 .tab-btn.active,
-.tab-btn:hover {
+.tab-btn {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
 }
@@ -556,7 +556,7 @@ body {
     text-align: left;
 }
 
-.skill-item:hover {
+.skill-item {
     transform: translateY(-5px);
     box-shadow: var(--shadow-sm);
 }
@@ -699,7 +699,7 @@ body {
 }
 
 .filter-btn.active,
-.filter-btn:hover {
+.filter-btn {
     background: var(--primary-color);
     color: var(--white);
 }
@@ -720,7 +720,7 @@ body {
     grid-template-columns: 350px 1fr;
 }
 
-.project-card-large:hover {
+.project-card-large {
     box-shadow: var(--shadow);
     transform: translateY(-5px);
 }
@@ -732,7 +732,7 @@ body {
     transition: var(--transition);
 }
 
-.project-card-large:hover .project-image-large {
+.project-card-large .project-image-large {
     transform: scale(1.05);
 }
 
@@ -833,7 +833,7 @@ body {
     flex-direction: column;
 }
 
-.blog-card:hover {
+.blog-card {
     transform: translateY(-10px);
     box-shadow: var(--shadow);
 }
@@ -845,7 +845,7 @@ body {
     transition: var(--transition);
 }
 
-.blog-card:hover .blog-image {
+.blog-card .blog-image {
     transform: scale(1.05);
 }
 
@@ -900,7 +900,7 @@ body {
     margin-top: auto;
 }
 
-.read-more:hover {
+.read-more {
     transform: translateX(5px);
 }
 
@@ -913,7 +913,7 @@ body {
     transition: var(--transition);
 }
 
-.blog-post:hover {
+.blog-post {
     box-shadow: var(--shadow);
     transform: translateX(5px);
 }
@@ -934,7 +934,7 @@ body {
     transition: var(--transition);
 }
 
-.blog-header h2 a:hover {
+.blog-header h2 a {
     color: var(--primary-color);
 }
 
@@ -1088,7 +1088,7 @@ body {
     font-weight: 600;
 }
 
-.info-content a:hover {
+.info-content a {
     text-decoration: underline;
 }
 
@@ -1111,7 +1111,7 @@ body {
     transition: var(--transition);
 }
 
-.social-link:hover {
+.social-link {
     background: var(--primary-color);
     color: var(--white);
     transform: translateY(-3px);
@@ -1204,7 +1204,7 @@ body {
     transition: var(--transition);
 }
 
-.newsletter-form button:hover {
+.newsletter-form button {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -1246,7 +1246,7 @@ body {
     transition: var(--transition);
 }
 
-.footer-section a:hover {
+.footer-section a {
     color: var(--white);
 }
 
@@ -1267,7 +1267,7 @@ body {
     transition: var(--transition);
 }
 
-.social-links a:hover {
+.social-links a{
     background: var(--primary-color);
     transform: translateY(-3px);
 }
@@ -1302,7 +1302,7 @@ body {
     transition: var(--transition);
 }
 
-.pagination-btn:hover:not(:disabled) {
+.pagination-btn:not(:disabled) {
     background: var(--primary-color);
     color: var(--white);
 }
