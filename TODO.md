@@ -2,12 +2,12 @@
 
 ## Getting Started
 
-- [ ] Replace "Your Name" with your actual name throughout all pages
-- [ ] Update email address: your.email@example.com
-- [ ] Update phone number: +1 (234) 567-890
-- [ ] Update location information
-- [ ] Add your profile image/avatar
-- [ ] Update social media links (GitHub, LinkedIn, Twitter, etc.)
+- [v] Replace "Your Name" with your actual name throughout all pages
+- [v] Update email address: your.email@example.com
+- [v] Update phone number: +1 (234) 567-890
+- [v] Update location information
+- [v] Add your profile image/avatar
+- [v] Update social media links (GitHub, LinkedIn, Twitter, etc.)
 
 ## Content Updates
 
