@@ -12,7 +12,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <a href="../index.html">Your Portfolio</a>
+                <a href="../index.html">Kane Wang</a>
             </div>
             <ul class="nav-menu">
                 <li><a href="../index.html">Home</a></li>
@@ -73,7 +73,7 @@
                             <span>PyTorch</span>
                         </div>
                         <div class="project-actions">
-                            <a href="#" class="btn-small btn-outline">Demo Video</a>
+                            <a href="#" class="btn-small btn-outline">Full demo coming soon</a>
                         </div>
                     </div>
                 </div>
@@ -98,16 +98,15 @@
                             </div>
                         </div>
                         <div class="project-tech">
-                            <span>Qwen3-1.7B</span>
+                            <span>Small Language Model</span>
                             <span>LoRA Fine-Tuning</span>
                             <span>AWS Trainium</span>
                             <span>Optimum Neuron</span>
-                            <span>Content Safety</span>
                             <span>PyTorch</span>
                         </div>
                         <div class="project-actions">
                             <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" class="btn-small btn-primary">View Code</a>
-                            <a href="files/children_story_generator.pdf" target="_blank" class="btn-small btn-outline">Learn More</a>
+                            <a href="#" class="btn-small btn-outline btn-proof-recognition">Proof of Recognition</a>
                         </div>
                     </div>
                 </div>
@@ -127,18 +126,19 @@
                                 <strong>ML Automation:</strong> Automated pipeline with MLflow achieving AUC-PR of 0.92, 30% reduced training time through optimized feature engineering.
                             </div>
                             <div class="highlight">
-                                <strong>Data Simulation:</strong> Confluent Kafka generating 500,000+ labeled synthetic transactions with 6 distinct fraud patterns, enhancing model robustness by 30%.
+                                <strong>Data Simulation:</strong> Confluent Kafka to continuously generate labeled synthetic transactions with 6 distinct fraud patterns, enhancing model robustness by 30%.
                             </div>
                         </div>
                         <div class="project-tech">
                             <span>Apache Spark</span>
-                            <span>Kafka</span>
+                            <span>Confluent Kafka</span>
+                            <span>Apache Airflow</span>
                             <span>MLflow</span>
                             <span>PostgreSQL</span>
                             <span>Docker</span>
                             <span>Redis</span>
                             <span>MinIO</span>
-                            <span>LightGBM</span>
+                            <span>Boosting Models</span>
                         </div>
                         <div class="project-actions">
                             <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" class="btn-small btn-primary">View Code</a>
@@ -158,7 +158,7 @@
                                 <strong>EDA & Optimization:</strong> Conducted exploratory data analysis on user engagement using NumPy, pandas, and matplotlib; improved dataset quality by removing 20% redundant features.
                             </div>
                             <div class="highlight">
-                                <strong>Architecture Comparison:</strong> Evaluated CNN, RNN, bidirectional RNN, LSTM, and transformer models; transformer-based architecture achieved best AUC of 0.86 (24% better than CNN baseline).
+                                <strong>Architecture Comparison:</strong> Evaluated CNN, RNN and transformer-based architecture, achieved best AUC of 0.86 (24% better than CNN baseline).
                             </div>
                             <div class="highlight">
                                 <strong>Production Deployment:</strong> AWS-hosted Streamlit application with optimized UI, serving 500+ concurrent users with sub-second prediction latency.
@@ -166,7 +166,7 @@
                         </div>
                         <div class="project-tech">
                             <span>PyTorch</span>
-                            <span>CNN/RNN/LSTM</span>
+                            <span>CNN/RNN</span>
                             <span>Transformers</span>
                             <span>Streamlit</span>
                             <span>AWS</span>
@@ -201,15 +201,6 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="journey.html">Journey</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
                         <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
@@ -226,6 +217,32 @@
             </div>
         </div>
     </footer>
+
+    <!-- Recognition Modal -->
+    <div id="recognitionModal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; overflow:auto; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+      <span class="modal-close" style="position:absolute; top:30px; right:40px; color:#fff; font-size:2.5rem; font-weight:700; cursor:pointer;">&times;</span>
+      <img src="../images/proof_of_recognition.png" alt="Proof of Recognition" style="max-width:90vw; max-height:80vh; display:block; margin:60px auto 0 auto; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.3); background:#fff;" />
+    </div>
+    <script>
+    // Modal open/close logic
+    const modal = document.getElementById('recognitionModal');
+    const closeBtn = modal ? modal.querySelector('.modal-close') : null;
+    const proofBtns = document.querySelectorAll('.btn-proof-recognition');
+    if (proofBtns.length && modal && closeBtn) {
+      proofBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          modal.style.display = 'flex';
+        });
+      });
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+    }
+    </script>
 
     <script src="../js/script.js"></script>
 </body>
