@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Your Portfolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Your Portfolio</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>My Projects</h1>
+            <p>Showcasing my work and creative solutions</p>
+        </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section class="projects-showcase">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+            </div>
+
+            <div class="projects-grid-large">
+                <!-- Project Card 1 -->
+                <div class="project-card-large" data-category="web">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project One - Web Application</h3>
+                        <p class="project-description">A modern web application built with React and Node.js. Features real-time updates, responsive design, and a beautiful user interface.</p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                            <span>Responsive Design</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">Live Demo</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card-large" data-category="fullstack">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project Two - Full Stack Platform</h3>
+                        <p class="project-description">A comprehensive full-stack platform with user authentication, database management, and advanced analytics features for business operations.</p>
+                        <div class="project-tech">
+                            <span>Vue.js</span>
+                            <span>Django</span>
+                            <span>PostgreSQL</span>
+                            <span>Docker</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">Live Demo</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card-large" data-category="mobile">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project Three - Mobile App</h3>
+                        <p class="project-description">A cross-platform mobile application developed with Flutter, offering seamless performance across iOS and Android devices.</p>
+                        <div class="project-tech">
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>Firebase</span>
+                            <span>iOS & Android</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">Learn More</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card-large" data-category="web">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project Four - Design System</h3>
+                        <p class="project-description">A comprehensive design system and component library built for scalability. Includes UI components, documentation, and Figma integration.</p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>SASS</span>
+                            <span>Figma</span>
+                            <span>Storybook</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">View System</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card-large" data-category="fullstack">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project Five - E-Commerce Platform</h3>
+                        <p class="project-description">An end-to-end e-commerce solution with product management, payment processing, and inventory tracking.</p>
+                        <div class="project-tech">
+                            <span>Next.js</span>
+                            <span>Stripe API</span>
+                            <span>Prisma</span>
+                            <span>AWS</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">Live Demo</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="project-card-large" data-category="web">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                    <div class="project-info">
+                        <h3>Project Six - Analytics Dashboard</h3>
+                        <p class="project-description">A powerful analytics dashboard featuring real-time data visualization, charts, and insights for data-driven decision making.</p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>D3.js</span>
+                            <span>GraphQL</span>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-primary">Live Demo</a>
+                            <a href="#" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Interested in Working Together?</h2>
+            <p>Let's collaborate and create something amazing!</p>
+            <a href="contact.html" class="btn btn-primary">Start a Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="journey.html">Journey</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Me</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-codepen"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
