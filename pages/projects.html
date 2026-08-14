@@ -10,7 +10,7 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="container">
+            <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
             </div>
@@ -28,6 +28,7 @@
                 <span></span>
             </div>
         </div>
+                
     </nav>
 
     <!-- Page Header -->
@@ -45,6 +46,35 @@
             <!-- Personal Projects Tab -->
             <div class="tab-content active" id="personal-projects">
                 <div class="projects-grid-large">
+                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
+                <div class="project-card-large" data-category="ai" id="loomai">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">
+                        <img src="../images/loomai.png" alt="Loom AI" style="width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
+                        <p class="project-date"><strong>2026</strong> | Remote</p>
+                        <p class="project-description">Developed a multi-node LangGraph agent orchestrating tool-calling, LLM reasoning, and deterministic scheduling to automate calendar planning.</p>
+                        <div class="project-highlights">
+                            <div class="highlight">
+                                <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
+                            </div>
+                            <div class="highlight">
+                                <strong>Evaluation:</strong> 317-test eval harness and a 20-user study showed 85% users rating 4–5 stars, saving 30–60 minutes per planning task.
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>LangGraph</span>
+                            <span>Multi-Agent Systems</span>
+                            <span>Node.js</span>
+                            <span>Redis</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-outline">More details coming soon</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Personal Project 1: MorningTide -->
                 <div class="project-card-large" data-category="ai" id="morningtide">
                     <div class="project-image-large" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
@@ -88,39 +118,7 @@
                 </div>
 
 
-                <!-- Personal Project 4: AWS Fine-Tuned SLM -->
-                <div class="project-card-large" data-category="ai">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <img src="../images/children_story_generator.png" alt="Best Children Story Generator" style="width: 100%; height: auto; border-radius: 8px;">
-                    </div>
-                    <div class="project-info">
-                        <h3>Fine-Tuned Small Language Model for Children Story Generation</h3>
-                        <p class="project-date"><strong>November 2025</strong> | New York, NY</p>
-                        <p class="project-description">Fine-tuned Qwen3-1.7B small language model (SLM) for child-safe story generation. Targeted working parents needing quick, safe and creative bedtime stories. Achieved top 4 recognition among 50+ competing teams at AWS & AGI House Build Day.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Model Fine-Tuning:</strong> Trained Qwen3-1.7B on TinyStories dataset (2.2M+ stories) using LoRA fine-tuning techniques.
-                            </div>
-                            <div class="highlight">
-                                <strong>AWS Optimization:</strong> Leveraged AWS Trainium and Optimum Neuron for 1-day delivery requirement, balancing speed with stability.
-                            </div>
-                            <div class="highlight">
-                                <strong>Safety & Reliability:</strong> Implemented content safety filters ensuring child-friendly output; surpassed LLMs by 20% in generation reliability via human evaluation.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>Small Language Model</span>
-                            <span>LoRA Fine-Tuning</span>
-                            <span>AWS Trainium</span>
-                            <span>Optimum Neuron</span>
-                            <span>PyTorch</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" class="btn-small btn-primary">View Code</a>
-                            <a href="#" class="btn-small btn-outline btn-proof-recognition">Proof of Recognition</a>
-                        </div>
-                    </div>
-                </div>
+                <!-- removed Fine-Tuned SLM here; will re-insert after KV-Cache to match requested order -->
 
                 <!-- Personal Project 2: Credit Card Fraud Detection -->
                 <div class="project-card-large" data-category="data" id="fraud">
@@ -168,34 +166,66 @@
                     </div>
                 </div>
 
-                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
-                <div class="project-card-large" data-category="ai" id="loomai">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">
-                        <img src="../images/loomai.png" alt="Loom AI" style="width: 100%; height: auto; border-radius: 8px;">
+                <!-- Additional Benchmarking Project: KV-Cache Management -->
+                <div class="project-card-large" data-category="research" id="kvcache">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+                        <img src="../images/kv_cache.png" alt="KV Cache Benchmarking" style="width: 100%; height: auto; border-radius: 8px;">
                     </div>
                     <div class="project-info">
-                        <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
-                        <p class="project-date"><strong>2026</strong> | Remote</p>
-                        <p class="project-description">Developed a multi-node LangGraph agent orchestrating tool-calling, LLM reasoning, and deterministic scheduling to automate calendar planning.</p>
+                        <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
+                        <p class="project-date"><strong>2025</strong> | Research</p>
+                        <p class="project-description">Benchmarked multiple KV-cache strategies for vLLM under realistic request patterns to identify throughput and memory bottlenecks.</p>
                         <div class="project-highlights">
                             <div class="highlight">
-                                <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
+                                <strong>Throughput Harness:</strong> 500-request Poisson harness on vLLM to simulate realistic traffic patterns.
                             </div>
                             <div class="highlight">
-                                <strong>Evaluation:</strong> 317-test eval harness and a 20-user study showed 85% users rating 4–5 stars, saving 30–60 minutes per planning task.
+                                <strong>Findings:</strong> Identified KV memory as throughput bottleneck (18.7% → 79.7% utilization); v0-eager outperformed alternatives by 10–24%.
                             </div>
                         </div>
                         <div class="project-tech">
-                            <span>LangGraph</span>
-                            <span>Multi-Agent Systems</span>
-                            <span>Node.js</span>
-                            <span>Redis</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="#" class="btn-small btn-outline">More details coming soon</a>
+                            <span>vLLM</span>
+                            <span>KV-Cache</span>
+                            <span>Benchmarking</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Re-inserted: Fine-Tuned Small Language Model for Children Story Generation -->
+                <div class="project-card-large" data-category="ai">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <img src="../images/children_story_generator.png" alt="Best Children Story Generator" style="width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Fine-Tuned Small Language Model for Children Story Generation</h3>
+                        <p class="project-date"><strong>November 2025</strong> | New York, NY</p>
+                        <p class="project-description">Fine-tuned Qwen3-1.7B small language model (SLM) for child-safe story generation. Targeted working parents needing quick, safe and creative bedtime stories. Achieved top 4 recognition among 50+ competing teams at AWS & AGI House Build Day.</p>
+                        <div class="project-highlights">
+                            <div class="highlight">
+                                <strong>Model Fine-Tuning:</strong> Trained Qwen3-1.7B on TinyStories dataset (2.2M+ stories) using LoRA fine-tuning techniques.
+                            </div>
+                            <div class="highlight">
+                                <strong>AWS Optimization:</strong> Leveraged AWS Trainium and Optimum Neuron for 1-day delivery requirement, balancing speed with stability.
+                            </div>
+                            <div class="highlight">
+                                <strong>Safety & Reliability:</strong> Implemented content safety filters ensuring child-friendly output; surpassed LLMs by 20% in generation reliability via human evaluation.
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Small Language Model</span>
+                            <span>LoRA Fine-Tuning</span>
+                            <span>AWS Trainium</span>
+                            <span>Optimum Neuron</span>
+                            <span>PyTorch</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" class="btn-small btn-primary">View Code</a>
+                            <a href="#" class="btn-small btn-outline btn-proof-recognition">Proof of Recognition</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- removed duplicate Loom AI block (moved to top) -->
 
                 <!-- Personal Project 3: Deep Learning News Recommender -->
                 <div class="project-card-large" data-category="ai" id="news">
@@ -236,32 +266,7 @@
             </div>
             <!-- End Personal Projects Grid -->
             
-            <!-- Additional Benchmarking Project: KV-Cache Management -->
-            <div style="margin-top: 40px;">
-                <div class="project-card-large" data-category="research" id="kvcache">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
-                        <img src="../images/kv_cache.png" alt="KV Cache Benchmarking" style="width: 100%; height: auto; border-radius: 8px;">
-                    </div>
-                    <div class="project-info">
-                        <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
-                        <p class="project-date"><strong>2025</strong> | Research</p>
-                        <p class="project-description">Benchmarked multiple KV-cache strategies for vLLM under realistic request patterns to identify throughput and memory bottlenecks.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Throughput Harness:</strong> 500-request Poisson harness on vLLM to simulate realistic traffic patterns.
-                            </div>
-                            <div class="highlight">
-                                <strong>Findings:</strong> Identified KV memory as throughput bottleneck (18.7% → 79.7% utilization); v0-eager outperformed alternatives by 10–24%.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>vLLM</span>
-                            <span>KV-Cache</span>
-                            <span>Benchmarking</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             </div>
             <!-- End Personal Projects Tab -->
 
