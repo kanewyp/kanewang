@@ -51,12 +51,12 @@
                         <img src="../images/morningtide.png" alt="MorningTide Project Image" style="width: 100%; height: auto; border-radius: 8px;">
                     </div>
                     <div class="project-info">
-                        <h3>MorningTide: AI-Driven Therapy Assistant</h3>
+                        <h3>MorningTide — RAG Journaling & Emotional-Pattern Assistant</h3>
                         <p class="project-date"><strong>December 2025 - Present</strong> | New York, NY</p>
-                        <p class="project-description">An intelligent therapy support platform that combines sentiment analysis with session planning automation. Uses low-latency AI models to analyze client journal entries and provide therapists with actionable insights for effective session planning.</p>
+                        <p class="project-description">A RAG-based journaling assistant that analyzes emotional patterns over time and surfaces actionable summaries for therapists and self-reflection.</p>
                         <div class="project-highlights">
                             <div class="highlight">
-                                <strong>Sentiment Engine:</strong> Implemented DistillBERT for emotional intensity analysis (valence scores over 20 emotions), retaining 96% of BERT performance while reducing inference latency 5x.
+                                <strong>Sentiment Engine:</strong> Implemented DistilBERT for emotional intensity analysis (valence scores over 20 emotions), retaining 96% of BERT performance while reducing inference latency 5x.
                             </div>
                             <div class="highlight">
                                 <strong>Content Analysis:</strong> Built sentence importance model achieving 95% accuracy in identifying high-impact journal entries for therapy-focused analytics.
@@ -64,15 +64,22 @@
                             <div class="highlight">
                                 <strong>Session Planning:</strong> Developed RAG indexing module analyzing weekly journals with therapy documents, achieving 60% reduction in manual prep time.
                             </div>
+                            <div class="highlight">
+                                <strong>RAG Pipeline:</strong> Built a tool-calling RAG pipeline over journal segments for emotional pattern detection and long-range retrieval.
+                            </div>
+                            <div class="highlight">
+                                <strong>Distillation:</strong> Distilled a DistilBERT sentiment classifier via knowledge distillation, retaining 93% of teacher F1 at 50% of inference cost.
+                            </div>
+                            <div class="highlight">
+                                <strong>User Impact:</strong> Integrated insights into therapist workflows, reducing manual prep time and improving session quality.
+                            </div>
                         </div>
                         <div class="project-tech">
-                            <span>Flask</span>
-                            <span>React</span>
-                            <span>DistillBERT</span>
                             <span>RAG</span>
-                            <span>PostgreSQL</span>
-                            <span>SQLAlchemy</span>
+                            <span>DistilBERT</span>
                             <span>PyTorch</span>
+                            <span>Plotly</span>
+                            <span>Flask</span>
                         </div>
                         <div class="project-actions">
                             <a href="#" class="btn-small btn-outline">Full demo coming soon</a>
@@ -123,16 +130,25 @@
                     <div class="project-info">
                         <h3>Credit Card Fraud Detection MLOps Solution</h3>
                         <p class="project-date"><strong>July 2025 - September 2025</strong> | Hong Kong, HK</p>
-                        <p class="project-description">Enterprise-grade, end-to-end MLOps solution for real-time credit card fraud detection. Features comprehensive feature engineering, multi-framework support, and production-ready streaming inference at scale.</p>
+                        <p class="project-description">Enterprise-grade, end-to-end MLOps system for real-time credit card fraud detection. Built a Kafka-to-Spark streaming pipeline processing 50k events/s with sub-70ms inference latency; orchestrated intraday training and model registration with Airflow and MLflow.</p>
                         <div class="project-highlights">
                             <div class="highlight">
-                                <strong>Real-Time Pipeline:</strong> Apache Spark Structured Streaming processing 10,000+ transactions/second with sub-second latency, improving fraud detection rate by 15%.
+                                <strong>Real-Time Pipeline:</strong> Kafka-to-Spark streaming pipeline processing 50k events/s with sub-70ms end-to-end latency, enabling near-instant fraud scoring.
                             </div>
                             <div class="highlight">
-                                <strong>ML Automation:</strong> Automated pipeline with MLflow achieving AUC-PR of 0.92, 30% reduced training time through optimized feature engineering.
+                                <strong>Model Ops:</strong> Orchestrated intraday training and model registration using Airflow and MLflow for continuous deployment.
                             </div>
                             <div class="highlight">
-                                <strong>Data Simulation:</strong> Confluent Kafka to continuously generate labeled synthetic transactions with 6 distinct fraud patterns, enhancing model robustness by 30%.
+                                <strong>Simulation:</strong> Synthetic event generation via Kafka harness to stress-test models across multiple fraud patterns.
+                            </div>
+                            <div class="highlight">
+                                <strong>Real-Time Pipeline (original):</strong> Apache Spark Structured Streaming processing 10,000+ transactions/second with sub-second latency, improving fraud detection rate by 15%.
+                            </div>
+                            <div class="highlight">
+                                <strong>ML Automation (original):</strong> Automated pipeline with MLflow achieving AUC-PR of 0.92, reducing training time by ~30% through optimized feature engineering.
+                            </div>
+                            <div class="highlight">
+                                <strong>Data Simulation (original):</strong> Confluent Kafka to continuously generate labeled synthetic transactions with multiple fraud patterns, enhancing model robustness.
                             </div>
                         </div>
                         <div class="project-tech">
@@ -148,6 +164,35 @@
                         </div>
                         <div class="project-actions">
                             <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" class="btn-small btn-primary">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
+                <div class="project-card-large" data-category="ai" id="loomai">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">
+                        <img src="../images/loomai.png" alt="Loom AI" style="width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
+                        <p class="project-date"><strong>2026</strong> | Remote</p>
+                        <p class="project-description">Developed a multi-node LangGraph agent orchestrating tool-calling, LLM reasoning, and deterministic scheduling to automate calendar planning.</p>
+                        <div class="project-highlights">
+                            <div class="highlight">
+                                <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
+                            </div>
+                            <div class="highlight">
+                                <strong>Evaluation:</strong> 317-test eval harness and a 20-user study showed 85% users rating 4–5 stars, saving 30–60 minutes per planning task.
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>LangGraph</span>
+                            <span>Multi-Agent Systems</span>
+                            <span>Node.js</span>
+                            <span>Redis</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-small btn-outline">More details coming soon</a>
                         </div>
                     </div>
                 </div>
@@ -190,6 +235,33 @@
                 
             </div>
             <!-- End Personal Projects Grid -->
+            
+            <!-- Additional Benchmarking Project: KV-Cache Management -->
+            <div style="margin-top: 40px;">
+                <div class="project-card-large" data-category="research" id="kvcache">
+                    <div class="project-image-large" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+                        <img src="../images/kv_cache.png" alt="KV Cache Benchmarking" style="width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
+                        <p class="project-date"><strong>2025</strong> | Research</p>
+                        <p class="project-description">Benchmarked multiple KV-cache strategies for vLLM under realistic request patterns to identify throughput and memory bottlenecks.</p>
+                        <div class="project-highlights">
+                            <div class="highlight">
+                                <strong>Throughput Harness:</strong> 500-request Poisson harness on vLLM to simulate realistic traffic patterns.
+                            </div>
+                            <div class="highlight">
+                                <strong>Findings:</strong> Identified KV memory as throughput bottleneck (18.7% → 79.7% utilization); v0-eager outperformed alternatives by 10–24%.
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span>vLLM</span>
+                            <span>KV-Cache</span>
+                            <span>Benchmarking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
             <!-- End Personal Projects Tab -->
 
