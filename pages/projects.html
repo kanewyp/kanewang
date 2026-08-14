@@ -63,6 +63,15 @@
                             <div class="highlight">
                                 <strong>Evaluation:</strong> 317-test eval harness and a 20-user study showed 85% users rating 4–5 stars, saving 30–60 minutes per planning task.
                             </div>
+                            <div class="highlight">
+                                <strong>Hybrid Design:</strong> LLMs do decomposition, critique, and rationale; deterministic Python enforces time geometry, validation, and calendar writes to prevent hallucinated or invalid schedules.
+                            </div>
+                            <div class="highlight">
+                                <strong>Scheduling Strategies:</strong> Implements three heuristics—deadline-first, min-fragmentation, and energy-aware—to offer diverse valid plans.
+                            </div>
+                            <div class="highlight">
+                                <strong>Safety & UX:</strong> Checkpointed human approval prevents automatic calendar edits; deterministic validators check overlap, out-of-hours, and deadline violations.
+                            </div>
                         </div>
                         <div class="project-tech">
                             <span>LangGraph</span>
@@ -88,10 +97,16 @@
                         <p class="project-context" style="margin-top:8px; color:var(--text-light);">Context: HPML final project comparing Full Cache, H2O, StreamingLLM, and PagedAttention on Qwen2.5-7B. Highlights: StreamingLLM yields large memory reductions on short tasks; H2O can fail on long-form decoding; PagedAttention preserves quality and performs best under concurrent loads. Under realistic traces, KV memory became the main throughput bottleneck. Full report available below.</p>
                         <div class="project-highlights">
                             <div class="highlight">
-                                <strong>Throughput Harness:</strong> 500-request Poisson harness on vLLM to simulate realistic traffic patterns.
+                                <strong>Throughput Harness:</strong> 500-request Poisson trace replay on vLLM to simulate heterogeneous concurrent traffic and stress KV memory.
                             </div>
                             <div class="highlight">
-                                <strong>Findings:</strong> Identified KV memory as throughput bottleneck (18.7% → 79.7% utilization); v0-eager outperformed alternatives by 10–24%.
+                                <strong>Findings:</strong> Identified KV memory as the dominant throughput bottleneck (observed utilization 18.7% → 79.7%). v0-eager delivered best single-GPU throughput and lowest tail latency among configs tested.
+                            </div>
+                            <div class="highlight">
+                                <strong>Quality vs Memory:</strong> StreamingLLM can reduce KV memory dramatically on short tasks (up to ~198×) while PagedAttention preserves full-cache quality on long-form generation.
+                            </div>
+                            <div class="highlight">
+                                <strong>Reproducibility:</strong> Experiments run on Qwen2.5-7B with fixed seeds, pinned package versions, and committed per-run JSON artifacts for analysis.
                             </div>
                         </div>
                         <div class="project-tech">
@@ -339,17 +354,23 @@
         if (e.target === modal) modal.style.display = 'none';
       });
     }
-        // PDF modal logic
+        // PDF modal logic with existence check
         const pdfBtn = document.getElementById('kvcache-pdf-btn');
         const pdfModal = document.getElementById('pdfModal');
         const pdfClose = pdfModal ? pdfModal.querySelector('.pdf-modal-close') : null;
         const pdfFrame = document.getElementById('pdfFrame');
         if (pdfBtn && pdfModal && pdfClose && pdfFrame) {
-            pdfBtn.addEventListener('click', function(e) {
+            pdfBtn.addEventListener('click', async function(e) {
                 e.preventDefault();
                 const href = this.getAttribute('href');
-                pdfFrame.src = href;
-                pdfModal.style.display = 'flex';
+                try {
+                    const res = await fetch(href, { method: 'HEAD' });
+                    if (!res.ok) throw new Error('not found');
+                    pdfFrame.src = href;
+                    pdfModal.style.display = 'flex';
+                } catch (err) {
+                    alert('Report not found at ' + href + '.\nPlease add HPML_FINAL_REPORT.PDF to the repository root (same folder as index.html), then refresh the page.');
+                }
             });
             pdfClose.addEventListener('click', function() {
                 pdfModal.style.display = 'none';
