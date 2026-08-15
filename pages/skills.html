@@ -228,8 +228,6 @@
                 .attr('y2', d => d.target.y);
 
             node.attr('transform', d => `translate(${d.x},${d.y})`);
-            // update group overlay positions and sizes
-            updateOverlays();
         }
 
         function drag(simulation){
@@ -370,8 +368,6 @@
             if (hiddenCats.has(cat)) hiddenCats.delete(cat); else hiddenCats.add(cat);
             node.style('display', d => hiddenCats.has(d.group) ? 'none' : '');
             link.style('display', l => (hiddenCats.has(l.source.group) || hiddenCats.has(l.target.group)) ? 'none' : '');
-            // hide/show group overlays as well
-            overlayGroup.style('display', gd => hiddenCats.has(gd.group) ? 'none' : '');
         }
 
         function resetHighlight(){
@@ -400,155 +396,7 @@
             simulation.alpha(0.3).restart();
         });
 
-        // --- Group overlays: use a separate overlay simulation so overlay circles don't overlap ---
-        // build overlays for all groups present (no Person group expected now)
-        const groupData = Array.from(groupMap.keys()).map(k => ({group: k}));
-        const overlays = g.append('g').attr('class', 'group-overlays');
-        const overlayGroup = overlays.selectAll('g')
-            .data(groupData)
-            .join('g')
-            .attr('class', 'group-overlay');
-
-        overlayGroup.append('circle')
-            .attr('r', 0)
-            .attr('fill', d => color(d.group))
-            .attr('opacity', 0.06)
-            .attr('stroke', d => color(d.group))
-            .attr('stroke-width', 0.8);
-
-        overlayGroup.append('text')
-            .attr('text-anchor', 'middle')
-            .style('font-size', '13px')
-            .style('font-weight', 700)
-            .style('fill', 'var(--text-dark)')
-            .text(d => d.group);
-
-        // send overlays to back
-        overlayGroup.each(function(){
-            const n = this;
-            n.parentNode.insertBefore(n, n.parentNode.firstChild);
-        });
-
-        // overlay nodes used by a small, separate force simulation to avoid overlaps
-        const overlayNodes = groupData.map(g => ({group: g.group, x: width/2, y: height/2, r: 60, xTarget: width/2, yTarget: height/2}));
-        const overlayMap = new Map(overlayNodes.map(n => [n.group, n]));
-
-        const overlaySim = d3.forceSimulation(overlayNodes)
-            // stronger collide so overlays separate cleanly
-            .force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1.6))
-            // pull overlays strongly to their targets (group centroids)
-            .force('x', d3.forceX(d => d.xTarget).strength(0.9))
-            .force('y', d3.forceY(d => d.yTarget).strength(0.9))
-            .stop();
-
-        overlaySim.on('tick', () => {
-            overlayGroup.each(function(gd){
-                const o = overlayMap.get(gd.group);
-                // compute radius so overlay encloses current member nodes
-                const members = nodes.filter(n => n.group === gd.group && !(hiddenCats.has(n.group)));
-                let maxDist = 0;
-                members.forEach(m => {
-                    const dx = (m.x || 0) - o.x;
-                    const dy = (m.y || 0) - o.y;
-                    const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
-                    if (dist > maxDist) maxDist = dist;
-                });
-                const pad = 8;
-                o.r = Math.max(40, maxDist + pad);
-                d3.select(this).select('circle').attr('cx', o.x).attr('cy', o.y).attr('r', o.r);
-                d3.select(this).select('text').attr('x', o.x).attr('y', o.y - o.r + 14);
-            });
-        });
-
-        function updateOverlays(){
-            const labelList = [];
-            overlayGroup.each(function(gd, i){
-                const members = nodes.filter(n => n.group === gd.group && !(hiddenCats.has(n.group)));
-                const sel = d3.select(this);
-                const o = overlayMap.get(gd.group);
-                if (!members.length){ sel.style('display','none'); o.visible = false; return; }
-                o.visible = true; sel.style('display','');
-                const cx = d3.mean(members, m => m.x) || width/2;
-                const cy = d3.mean(members, m => m.y) || height/2;
-                let maxr = 0;
-                members.forEach(m => {
-                    const dx = (m.x||0) - cx;
-                    const dy = (m.y||0) - cy;
-                    const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
-                    if (dist > maxr) maxr = dist;
-                });
-                const pad = 8;
-                // cap overlay radius so one overlay doesn't engulf the whole canvas
-                const maxAllowed = Math.min(width, height) * 0.45;
-                const desiredR = Math.min(Math.max(40, maxr + pad), maxAllowed);
-                o.xTarget = cx;
-                o.yTarget = cy;
-                o.r = desiredR;
-                // measure label bbox (after text exists)
-                const bbox = d3.select(this).select('text').node().getBBox();
-                o.labelW = bbox.width; o.labelH = bbox.height;
-                labelList.push(o);
-            });
-
-            // update overlay collision radius and restart overlay simulation to resolve overlaps
-            overlaySim.force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1.6));
-            overlaySim.alpha(0.7).restart();
-
-            // fallback label nudging to reduce label overlap after overlaySim settles
-            for (let iter=0; iter<6; iter++){
-                let moved = false;
-                for (let i=0;i<labelList.length;i++){
-                    for (let j=i+1;j<labelList.length;j++){
-                        const a = labelList[i]; const b = labelList[j];
-                        if (!a.visible || !b.visible) continue;
-                        const ax = a.xTarget; const ay = a.yTarget - a.r + 14;
-                        const bx = b.xTarget; const by = b.yTarget - b.r + 14;
-                        if (Math.abs(ax - bx) < (a.labelW + b.labelW)/2 && Math.abs(ay - by) < (a.labelH + b.labelH)/2){
-                            // nudge labels slightly apart horizontally
-                            const shift = ((a.labelW + b.labelW)/2 - Math.abs(ax - bx)) / 2 + 6;
-                            if (ax <= bx){ a.xTarget -= shift; b.xTarget += shift; } else { a.xTarget += shift; b.xTarget -= shift; }
-                            moved = true;
-                        }
-                    }
-                }
-                if (!moved) break;
-            }
-        }
-
-        // make only overlay circles draggable (background group circles)
-        overlayGroup.select('circle').call(d3.drag()
-            .on('start', function(event, gd){
-                const o = overlayMap.get(gd.group);
-                o.dragging = true;
-                o._prevX = event.x - 12; o._prevY = event.y - 12;
-                // pin member nodes while dragging so they move with overlay
-            })
-            .on('drag', function(event, gd){
-                const o = overlayMap.get(gd.group);
-                const nx = event.x - 12; const ny = event.y - 12;
-                const dx = nx - (o._prevX || nx); const dy = ny - (o._prevY || ny);
-                o._prevX = nx; o._prevY = ny;
-                // move member nodes together
-                nodes.forEach(n => {
-                    if (n.group === gd.group){
-                        n.x = (n.x || 0) + dx;
-                        n.y = (n.y || 0) + dy;
-                        n.fx = n.x; n.fy = n.y;
-                    }
-                });
-                // update overlay position
-                o.x = (o.x || nx) + dx; o.y = (o.y || ny) + dy;
-                simulation.alpha(0.3).restart();
-            })
-            .on('end', function(event, gd){
-                const o = overlayMap.get(gd.group);
-                o.dragging = false;
-                // release member node pins so simulation can continue
-                nodes.forEach(n => { if (n.group === gd.group){ n.fx = null; n.fy = null; } });
-                delete o._prevX; delete o._prevY;
-                simulation.alpha(0.3).restart();
-            })
-        );
+        // overlays removed per user request
 
     })();
     </script>
