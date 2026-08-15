@@ -33,115 +33,199 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Technical Skills & Expertise</h1>
-            <p>Comprehensive toolkit for data science, ML engineering, and full-stack development</p>
+            <h1>Technical Skills & Interactive Map</h1>
+            <p>Explore related skills by proximity — drag nodes, zoom, and hover for details.</p>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="about-section">
+    <!-- Interactive Skills Map -->
+    <section class="about-section" style="padding-bottom: 40px;">
         <div class="container">
-            <div style="margin-bottom: 40px;">
-                <h2 style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <i class="fas fa-code" style="color: var(--primary-color); font-size: 1.5rem;"></i>
-                    Languages & Frameworks
-                </h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h4>Python</h4>
-                        <p>Data engineering, ML engineering, scripting — common libraries and frameworks (NumPy, pandas, PyTorch, TensorFlow, scikit-learn)</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>R</h4>
-                        <p>Statistical analysis and visualization (tidyverse, ggplot2, plotly)</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>SQL & Databases</h4>
-                        <p>Analytical queries and warehouse work (Snowflake, PostgreSQL)</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>C++</h4>
-                        <p>Algorithms and systems-level implementations</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>JavaScript & CSS</h4>
-                        <p>Frontend integration, basic UI/UX and API wiring</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Unix & Shell</h4>
-                        <p>Shell scripting, automation, and system tooling</p>
-                    </div>
-                </div>
+            <div id="skills-map" style="width:100%; height:720px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
+                <!-- SVG injected by D3 -->
             </div>
-
-            <div style="margin-bottom: 40px;">
-                <h2 style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <i class="fas fa-robot" style="color: #43e97b; font-size: 1.5rem;"></i>
-                    GenAI, LLMs & Research
-                </h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h4>LLM Inference & Optimization</h4>
-                        <p>vLLM, KV-cache strategies, PagedAttention, throughput / latency engineering for serving</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Retrieval-Augmented Systems</h4>
-                        <p>RAG pipelines, vector indexing, retrieval pipelines for long-context applications</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Multi-Agent Systems</h4>
-                        <p>Agent orchestration and LangGraph-style planning for structured reasoning and tool-calling</p>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <i class="fas fa-server" style="color: var(--secondary-color); font-size: 1.5rem;"></i>
-                    MLOps, Data Engineering & Cloud
-                </h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h4>Production Pipelines</h4>
-                        <p>Argo Workflows, Airflow orchestration, CI/CD for ML</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Containerization & Orchestration</h4>
-                        <p>Docker, Kubernetes, Argo CD</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Streaming & Big Data</h4>
-                        <p>Kafka, Spark, real-time ingestion and streaming inference</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Cloud & Storage</h4>
-                        <p>AWS (S3, SageMaker), MinIO, Snowflake</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Model Ops & Monitoring</h4>
-                        <p>MLflow, model registries, drift detection, Grafana / observability tools</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Experimentation</h4>
-                        <p>Weights & Biases, reproducible benchmark artifacts</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 30px;">
-                <h2 style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <i class="fas fa-wrench" style="color: #f6b93b; font-size: 1.5rem;"></i>
-                    Tools & Visualization
-                </h2>
-                <div class="skills-grid">
-                    <div class="skill-item"><h4>Visualization</h4><p>matplotlib, seaborn, Plotly</p></div>
-                    <div class="skill-item"><h4>APIs & Web</h4><p>Flask, Streamlit, REST API design</p></div>
-                    <div class="skill-item"><h4>Version Control</h4><p>git, GitHub workflows</p></div>
-                    <div class="skill-item"><h4>Office & Reporting</h4><p>Excel (VBA), Power BI, Tableau, Quarto</p></div>
-                </div>
+            <div style="margin-top:12px; display:flex; gap:16px; align-items:center;">
+                <small style="color:var(--text-light);">Tip: Drag nodes to rearrange. Scroll or pinch to zoom. Click a node to highlight its neighbors.</small>
             </div>
         </div>
     </section>
+
+    <!-- D3 and Diagram Script -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+    (function() {
+        const width = document.getElementById('skills-map').clientWidth - 24;
+        const height = document.getElementById('skills-map').clientHeight - 24;
+
+        const color = d3.scaleOrdinal()
+            .domain(['Languages','GenAI','MLOps','Data','Tools','Visualization','Other'])
+            .range(['var(--primary-color)','var(--secondary-color)','#43e97b','#f093fb','#4facfe','#f6b93b','#667eea']);
+
+        // Resolve CSS variables to actual color values
+        const rootStyle = getComputedStyle(document.documentElement);
+        color.range(color.range().map(k => {
+            try { return rootStyle.getPropertyValue(k.trim()) || k; } catch(e) { return k; }
+        }));
+
+        const nodes = [
+            {id: 'Python', group: 'Languages'},
+            {id: 'R', group: 'Languages'},
+            {id: 'SQL', group: 'Data'},
+            {id: 'C++', group: 'Languages'},
+            {id: 'JavaScript', group: 'Languages'},
+            {id: 'Unix', group: 'Other'},
+            {id: 'PyTorch', group: 'GenAI'},
+            {id: 'TensorFlow', group: 'GenAI'},
+            {id: 'scikit-learn', group: 'GenAI'},
+            {id: 'LLM Inference', group: 'GenAI'},
+            {id: 'RAG', group: 'GenAI'},
+            {id: 'Multi-Agent', group: 'GenAI'},
+            {id: 'vLLM / KV-Cache', group: 'GenAI'},
+            {id: 'Docker', group: 'MLOps'},
+            {id: 'Kubernetes', group: 'MLOps'},
+            {id: 'Argo / ArgoCD', group: 'MLOps'},
+            {id: 'Airflow', group: 'MLOps'},
+            {id: 'Kafka', group: 'Data'},
+            {id: 'Spark', group: 'Data'},
+            {id: 'Snowflake', group: 'Data'},
+            {id: 'AWS', group: 'Data'},
+            {id: 'MinIO', group: 'Data'},
+            {id: 'MLflow', group: 'MLOps'},
+            {id: 'Drift Detection', group: 'MLOps'},
+            {id: 'W&B', group: 'Tools'},
+            {id: 'Grafana', group: 'Tools'},
+            {id: 'Flask', group: 'Tools'},
+            {id: 'Streamlit', group: 'Tools'},
+            {id: 'Plotly / Matplotlib', group: 'Visualization'},
+            {id: 'Power BI / Tableau', group: 'Visualization'}
+        ];
+
+        // create links by connecting nodes within same group and a few cross links
+        const links = [];
+        const groupMap = d3.group(nodes, d => d.group);
+        for (const [g, arr] of groupMap) {
+            for (let i=0;i<arr.length;i++){
+                for (let j=i+1;j<arr.length;j++){
+                    links.push({source: arr[i].id, target: arr[j].id, value: 1});
+                }
+            }
+        }
+        // add intentional cross-links
+        const cross = [
+            ['Python','PyTorch'], ['Python','Spark'], ['LLM Inference','vLLM / KV-Cache'], ['RAG','vLLM / KV-Cache'], ['Docker','Kubernetes'], ['Kafka','Spark'], ['MLflow','W&B'], ['AWS','Snowflake']
+        ];
+        cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
+
+        const svg = d3.select('#skills-map').append('svg')
+            .attr('width', width + 24)
+            .attr('height', height + 24)
+            .call(d3.zoom().scaleExtent([0.5, 3]).on('zoom', (event) => {
+                g.attr('transform', event.transform);
+            }));
+
+        const g = svg.append('g').attr('transform', 'translate(12,12)');
+
+        const link = g.append('g')
+            .attr('stroke', '#ccc')
+            .selectAll('line')
+            .data(links)
+            .join('line')
+            .attr('stroke-width', d => Math.sqrt(d.value));
+
+        const node = g.append('g')
+            .selectAll('g')
+            .data(nodes)
+            .join('g')
+            .call(drag(simulation));
+
+        node.append('circle')
+            .attr('r', 28)
+            .attr('fill', d => color(d.group))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .on('click', (event, d) => highlightNeighbors(d));
+
+        node.append('text')
+            .attr('dy', 4)
+            .attr('x', 0)
+            .attr('text-anchor', 'middle')
+            .style('pointer-events', 'none')
+            .style('font-size', '11px')
+            .text(d => d.id);
+
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(d => 80))
+            .force('charge', d3.forceManyBody().strength(-250))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(40))
+            .on('tick', ticked);
+
+        function ticked() {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        }
+
+        function drag(simulation){
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+
+            return d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended);
+        }
+
+        // neighbor highlighting
+        const adjacency = {};
+        links.forEach(d => {
+            adjacency[`${d.source},${d.target}`] = true;
+            adjacency[`${d.target},${d.source}`] = true;
+        });
+
+        function highlightNeighbors(nodeData){
+            node.selectAll('circle').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
+            node.selectAll('text').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
+            link.attr('stroke-opacity', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? 1 : 0.05)
+                .attr('stroke', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? '#333' : '#ccc');
+            setTimeout(() => resetHighlight(), 4000);
+        }
+
+        function resetHighlight(){
+            node.selectAll('circle').attr('opacity', 1);
+            node.selectAll('text').attr('opacity', 1);
+            link.attr('stroke-opacity', 1).attr('stroke', '#ccc');
+        }
+
+        // responsive on resize
+        window.addEventListener('resize', () => {
+            const w = document.getElementById('skills-map').clientWidth - 24;
+            const h = document.getElementById('skills-map').clientHeight - 24;
+            svg.attr('width', w + 24).attr('height', h + 24);
+            simulation.force('center', d3.forceCenter(w/2, h/2));
+            simulation.alpha(0.3).restart();
+        });
+
+    })();
+    </script>
 
     <!-- CTA Section -->
     <section class="cta-section">
