@@ -182,7 +182,7 @@
         }
 
         node.append('circle')
-            .attr('r', d => radiusByGroup(d.group))
+            .attr('r', d => 28)
             .attr('fill', d => color(d.group))
             .attr('stroke', '#fff')
             .attr('stroke-width', 2)
@@ -212,6 +212,8 @@
                 .attr('y2', d => d.target.y);
 
             node.attr('transform', d => `translate(${d.x},${d.y})`);
+            // update group overlay positions and sizes
+            updateOverlays();
         }
 
         function drag(simulation){
@@ -352,6 +354,8 @@
             if (hiddenCats.has(cat)) hiddenCats.delete(cat); else hiddenCats.add(cat);
             node.style('display', d => hiddenCats.has(d.group) ? 'none' : '');
             link.style('display', l => (hiddenCats.has(l.source.group) || hiddenCats.has(l.target.group)) ? 'none' : '');
+            // hide/show group overlays as well
+            overlayGroup.style('display', gd => hiddenCats.has(gd.group) ? 'none' : '');
         }
 
         function resetHighlight(){
@@ -368,6 +372,55 @@
             simulation.force('center', d3.forceCenter(w/2, h/2));
             simulation.alpha(0.3).restart();
         });
+
+        // --- Group overlays: a soft larger circle per category that follows group centroid ---
+        const groupData = Array.from(groupMap.keys()).map(k => ({group: k}));
+        const overlays = g.append('g').attr('class', 'group-overlays');
+        const overlayGroup = overlays.selectAll('g')
+            .data(groupData)
+            .join('g')
+            .attr('class', 'group-overlay');
+
+        overlayGroup.append('circle')
+            .attr('r', 0)
+            .attr('fill', d => color(d.group))
+            .attr('opacity', 0.08)
+            .attr('stroke', d => color(d.group))
+            .attr('stroke-width', 1);
+
+        overlayGroup.append('text')
+            .attr('text-anchor', 'start')
+            .style('font-size', '13px')
+            .style('font-weight', 700)
+            .style('fill', 'var(--text-dark)')
+            .text(d => d.group);
+
+        // send overlays to back
+        overlayGroup.each(function(){
+            const n = this;
+            n.parentNode.insertBefore(n, n.parentNode.firstChild);
+        });
+
+        function updateOverlays(){
+            overlayGroup.each(function(gd){
+                const members = nodes.filter(n => n.group === gd.group && !(hiddenCats.has(n.group)));
+                const sel = d3.select(this);
+                if (!members.length){ sel.style('display','none'); return; }
+                sel.style('display','');
+                const cx = d3.mean(members, m => m.x) || width/2;
+                const cy = d3.mean(members, m => m.y) || height/2;
+                let maxr = 0;
+                members.forEach(m => {
+                    const dx = (m.x||0) - cx;
+                    const dy = (m.y||0) - cy;
+                    const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
+                    if (dist > maxr) maxr = dist;
+                });
+                const pad = 18;
+                sel.select('circle').attr('cx', cx).attr('cy', cy).attr('r', maxr + pad);
+                sel.select('text').attr('x', cx + (maxr + pad) + 8).attr('y', cy + 4);
+            });
+        }
 
     })();
     </script>
