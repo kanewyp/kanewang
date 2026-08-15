@@ -92,7 +92,7 @@
             {id: 'CSS', group: 'Other', score:3},
 
             // GenAI & LLMs (resume)
-            {id: 'LLM inference optimization', group: 'GenAI', score:5},
+            // LLM inference optimization removed; functionality consolidated into related nodes
             {id: 'vLLM', group: 'GenAI', score:5},
             {id: 'PagedAttention', group: 'GenAI', score:4},
             {id: 'H2O', group: 'GenAI', score:3},
@@ -134,7 +134,7 @@
             // R packages removed: consolidate under single `R` node
             ['SQL','Snowflake'], ['SQL','Spark'], ['Spark','Kafka'], ['Kafka','AWS SageMaker'],
             ['Docker','Kubernetes'], ['Argo Workflows','Argo CD'], ['MLflow','Weights & Biases'],
-            ['LLM inference optimization','vLLM'], ['LLM inference optimization','PagedAttention'], ['RAG','LangGraph'], ['RAG','vLLM']
+            ['RAG','LangGraph'], ['RAG','vLLM']
         ];
         cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
 
@@ -151,7 +151,8 @@
             .force('link', d3.forceLink(links).id(d => d.id).distance( d => 60 ).strength(0.9))
             .force('charge', d3.forceManyBody().strength(-80))
             .force('center', d3.forceCenter(width / 2, height / 2))
-            .force('collision', d3.forceCollide().radius(d => radiusByGroup(d.group) + 4))
+            // temporary collision radius; will be updated after measuring label sizes
+            .force('collision', d3.forceCollide().radius(32))
             .on('tick', ticked);
 
         const link = g.append('g')
@@ -167,9 +168,17 @@
             .join('g')
             .call(drag(simulation));
 
-        function radiusByGroup(g){
-            // Use a consistent radius for all nodes for a clean, uniform look.
-            return 28;
+        // After labels are added we compute a radius per node so long labels fit inside the circle.
+        function computeRadii(){
+            node.each(function(d){
+                const textEl = d3.select(this).select('text').node();
+                const bbox = textEl.getBBox();
+                const r = Math.max(28, Math.max(bbox.width / 2 + 12, bbox.height / 2 + 8));
+                d.r = r;
+                d3.select(this).select('circle').attr('r', r);
+            });
+            simulation.force('collision', d3.forceCollide().radius(d => (d.r || 28) + 4));
+            simulation.alpha(0.3).restart();
         }
 
         node.append('circle')
@@ -191,6 +200,9 @@
             .style('font-weight', 700)
             .style('fill', 'var(--text-dark)')
             .text(d => d.id);
+
+        // compute radii now that text elements are in the DOM
+        computeRadii();
 
         function ticked() {
             link
@@ -256,40 +268,50 @@
             .style('color', 'var(--text-dark)');
 
         const descriptions = {
-            'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs.',
-            'R': 'Statistical analysis, visualization and modeling workflows (tidyverse, ggplot2, plotly, tidymodels); building reproducible analysis pipelines and interactive dashboards.',
-            'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices.',
-            'C++': 'Systems-level implementations and performance-focused components when low-level control is required.',
-            'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs.',
-            'Unix': 'Shell scripting, automation, cron/CI tasks, and general system tooling.',
-            'PyTorch': 'Experiment development, model training loops, custom modules, and conversion for serving.',
-            'TensorFlow': 'Model prototyping and select production workflows.',
-            'scikit-learn': 'Baseline modelling, pipelines, feature transforms and model evaluation.',
-            'LLM Inference': 'Throughput and latency optimization, batching, kv-cache strategies, and serving best practices.',
-            'RAG': 'Designing retrieval pipelines, vector indexing, chunking strategies and RAG orchestration for long-context apps.',
-            'Multi-Agent': 'LangGraph-style agent orchestration, tool-calling coordination, and deterministic validators for planning systems.',
-            'vLLM / KV-Cache': 'Implementing and benchmarking KV-cache strategies to reduce memory while preserving quality on LLM inference.',
-            'Docker': 'Containerizing services, building multi-stage images, and local reproducible environments.',
-            'Kubernetes': 'Deployments, services, and basic rollout strategies for scaling model services.',
-            'Argo / ArgoCD': 'GitOps deployment workflows and Argo Workflows for ML pipeline automation.',
-            'Airflow': 'Authoring DAGs for ETL and scheduled training; managing dependencies and alerts.',
-            'Kafka': 'Designing producer/consumer pipelines, topic partitioning, and streaming ingestion for real-time features.',
-            'Spark': 'Distributed ETL and structured streaming for large-scale data processing.',
-            'Snowflake': 'Data warehouse schema design, performance tuning, and cost-conscious querying.',
-            'AWS': 'S3-first storage patterns, SageMaker experiments, EC2 hosting and infra alignment for ML workloads.',
-            'MinIO': 'S3-compatible local/dev object storage and testing environments.',
-            'MLflow': 'Experiment tracking, model versioning and registry-driven deployment workflows.',
-            'Drift Detection': 'Implementing statistical and model-based monitors to detect covariate/label drift and trigger retraining.',
-            'W&B': 'Experiment tracking, metric dashboards and run comparisons.',
-            'Grafana': 'Instrumentation dashboards and alerting for pipeline and model health.',
-            'Flask': 'Designing small REST APIs to serve models and tools.',
-            'Streamlit': 'Rapid demos and internal tools for model exploration and stakeholder demos.',
-            'Plotly / Matplotlib': 'Interactive visualizations and static plots for analysis and reporting.',
-            'Power BI / Tableau': 'Business-facing dashboards and scheduled reporting.'
+            'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs. Comfortable productionizing models and writing reproducible data pipelines.',
+            'R': 'Statistical analysis, visualization and modeling workflows (tidyverse, ggplot2, plotly, tidymodels); building reproducible analysis pipelines and interactive dashboards. Applied R for exploratory analysis, reporting and lightweight web demos.',
+            'H2O': 'H2O.ai tools and AutoML for scalable model development and experimentation. Used for quick prototyping, distributed training, and automated model selection in production workflows.',
+            'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices. Experienced in query optimization and cost-aware schema design.',
+            'C++': 'Systems-level implementations and performance-focused components when low-level control is required. Used for high-performance libraries and native integrations.',
+            'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs. Comfortable building small interactive visualizations and prototypes.',
+            'Unix': 'Shell scripting, automation, cron/CI tasks, and general system tooling. Regularly use shells for job orchestration and environment setup.',
+            'PyTorch': 'Experiment development, model training loops, custom modules, and conversion for serving. Applied to research, prototyping and production model training pipelines.',
+            'TensorFlow': 'Model prototyping and select production workflows. Experienced in TF model conversion and serving when appropriate.',
+            'scikit-learn': 'Baseline modelling, pipelines, feature transforms and model evaluation. Used extensively for traditional ML baselines and quick iterations.',
+            'LLM Inference': 'Throughput and latency optimization, batching, kv-cache strategies, and serving best practices. I apply quantization, operator fusion and caching to reduce inference cost while preserving model quality.',
+            'RAG': 'Designing retrieval-augmented generation pipelines combining dense retrieval with contextual prompt engineering. Implemented vector indexing, chunking strategies, and hybrid retrieval to improve factuality and latency in long-context applications.',
+            'Multi-Agent': 'LangGraph-style agent orchestration, tool-calling coordination, and deterministic validators for planning systems. Built prototype multi-agent flows for orchestration and testing.',
+            'vLLM': 'vLLM: a high-performance LLM inference runtime focused on throughput and efficient memory usage. Used to benchmark KV-cache strategies and scale multi-instance low-latency deployments.',
+            'PagedAttention': 'PagedAttention: attention strategies that reduce memory footprint for long-context models. Applied in experiments to enable longer context windows with acceptable resource costs.',
+            'vLLM / KV-Cache': 'Implementing and benchmarking KV-cache strategies to reduce memory while preserving quality on LLM inference. Focused on practical tradeoffs between memory, latency and throughput.',
+            'Docker': 'Containerizing services, building multi-stage images, and local reproducible environments. Used extensively for dev/prod parity and CI pipeline images.',
+            'Kubernetes': 'Deployments, services, and basic rollout strategies for scaling model services. Experience with manifests, probes and rollout strategies for model endpoints.',
+            'Argo / ArgoCD': 'GitOps deployment workflows and Argo Workflows for ML pipeline automation. Built ML pipeline orchestration using Argo Workflows for retraining and batch jobs.',
+            'Airflow': 'Authoring DAGs for ETL and scheduled training; managing dependencies and alerts. Implemented monitoring and retry strategies for robust pipelines.',
+            'Kafka': 'Designing producer/consumer pipelines, topic partitioning, and streaming ingestion for real-time features. Used in feature pipelines and streaming ingestion for near-real-time models.',
+            'Spark': 'Distributed ETL and structured streaming for large-scale data processing. Applied for large-scale transformations and streaming feature engineering.',
+            'Snowflake': 'Data warehouse schema design, performance tuning, and cost-conscious querying. Experienced in leveraging Snowflake for analytical workloads and data sharing patterns.',
+            'AWS': 'S3-first storage patterns, SageMaker experiments, EC2 hosting and infra alignment for ML workloads. Familiar with IAM, cost management and scaling patterns.',
+            'MinIO': 'S3-compatible local/dev object storage and testing environments. Useful for local testing and CI workflows that mimic S3.',
+            'MLflow': 'Experiment tracking, model versioning and registry-driven deployment workflows. Used MLflow to track experiments and manage model lifecycle.',
+            'Drift Detection': 'Implementing statistical and model-based monitors to detect covariate/label drift and trigger retraining. Built alerting hooks and sample re-training flows.',
+            'W&B': 'Experiment tracking, metric dashboards and run comparisons. Used W&B for visualizing experiments and comparing runs across hyperparameters.',
+            'Grafana': 'Instrumentation dashboards and alerting for pipeline and model health. Created dashboards for latency, throughput and error monitoring.',
+            'Flask': 'Designing small REST APIs to serve models and tools. Built lightweight serving endpoints and internal tooling APIs.',
+            'Streamlit': 'Rapid demos and internal tools for model exploration and stakeholder demos. Useful for quick interactive prototypes.',
+            'Plotly / Matplotlib': 'Interactive visualizations and static plots for analysis and reporting. Used for exploratory analysis and stakeholder visualizations.',
+            'Power BI / Tableau': 'Business-facing dashboards and scheduled reporting. Built scheduled reports and dashboards for stakeholders.'
         };
 
+        function ensureTwoSentences(text){
+            const parts = text.split('.').map(s => s.trim()).filter(Boolean);
+            if (parts.length >= 2) return text;
+            return text + (text.endsWith('.') ? ' ' : '. ') + 'Applied in production and research projects.';
+        }
+
         function showTooltip(event, d){
-            const text = descriptions[d.id] || d.id;
+            const raw = descriptions[d.id] || descriptions[d.id.replace(/\s*\(.*\)/,'')] || d.id;
+            const text = ensureTwoSentences(raw);
             tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
             moveTooltip(event);
         }
