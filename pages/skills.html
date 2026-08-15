@@ -41,7 +41,7 @@
     <!-- Interactive Skills Map -->
     <section class="about-section" style="padding-bottom: 40px;">
         <div class="container">
-            <div id="skills-map" style="position:relative; width:100%; height:720px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
+            <div id="skills-map" style="position:relative; width:100%; height:880px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
                 <!-- SVG injected by D3 -->
             </div>
             <div style="margin-top:12px; display:flex; gap:16px; align-items:center;">
@@ -175,8 +175,9 @@
             .attr('x', 0)
             .attr('text-anchor', 'middle')
             .style('pointer-events', 'none')
-            .style('font-size', '10px')
-            .style('font-weight', 600)
+            .style('font-size', '12px')
+            .style('font-weight', 700)
+            .style('fill', 'var(--text-dark)')
             .text(d => d.id);
 
         function ticked() {
@@ -239,7 +240,7 @@
             .style('border-radius', '8px')
             .style('box-shadow', '0 6px 20px rgba(0,0,0,0.08)')
             .style('display', 'none')
-            .style('font-size', '13px')
+            .style('font-size', '14px')
             .style('color', 'var(--text-dark)');
 
         const descriptions = {
