@@ -73,6 +73,11 @@
         const nodes = [
             {id: 'Python', group: 'Languages'},
             {id: 'R', group: 'Languages'},
+            {id: 'tidyverse', group: 'Languages'},
+            {id: 'ggplot2', group: 'Languages'},
+            {id: 'plotly (R)', group: 'Languages'},
+            {id: 'shiny', group: 'Languages'},
+            {id: 'tidymodels', group: 'Languages'},
             {id: 'SQL', group: 'Data'},
             {id: 'C++', group: 'Languages'},
             {id: 'JavaScript', group: 'Languages'},
@@ -115,7 +120,8 @@
         }
         // add intentional cross-links
         const cross = [
-            ['Python','PyTorch'], ['Python','Spark'], ['LLM Inference','vLLM / KV-Cache'], ['RAG','vLLM / KV-Cache'], ['Docker','Kubernetes'], ['Kafka','Spark'], ['MLflow','W&B'], ['AWS','Snowflake']
+            ['Python','PyTorch'], ['Python','Spark'], ['LLM Inference','vLLM / KV-Cache'], ['RAG','vLLM / KV-Cache'], ['Docker','Kubernetes'], ['Kafka','Spark'], ['MLflow','W&B'], ['AWS','Snowflake'],
+            ['SQL','Snowflake'], ['SQL','Spark'], ['tidyverse','SQL'], ['R','Plotly / Matplotlib']
         ];
         cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
 
@@ -245,7 +251,12 @@
 
         const descriptions = {
             'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs.',
-            'R': 'Statistical analysis and visualization using tidyverse, ggplot2 and Plotly for exploratory analysis and reporting.',
+            'R': 'Statistical analysis and visualization; proficient in tidyverse workflows and data transformation for analysis and reporting.',
+            'tidyverse': 'Data manipulation and pipelines (dplyr, tidyr), dbplyr for database-backed transformations, and tibbles for tidy data.',
+            'ggplot2': 'Grammar-of-graphics plotting for publication-quality visualizations and layered plots.',
+            'plotly (R)': 'Interactive visualizations and dashboards via Plotly; used for exploratory and stakeholder-facing plots.',
+            'shiny': 'Rapid interactive dashboards and internal web tools built with Shiny for data exploration and demos.',
+            'tidymodels': 'Modeling workflows in R using unified APIs for preprocessing, tuning and evaluation.',
             'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices.',
             'C++': 'Systems-level implementations and performance-focused components when low-level control is required.',
             'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs.',
