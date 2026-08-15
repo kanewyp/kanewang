@@ -116,7 +116,7 @@
             {id: 'Grafana', group: 'Tools', score:3},
             {id: 'Weights & Biases', group: 'Tools', score:3},
             {id: 'CI/CD', group: 'MLOps', score:4}
-            ,{id: 'Me', group: 'Person', person: true}
+            
         ];
 
         // create links by connecting nodes within same group and a few cross links
@@ -169,8 +169,7 @@
             }).strength(0.02))
             .on('tick', ticked);
 
-        // anchor the `Me` node at the center
-        nodes.forEach(n => { if (n.person){ n.fx = width/2; n.fy = height/2; n.r = 44; } });
+        // no central person node — keep nodes free for layout
 
         const link = g.append('g')
             .attr('stroke', '#ccc')
@@ -199,9 +198,9 @@
         }
 
         node.append('circle')
-            .attr('r', d => d.person ? 44 : 28)
-            .attr('fill', d => d.person ? '#222' : color(d.group))
-            .attr('stroke', d => d.person ? '#fff' : '#fff')
+            .attr('r', d => d.r || 28)
+            .attr('fill', d => color(d.group))
+            .attr('stroke', '#fff')
             .attr('stroke-width', 2)
             .on('click', (event, d) => highlightNeighbors(d))
             .on('mouseover', showTooltip)
@@ -213,10 +212,10 @@
             .attr('x', 0)
             .attr('text-anchor', 'middle')
             .style('pointer-events', 'none')
-            .style('font-size', d => d.person ? '18px' : '12px')
+            .style('font-size', '12px')
             .style('font-weight', 700)
-            .style('fill', d => d.person ? '#fff' : 'var(--text-dark)')
-            .text(d => d.person ? '👤' : d.id);
+            .style('fill', 'var(--text-dark)')
+            .text(d => d.id);
 
         // compute radii now that text elements are in the DOM
         computeRadii();
@@ -402,8 +401,8 @@
         });
 
         // --- Group overlays: use a separate overlay simulation so overlay circles don't overlap ---
-        // exclude the Person group from overlays
-        const groupData = Array.from(groupMap.keys()).filter(k => k !== 'Person').map(k => ({group: k}));
+        // build overlays for all groups present (no Person group expected now)
+        const groupData = Array.from(groupMap.keys()).map(k => ({group: k}));
         const overlays = g.append('g').attr('class', 'group-overlays');
         const overlayGroup = overlays.selectAll('g')
             .data(groupData)
@@ -454,7 +453,7 @@
                     const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
                     if (dist > maxDist) maxDist = dist;
                 });
-                const pad = 18;
+                const pad = 8;
                 o.r = Math.max(40, maxDist + pad);
                 d3.select(this).select('circle').attr('cx', o.x).attr('cy', o.y).attr('r', o.r);
                 d3.select(this).select('text').attr('x', o.x).attr('y', o.y - o.r + 14);
@@ -478,7 +477,7 @@
                     const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
                     if (dist > maxr) maxr = dist;
                 });
-                const pad = 18;
+                const pad = 8;
                 // cap overlay radius so one overlay doesn't engulf the whole canvas
                 const maxAllowed = Math.min(width, height) * 0.45;
                 const desiredR = Math.min(Math.max(40, maxr + pad), maxAllowed);
@@ -531,7 +530,7 @@
                 o._prevX = nx; o._prevY = ny;
                 // move member nodes together
                 nodes.forEach(n => {
-                    if (n.group === gd.group && !n.person){
+                    if (n.group === gd.group){
                         n.x = (n.x || 0) + dx;
                         n.y = (n.y || 0) + dy;
                         n.fx = n.x; n.fy = n.y;
@@ -545,7 +544,7 @@
                 const o = overlayMap.get(gd.group);
                 o.dragging = false;
                 // release member node pins so simulation can continue
-                nodes.forEach(n => { if (n.group === gd.group && !n.person){ n.fx = null; n.fy = null; } });
+                nodes.forEach(n => { if (n.group === gd.group){ n.fx = null; n.fy = null; } });
                 delete o._prevX; delete o._prevY;
                 simulation.alpha(0.3).restart();
             })
