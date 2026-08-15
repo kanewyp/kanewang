@@ -228,9 +228,9 @@
         // capture a canonical layout shortly after initial stabilization
         setTimeout(() => {
             nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
-            // enable a gentle home force so nodes slowly return to their original spots
-            simulation.force('homeX', d3.forceX(d => d.x0).strength(0.02));
-            simulation.force('homeY', d3.forceY(d => d.y0).strength(0.02));
+            // enable a stronger home force so nodes return more quickly to their original spots
+            simulation.force('homeX', d3.forceX(d => d.x0).strength(0.12));
+            simulation.force('homeY', d3.forceY(d => d.y0).strength(0.12));
             simulation.alpha(0.3).restart();
         }, 900);
 
@@ -261,13 +261,12 @@
 
             function dragended(event, d) {
                 if (!event.active) simulation.alphaTarget(0);
-                // release the drag and re-enable a gentle home pull so nodes ease back
+                // release the drag and re-enable a stronger home pull so nodes ease back faster
                 d.fx = null;
                 d.fy = null;
-                // restore a gentle home force to slowly return nodes to their saved positions
-                simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0.02));
-                simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0.02));
-                simulation.alphaTarget(0.2).restart();
+                simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0.12));
+                simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0.12));
+                simulation.alphaTarget(0.6).restart();
             }
 
             return d3.drag()
