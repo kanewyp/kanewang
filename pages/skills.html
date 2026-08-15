@@ -153,6 +153,17 @@
             .force('center', d3.forceCenter(width / 2, height / 2))
             // temporary collision radius; will be updated after measuring label sizes
             .force('collision', d3.forceCollide().radius(32))
+            // per-group positioning forces to nudge certain groups apart (MLOps vs Tools)
+            .force('groupX', d3.forceX(d => {
+                if (d.group === 'MLOps') return width * 0.28;
+                if (d.group === 'Tools') return width * 0.78;
+                return width / 2;
+            }).strength(0.12))
+            .force('groupY', d3.forceY(d => {
+                if (d.group === 'MLOps') return height * 0.55;
+                if (d.group === 'Tools') return height * 0.45;
+                return height / 2;
+            }).strength(0.03))
             .on('tick', ticked);
 
         const link = g.append('g')
@@ -370,6 +381,17 @@
             const h = document.getElementById('skills-map').clientHeight - 24;
             svg.attr('width', w + 24).attr('height', h + 24);
             simulation.force('center', d3.forceCenter(w/2, h/2));
+            // update groupX/groupY targets on resize so group separation scales with viewport
+            simulation.force('groupX', d3.forceX(d => {
+                if (d.group === 'MLOps') return w * 0.28;
+                if (d.group === 'Tools') return w * 0.78;
+                return w / 2;
+            }).strength(0.12));
+            simulation.force('groupY', d3.forceY(d => {
+                if (d.group === 'MLOps') return h * 0.55;
+                if (d.group === 'Tools') return h * 0.45;
+                return h / 2;
+            }).strength(0.03));
             simulation.alpha(0.3).restart();
         });
 
