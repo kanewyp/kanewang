@@ -116,6 +116,7 @@
             {id: 'Grafana', group: 'Tools', score:3},
             {id: 'Weights & Biases', group: 'Tools', score:3},
             {id: 'CI/CD', group: 'MLOps', score:4}
+            ,{id: 'Me', group: 'Person', person: true}
         ];
 
         // create links by connecting nodes within same group and a few cross links
@@ -166,6 +167,9 @@
             }).strength(0.03))
             .on('tick', ticked);
 
+        // anchor the `Me` node at the center
+        nodes.forEach(n => { if (n.person){ n.fx = width/2; n.fy = height/2; n.r = 44; } });
+
         const link = g.append('g')
             .attr('stroke', '#ccc')
             .selectAll('line')
@@ -193,9 +197,9 @@
         }
 
         node.append('circle')
-            .attr('r', d => 28)
-            .attr('fill', d => color(d.group))
-            .attr('stroke', '#fff')
+            .attr('r', d => d.person ? 44 : 28)
+            .attr('fill', d => d.person ? '#222' : color(d.group))
+            .attr('stroke', d => d.person ? '#fff' : '#fff')
             .attr('stroke-width', 2)
             .on('click', (event, d) => highlightNeighbors(d))
             .on('mouseover', showTooltip)
@@ -207,10 +211,10 @@
             .attr('x', 0)
             .attr('text-anchor', 'middle')
             .style('pointer-events', 'none')
-            .style('font-size', '12px')
+            .style('font-size', d => d.person ? '18px' : '12px')
             .style('font-weight', 700)
-            .style('fill', 'var(--text-dark)')
-            .text(d => d.id);
+            .style('fill', d => d.person ? '#fff' : 'var(--text-dark)')
+            .text(d => d.person ? '👤' : d.id);
 
         // compute radii now that text elements are in the DOM
         computeRadii();
@@ -396,7 +400,8 @@
         });
 
         // --- Group overlays: use a separate overlay simulation so overlay circles don't overlap ---
-        const groupData = Array.from(groupMap.keys()).map(k => ({group: k}));
+        // exclude the Person group from overlays
+        const groupData = Array.from(groupMap.keys()).filter(k => k !== 'Person').map(k => ({group: k}));
         const overlays = g.append('g').attr('class', 'group-overlays');
         const overlayGroup = overlays.selectAll('g')
             .data(groupData)
@@ -509,21 +514,34 @@
         overlayGroup.select('circle').call(d3.drag()
             .on('start', function(event, gd){
                 const o = overlayMap.get(gd.group);
-                o.fx = o.x; o.fy = o.y;
-                overlaySim.alphaTarget(0.3).restart();
+                o.dragging = true;
+                o._prevX = event.x - 12; o._prevY = event.y - 12;
+                // pin member nodes while dragging so they move with overlay
             })
             .on('drag', function(event, gd){
                 const o = overlayMap.get(gd.group);
-                o.fx = event.x - 12; // account for g translate(12,12)
-                o.fy = event.y - 12;
-                // immediately update circle and recompute radii
-                d3.select(this).attr('cx', o.fx).attr('cy', o.fy);
-                overlaySim.tick();
+                const nx = event.x - 12; const ny = event.y - 12;
+                const dx = nx - (o._prevX || nx); const dy = ny - (o._prevY || ny);
+                o._prevX = nx; o._prevY = ny;
+                // move member nodes together
+                nodes.forEach(n => {
+                    if (n.group === gd.group && !n.person){
+                        n.x = (n.x || 0) + dx;
+                        n.y = (n.y || 0) + dy;
+                        n.fx = n.x; n.fy = n.y;
+                    }
+                });
+                // update overlay position
+                o.x = (o.x || nx) + dx; o.y = (o.y || ny) + dy;
+                simulation.alpha(0.3).restart();
             })
             .on('end', function(event, gd){
                 const o = overlayMap.get(gd.group);
-                o.fx = null; o.fy = null;
-                overlaySim.alphaTarget(0);
+                o.dragging = false;
+                // release member node pins so simulation can continue
+                nodes.forEach(n => { if (n.group === gd.group && !n.person){ n.fx = null; n.fy = null; } });
+                delete o._prevX; delete o._prevY;
+                simulation.alpha(0.3).restart();
             })
         );
 
