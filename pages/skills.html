@@ -70,43 +70,59 @@
 
         const color = d => categoryColor[d] || '#999';
 
-        // Add a relevance/proficiency score (1-5) per node to size nodes by impact
+        // Nodes strictly follow the skills listed on your resume
         const nodes = [
+            // Languages & packages (resume)
             {id: 'Python', group: 'Languages', score:5},
-            {id: 'R', group: 'Languages', score:4},
-            {id: 'tidyverse', group: 'Languages', score:4},
-            {id: 'ggplot2', group: 'Languages', score:4},
-            {id: 'plotly (R)', group: 'Languages', score:3},
-            {id: 'shiny', group: 'Languages', score:3},
-            {id: 'tidymodels', group: 'Languages', score:3},
-            {id: 'SQL', group: 'Data', score:5},
-            {id: 'C++', group: 'Languages', score:3},
-            {id: 'JavaScript', group: 'Languages', score:3},
-            {id: 'Unix', group: 'Other', score:4},
+            {id: 'NumPy', group: 'Languages', score:5},
+            {id: 'pandas', group: 'Languages', score:5},
+            {id: 'matplotlib', group: 'Visualization', score:4},
+            {id: 'seaborn', group: 'Visualization', score:4},
+            {id: 'scipy', group: 'Languages', score:4},
+            {id: 'scikit-learn', group: 'Languages', score:4},
             {id: 'PyTorch', group: 'GenAI', score:5},
             {id: 'TensorFlow', group: 'GenAI', score:4},
-            {id: 'scikit-learn', group: 'GenAI', score:4},
-            {id: 'LLM Inference', group: 'GenAI', score:5},
+            {id: 'keras', group: 'GenAI', score:3},
+            {id: 'R', group: 'Languages', score:4},
+            {id: 'ggplot2', group: 'Visualization', score:4},
+            {id: 'tidyverse', group: 'Languages', score:4},
+            {id: 'plotly', group: 'Visualization', score:4},
+            {id: 'caret', group: 'Languages', score:3},
+            {id: 'randomForest', group: 'Languages', score:3},
+            {id: 'glmnet', group: 'Languages', score:3},
+            {id: 'mlr3', group: 'Languages', score:3},
+            {id: 'C++', group: 'Languages', score:3},
+            {id: 'SQL', group: 'Data', score:5},
+            {id: 'Unix', group: 'Other', score:4},
+            {id: 'VBA', group: 'Other', score:3},
+            {id: 'JavaScript', group: 'Languages', score:3},
+            {id: 'CSS', group: 'Other', score:3},
+
+            // GenAI & LLMs (resume)
+            {id: 'LLM inference optimization', group: 'GenAI', score:5},
+            {id: 'vLLM', group: 'GenAI', score:5},
+            {id: 'PagedAttention', group: 'GenAI', score:4},
+            {id: 'H2O', group: 'GenAI', score:3},
             {id: 'RAG', group: 'GenAI', score:5},
-            {id: 'Multi-Agent', group: 'GenAI', score:4},
-            {id: 'vLLM / KV-Cache', group: 'GenAI', score:5},
-            {id: 'Docker', group: 'MLOps', score:4},
+            {id: 'Multi-agent systems', group: 'GenAI', score:4},
+            {id: 'LangGraph', group: 'GenAI', score:4},
+
+            // MLOps & Infra (resume)
+            {id: 'Argo Workflows', group: 'MLOps', score:4},
+            {id: 'Argo CD', group: 'MLOps', score:3},
             {id: 'Kubernetes', group: 'MLOps', score:3},
-            {id: 'Argo / ArgoCD', group: 'MLOps', score:4},
-            {id: 'Airflow', group: 'MLOps', score:4},
-            {id: 'Kafka', group: 'Data', score:4},
-            {id: 'Spark', group: 'Data', score:4},
-            {id: 'Snowflake', group: 'Data', score:4},
-            {id: 'AWS', group: 'Data', score:4},
-            {id: 'MinIO', group: 'Data', score:3},
+            {id: 'Docker', group: 'MLOps', score:4},
             {id: 'MLflow', group: 'MLOps', score:4},
-            {id: 'Drift Detection', group: 'MLOps', score:4},
-            {id: 'W&B', group: 'Tools', score:3},
+            {id: 'Airflow', group: 'MLOps', score:4},
+            {id: 'AWS SageMaker', group: 'Data', score:4},
+            {id: 'S3', group: 'Data', score:4},
+            {id: 'MinIO', group: 'Data', score:3},
+            {id: 'Snowflake', group: 'Data', score:4},
+            {id: 'Spark', group: 'Data', score:4},
+            {id: 'Kafka', group: 'Data', score:4},
             {id: 'Grafana', group: 'Tools', score:3},
-            {id: 'Flask', group: 'Tools', score:3},
-            {id: 'Streamlit', group: 'Tools', score:3},
-            {id: 'Plotly / Matplotlib', group: 'Visualization', score:4},
-            {id: 'Power BI / Tableau', group: 'Visualization', score:3}
+            {id: 'Weights & Biases', group: 'Tools', score:3},
+            {id: 'CI/CD', group: 'MLOps', score:4}
         ];
 
         // create links by connecting nodes within same group and a few cross links
@@ -121,8 +137,11 @@
         }
         // add intentional cross-links
         const cross = [
-            ['Python','PyTorch'], ['Python','Spark'], ['LLM Inference','vLLM / KV-Cache'], ['RAG','vLLM / KV-Cache'], ['Docker','Kubernetes'], ['Kafka','Spark'], ['MLflow','W&B'], ['AWS','Snowflake'],
-            ['SQL','Snowflake'], ['SQL','Spark'], ['tidyverse','SQL'], ['R','Plotly / Matplotlib']
+            ['Python','NumPy'], ['Python','pandas'], ['Python','scikit-learn'],
+            ['R','tidyverse'], ['R','ggplot2'], ['R','plotly'],
+            ['SQL','Snowflake'], ['SQL','Spark'], ['Spark','Kafka'], ['Kafka','AWS SageMaker'],
+            ['Docker','Kubernetes'], ['Argo Workflows','Argo CD'], ['MLflow','Weights & Biases'],
+            ['LLM inference optimization','vLLM'], ['LLM inference optimization','PagedAttention'], ['RAG','LangGraph'], ['RAG','vLLM']
         ];
         cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
 
