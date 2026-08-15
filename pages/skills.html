@@ -149,22 +149,24 @@
         const g = svg.append('g').attr('transform', 'translate(12,12)');
 
         const simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance( d => 60 ).strength(0.9))
-            .force('charge', d3.forceManyBody().strength(-80))
+            // bring linked nodes closer and strengthen links for tighter groups
+            .force('link', d3.forceLink(links).id(d => d.id).distance( d => 40 ).strength(1.2))
+            // reduce overall repulsion so clusters form more compactly
+            .force('charge', d3.forceManyBody().strength(-40))
             .force('center', d3.forceCenter(width / 2, height / 2))
             // temporary collision radius; will be updated after measuring label sizes
             .force('collision', d3.forceCollide().radius(32))
             // per-group positioning forces to nudge certain groups apart (MLOps vs Tools)
             .force('groupX', d3.forceX(d => {
-                if (d.group === 'MLOps') return width * 0.28;
-                if (d.group === 'Tools') return width * 0.78;
+                if (d.group === 'MLOps') return width * 0.26;
+                if (d.group === 'Tools') return width * 0.80;
                 return width / 2;
-            }).strength(0.12))
+            }).strength(0.06))
             .force('groupY', d3.forceY(d => {
                 if (d.group === 'MLOps') return height * 0.55;
                 if (d.group === 'Tools') return height * 0.45;
                 return height / 2;
-            }).strength(0.03))
+            }).strength(0.02))
             .on('tick', ticked);
 
         // anchor the `Me` node at the center
@@ -411,9 +413,9 @@
         overlayGroup.append('circle')
             .attr('r', 0)
             .attr('fill', d => color(d.group))
-            .attr('opacity', 0.08)
+            .attr('opacity', 0.06)
             .attr('stroke', d => color(d.group))
-            .attr('stroke-width', 1);
+            .attr('stroke-width', 0.8);
 
         overlayGroup.append('text')
             .attr('text-anchor', 'middle')
@@ -433,9 +435,11 @@
         const overlayMap = new Map(overlayNodes.map(n => [n.group, n]));
 
         const overlaySim = d3.forceSimulation(overlayNodes)
-            .force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1))
-            .force('x', d3.forceX(d => d.xTarget).strength(0.6))
-            .force('y', d3.forceY(d => d.yTarget).strength(0.6))
+            // stronger collide so overlays separate cleanly
+            .force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1.6))
+            // pull overlays strongly to their targets (group centroids)
+            .force('x', d3.forceX(d => d.xTarget).strength(0.9))
+            .force('y', d3.forceY(d => d.yTarget).strength(0.9))
             .stop();
 
         overlaySim.on('tick', () => {
@@ -475,7 +479,9 @@
                     if (dist > maxr) maxr = dist;
                 });
                 const pad = 18;
-                const desiredR = Math.max(40, maxr + pad);
+                // cap overlay radius so one overlay doesn't engulf the whole canvas
+                const maxAllowed = Math.min(width, height) * 0.45;
+                const desiredR = Math.min(Math.max(40, maxr + pad), maxAllowed);
                 o.xTarget = cx;
                 o.yTarget = cy;
                 o.r = desiredR;
@@ -486,8 +492,8 @@
             });
 
             // update overlay collision radius and restart overlay simulation to resolve overlaps
-            overlaySim.force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1));
-            overlaySim.alpha(0.4).restart();
+            overlaySim.force('collide', d3.forceCollide().radius(d => d.r + 18).strength(1.6));
+            overlaySim.alpha(0.7).restart();
 
             // fallback label nudging to reduce label overlap after overlaySim settles
             for (let iter=0; iter<6; iter++){
