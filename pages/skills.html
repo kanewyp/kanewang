@@ -84,13 +84,6 @@
             {id: 'TensorFlow', group: 'GenAI', score:4},
             {id: 'keras', group: 'GenAI', score:3},
             {id: 'R', group: 'Languages', score:4},
-            {id: 'ggplot2', group: 'Visualization', score:4},
-            {id: 'tidyverse', group: 'Languages', score:4},
-            {id: 'plotly', group: 'Visualization', score:4},
-            {id: 'caret', group: 'Languages', score:3},
-            {id: 'randomForest', group: 'Languages', score:3},
-            {id: 'glmnet', group: 'Languages', score:3},
-            {id: 'mlr3', group: 'Languages', score:3},
             {id: 'C++', group: 'Languages', score:3},
             {id: 'SQL', group: 'Data', score:5},
             {id: 'Unix', group: 'Other', score:4},
@@ -138,7 +131,7 @@
         // add intentional cross-links
         const cross = [
             ['Python','NumPy'], ['Python','pandas'], ['Python','scikit-learn'],
-            ['R','tidyverse'], ['R','ggplot2'], ['R','plotly'],
+            // R packages removed: consolidate under single `R` node
             ['SQL','Snowflake'], ['SQL','Spark'], ['Spark','Kafka'], ['Kafka','AWS SageMaker'],
             ['Docker','Kubernetes'], ['Argo Workflows','Argo CD'], ['MLflow','Weights & Biases'],
             ['LLM inference optimization','vLLM'], ['LLM inference optimization','PagedAttention'], ['RAG','LangGraph'], ['RAG','vLLM']
@@ -264,12 +257,7 @@
 
         const descriptions = {
             'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs.',
-            'R': 'Statistical analysis and visualization; proficient in tidyverse workflows and data transformation for analysis and reporting.',
-            'tidyverse': 'Data manipulation and pipelines (dplyr, tidyr), dbplyr for database-backed transformations, and tibbles for tidy data.',
-            'ggplot2': 'Grammar-of-graphics plotting for publication-quality visualizations and layered plots.',
-            'plotly (R)': 'Interactive visualizations and dashboards via Plotly; used for exploratory and stakeholder-facing plots.',
-            'shiny': 'Rapid interactive dashboards and internal web tools built with Shiny for data exploration and demos.',
-            'tidymodels': 'Modeling workflows in R using unified APIs for preprocessing, tuning and evaluation.',
+            'R': 'Statistical analysis, visualization and modeling workflows (tidyverse, ggplot2, plotly, tidymodels); building reproducible analysis pipelines and interactive dashboards.',
             'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices.',
             'C++': 'Systems-level implementations and performance-focused components when low-level control is required.',
             'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs.',
