@@ -220,6 +220,20 @@
         // compute radii now that text elements are in the DOM
         computeRadii();
 
+        // --- Home forces: remember an initial layout and softly pull nodes back to it after drag ---
+        // start with zero strength; we'll capture positions shortly and enable a gentle pull
+        simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0));
+        simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0));
+
+        // capture a canonical layout shortly after initial stabilization
+        setTimeout(() => {
+            nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+            // enable a gentle home force so nodes slowly return to their original spots
+            simulation.force('homeX', d3.forceX(d => d.x0).strength(0.02));
+            simulation.force('homeY', d3.forceY(d => d.y0).strength(0.02));
+            simulation.alpha(0.3).restart();
+        }, 900);
+
         function ticked() {
             link
                 .attr('x1', d => d.source.x)
@@ -233,6 +247,9 @@
         function drag(simulation){
             function dragstarted(event, d) {
                 if (!event.active) simulation.alphaTarget(0.3).restart();
+                // temporarily disable home pull while dragging for a natural feel
+                simulation.force('homeX', d3.forceX(d => d.x0 || d.x).strength(0));
+                simulation.force('homeY', d3.forceY(d => d.y0 || d.y).strength(0));
                 d.fx = d.x;
                 d.fy = d.y;
             }
@@ -244,8 +261,13 @@
 
             function dragended(event, d) {
                 if (!event.active) simulation.alphaTarget(0);
+                // release the drag and re-enable a gentle home pull so nodes ease back
                 d.fx = null;
                 d.fy = null;
+                // restore a gentle home force to slowly return nodes to their saved positions
+                simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0.02));
+                simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0.02));
+                simulation.alphaTarget(0.2).restart();
             }
 
             return d3.drag()
