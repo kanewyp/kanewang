@@ -181,8 +181,7 @@
         const node = g.append('g')
             .selectAll('g')
             .data(nodes)
-            .join('g')
-            .call(drag(simulation));
+            .join('g');
 
         // After labels are added we compute a radius per node so long labels fit inside the circle.
         function computeRadii(){
@@ -244,36 +243,7 @@
             node.attr('transform', d => `translate(${d.x},${d.y})`);
         }
 
-        function drag(simulation){
-            function dragstarted(event, d) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                // temporarily disable home pull while dragging for a natural feel
-                simulation.force('homeX', d3.forceX(d => d.x0 || d.x).strength(0));
-                simulation.force('homeY', d3.forceY(d => d.y0 || d.y).strength(0));
-                d.fx = d.x;
-                d.fy = d.y;
-            }
-
-            function dragged(event, d) {
-                d.fx = event.x;
-                d.fy = event.y;
-            }
-
-            function dragended(event, d) {
-                if (!event.active) simulation.alphaTarget(0);
-                // release the drag and re-enable a stronger home pull so nodes ease back faster
-                d.fx = null;
-                d.fy = null;
-                simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0.12));
-                simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0.12));
-                simulation.alphaTarget(0.6).restart();
-            }
-
-            return d3.drag()
-                .on('start', dragstarted)
-                .on('drag', dragged)
-                .on('end', dragended);
-        }
+        // dragging disabled by user request
 
         // neighbor highlighting
         const adjacency = {};
