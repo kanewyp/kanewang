@@ -70,42 +70,43 @@
 
         const color = d => categoryColor[d] || '#999';
 
+        // Add a relevance/proficiency score (1-5) per node to size nodes by impact
         const nodes = [
-            {id: 'Python', group: 'Languages'},
-            {id: 'R', group: 'Languages'},
-            {id: 'tidyverse', group: 'Languages'},
-            {id: 'ggplot2', group: 'Languages'},
-            {id: 'plotly (R)', group: 'Languages'},
-            {id: 'shiny', group: 'Languages'},
-            {id: 'tidymodels', group: 'Languages'},
-            {id: 'SQL', group: 'Data'},
-            {id: 'C++', group: 'Languages'},
-            {id: 'JavaScript', group: 'Languages'},
-            {id: 'Unix', group: 'Other'},
-            {id: 'PyTorch', group: 'GenAI'},
-            {id: 'TensorFlow', group: 'GenAI'},
-            {id: 'scikit-learn', group: 'GenAI'},
-            {id: 'LLM Inference', group: 'GenAI'},
-            {id: 'RAG', group: 'GenAI'},
-            {id: 'Multi-Agent', group: 'GenAI'},
-            {id: 'vLLM / KV-Cache', group: 'GenAI'},
-            {id: 'Docker', group: 'MLOps'},
-            {id: 'Kubernetes', group: 'MLOps'},
-            {id: 'Argo / ArgoCD', group: 'MLOps'},
-            {id: 'Airflow', group: 'MLOps'},
-            {id: 'Kafka', group: 'Data'},
-            {id: 'Spark', group: 'Data'},
-            {id: 'Snowflake', group: 'Data'},
-            {id: 'AWS', group: 'Data'},
-            {id: 'MinIO', group: 'Data'},
-            {id: 'MLflow', group: 'MLOps'},
-            {id: 'Drift Detection', group: 'MLOps'},
-            {id: 'W&B', group: 'Tools'},
-            {id: 'Grafana', group: 'Tools'},
-            {id: 'Flask', group: 'Tools'},
-            {id: 'Streamlit', group: 'Tools'},
-            {id: 'Plotly / Matplotlib', group: 'Visualization'},
-            {id: 'Power BI / Tableau', group: 'Visualization'}
+            {id: 'Python', group: 'Languages', score:5},
+            {id: 'R', group: 'Languages', score:4},
+            {id: 'tidyverse', group: 'Languages', score:4},
+            {id: 'ggplot2', group: 'Languages', score:4},
+            {id: 'plotly (R)', group: 'Languages', score:3},
+            {id: 'shiny', group: 'Languages', score:3},
+            {id: 'tidymodels', group: 'Languages', score:3},
+            {id: 'SQL', group: 'Data', score:5},
+            {id: 'C++', group: 'Languages', score:3},
+            {id: 'JavaScript', group: 'Languages', score:3},
+            {id: 'Unix', group: 'Other', score:4},
+            {id: 'PyTorch', group: 'GenAI', score:5},
+            {id: 'TensorFlow', group: 'GenAI', score:4},
+            {id: 'scikit-learn', group: 'GenAI', score:4},
+            {id: 'LLM Inference', group: 'GenAI', score:5},
+            {id: 'RAG', group: 'GenAI', score:5},
+            {id: 'Multi-Agent', group: 'GenAI', score:4},
+            {id: 'vLLM / KV-Cache', group: 'GenAI', score:5},
+            {id: 'Docker', group: 'MLOps', score:4},
+            {id: 'Kubernetes', group: 'MLOps', score:3},
+            {id: 'Argo / ArgoCD', group: 'MLOps', score:4},
+            {id: 'Airflow', group: 'MLOps', score:4},
+            {id: 'Kafka', group: 'Data', score:4},
+            {id: 'Spark', group: 'Data', score:4},
+            {id: 'Snowflake', group: 'Data', score:4},
+            {id: 'AWS', group: 'Data', score:4},
+            {id: 'MinIO', group: 'Data', score:3},
+            {id: 'MLflow', group: 'MLOps', score:4},
+            {id: 'Drift Detection', group: 'MLOps', score:4},
+            {id: 'W&B', group: 'Tools', score:3},
+            {id: 'Grafana', group: 'Tools', score:3},
+            {id: 'Flask', group: 'Tools', score:3},
+            {id: 'Streamlit', group: 'Tools', score:3},
+            {id: 'Plotly / Matplotlib', group: 'Visualization', score:4},
+            {id: 'Power BI / Tableau', group: 'Visualization', score:3}
         ];
 
         // create links by connecting nodes within same group and a few cross links
@@ -154,20 +155,24 @@
             .join('g')
             .call(drag(simulation));
 
-        function radiusByGroup(g){
+        function radiusByGroup(g, score){
+            // base radii by group; final radius scales with score (1-5)
+            let base;
             switch(g){
-                case 'GenAI': return 34;
-                case 'Languages': return 30;
-                case 'MLOps': return 28;
-                case 'Data': return 26;
-                case 'Tools': return 24;
-                case 'Visualization': return 24;
-                default: return 22;
+                case 'GenAI': base = 30; break;
+                case 'Languages': base = 28; break;
+                case 'MLOps': base = 26; break;
+                case 'Data': base = 24; break;
+                case 'Tools': base = 22; break;
+                case 'Visualization': base = 22; break;
+                default: base = 20;
             }
+            const s = (typeof score === 'number') ? score : 3;
+            return Math.round(base + (s - 3) * 4 + s * 1.5); // tuned scale
         }
 
         node.append('circle')
-            .attr('r', d => radiusByGroup(d.group))
+            .attr('r', d => radiusByGroup(d.group, d.score))
             .attr('fill', d => color(d.group))
             .attr('stroke', '#fff')
             .attr('stroke-width', 2)
@@ -289,7 +294,8 @@
 
         function showTooltip(event, d){
             const text = descriptions[d.id] || d.id;
-            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
+            const scoreText = d.score ? `<div style="margin-top:6px; font-weight:700;">Relevance: ${d.score}/5</div>` : '';
+            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>${scoreText}`);
             moveTooltip(event);
         }
 
@@ -320,6 +326,18 @@
             item.append('div').style('width','12px').style('height','12px').style('border-radius','3px').style('background', categoryColor[cat]);
             item.append('div').style('font-size','13px').style('color','var(--text-dark)').text(cat);
             item.on('click', () => toggleCategory(cat));
+        });
+
+        // Size legend
+        const sizeLegend = legend.append('div').style('margin-top','8px');
+        sizeLegend.append('div').style('font-size','12px').style('color','var(--text-light)').text('Node size = relevance to employer (1–5)');
+        const sizes = [2,3,5];
+        const sizeRow = sizeLegend.append('div').style('display','flex').style('gap','10px').style('align-items','center').style('margin-top','6px');
+        sizes.forEach(s => {
+            const r = 10 + (s * 4);
+            const box = sizeRow.append('div').style('display','flex').style('align-items','center').style('gap','6px');
+            box.append('svg').attr('width', r*2+6).attr('height', r*2+6).append('circle').attr('cx', r+3).attr('cy', r+3).attr('r', r).attr('fill', '#ddd').attr('stroke','#bbb');
+            box.append('div').style('font-size','12px').style('color','var(--text-light)').text(`${s}/5`);
         });
 
         const hiddenCats = new Set();
