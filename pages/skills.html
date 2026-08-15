@@ -434,11 +434,22 @@
             .stop();
 
         overlaySim.on('tick', () => {
-            overlayGroup.select('circle').attr('cx', gd => overlayMap.get(gd.group).x)
-                .attr('cy', gd => overlayMap.get(gd.group).y)
-                .attr('r', gd => overlayMap.get(gd.group).r);
-            overlayGroup.select('text').attr('x', gd => overlayMap.get(gd.group).x)
-                .attr('y', gd => overlayMap.get(gd.group).y - overlayMap.get(gd.group).r + 14);
+            overlayGroup.each(function(gd){
+                const o = overlayMap.get(gd.group);
+                // compute radius so overlay encloses current member nodes
+                const members = nodes.filter(n => n.group === gd.group && !(hiddenCats.has(n.group)));
+                let maxDist = 0;
+                members.forEach(m => {
+                    const dx = (m.x || 0) - o.x;
+                    const dy = (m.y || 0) - o.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy) + (m.r || 28);
+                    if (dist > maxDist) maxDist = dist;
+                });
+                const pad = 18;
+                o.r = Math.max(40, maxDist + pad);
+                d3.select(this).select('circle').attr('cx', o.x).attr('cy', o.y).attr('r', o.r);
+                d3.select(this).select('text').attr('x', o.x).attr('y', o.y - o.r + 14);
+            });
         });
 
         function updateOverlays(){
@@ -493,6 +504,28 @@
                 if (!moved) break;
             }
         }
+
+        // make only overlay circles draggable (background group circles)
+        overlayGroup.select('circle').call(d3.drag()
+            .on('start', function(event, gd){
+                const o = overlayMap.get(gd.group);
+                o.fx = o.x; o.fy = o.y;
+                overlaySim.alphaTarget(0.3).restart();
+            })
+            .on('drag', function(event, gd){
+                const o = overlayMap.get(gd.group);
+                o.fx = event.x - 12; // account for g translate(12,12)
+                o.fy = event.y - 12;
+                // immediately update circle and recompute radii
+                d3.select(this).attr('cx', o.fx).attr('cy', o.fy);
+                overlaySim.tick();
+            })
+            .on('end', function(event, gd){
+                const o = overlayMap.get(gd.group);
+                o.fx = null; o.fy = null;
+                overlaySim.alphaTarget(0);
+            })
+        );
 
     })();
     </script>
