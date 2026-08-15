@@ -402,10 +402,13 @@
         });
 
         function updateOverlays(){
+            const labelList = [];
+            // first pass: compute circle and base label position
             overlayGroup.each(function(gd){
                 const members = nodes.filter(n => n.group === gd.group && !(hiddenCats.has(n.group)));
                 const sel = d3.select(this);
-                if (!members.length){ sel.style('display','none'); return; }
+                if (!members.length){ sel.style('display','none'); gd.visible = false; return; }
+                gd.visible = true;
                 sel.style('display','');
                 const cx = d3.mean(members, m => m.x) || width/2;
                 const cy = d3.mean(members, m => m.y) || height/2;
@@ -418,8 +421,50 @@
                 });
                 const pad = 18;
                 sel.select('circle').attr('cx', cx).attr('cy', cy).attr('r', maxr + pad);
-                // position group label centered above the overlay circle
-                sel.select('text').attr('x', cx).attr('y', cy - (maxr + pad) + 14);
+                gd.baseX = cx;
+                gd.baseY = cy - (maxr + pad) + 14;
+                gd.cx = cx; gd.cy = cy; gd.maxr = maxr; gd.pad = pad;
+                gd.offsetY = gd.offsetY || 0;
+                // measure label bbox
+                const textNode = sel.select('text').node();
+                const bbox = textNode.getBBox();
+                gd.labelW = bbox.width; gd.labelH = bbox.height;
+                labelList.push(gd);
+            });
+
+            // simple label collision resolution (vertical nudging)
+            for (let iter = 0; iter < 8; iter++){
+                let moved = false;
+                for (let i = 0; i < labelList.length; i++){
+                    for (let j = i+1; j < labelList.length; j++){
+                        const a = labelList[i];
+                        const b = labelList[j];
+                        if (!a.visible || !b.visible) continue;
+                        const ax = a.baseX;
+                        const ay = a.baseY + a.offsetY;
+                        const aw = a.labelW;
+                        const ah = a.labelH;
+                        const bx = b.baseX;
+                        const by = b.baseY + b.offsetY;
+                        const bw = b.labelW;
+                        const bh = b.labelH;
+                        if (Math.abs(ax - bx) < (aw + bw)/2 && Math.abs(ay - by) < (ah + bh)/2){
+                            const overlapY = (ah + bh)/2 - Math.abs(ay - by) + 4;
+                            if (ay <= by){ a.offsetY -= overlapY/2; b.offsetY += overlapY/2; }
+                            else { a.offsetY += overlapY/2; b.offsetY -= overlapY/2; }
+                            moved = true;
+                        }
+                    }
+                }
+                if (!moved) break;
+            }
+
+            // apply final label positions
+            overlayGroup.each(function(gd){
+                const sel = d3.select(this);
+                if (!gd.visible){ sel.style('display','none'); return; }
+                sel.style('display','');
+                sel.select('text').attr('x', gd.baseX).attr('y', gd.baseY + (gd.offsetY || 0));
             });
         }
 
