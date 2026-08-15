@@ -174,24 +174,13 @@
             .join('g')
             .call(drag(simulation));
 
-        function radiusByGroup(g, score){
-            // base radii by group; final radius scales with score (1-5)
-            let base;
-            switch(g){
-                case 'GenAI': base = 30; break;
-                case 'Languages': base = 28; break;
-                case 'MLOps': base = 26; break;
-                case 'Data': base = 24; break;
-                case 'Tools': base = 22; break;
-                case 'Visualization': base = 22; break;
-                default: base = 20;
-            }
-            const s = (typeof score === 'number') ? score : 3;
-            return Math.round(base + (s - 3) * 4 + s * 1.5); // tuned scale
+        function radiusByGroup(g){
+            // Use a consistent radius for all nodes for a clean, uniform look.
+            return 28;
         }
 
         node.append('circle')
-            .attr('r', d => radiusByGroup(d.group, d.score))
+            .attr('r', d => radiusByGroup(d.group))
             .attr('fill', d => color(d.group))
             .attr('stroke', '#fff')
             .attr('stroke-width', 2)
@@ -313,8 +302,7 @@
 
         function showTooltip(event, d){
             const text = descriptions[d.id] || d.id;
-            const scoreText = d.score ? `<div style="margin-top:6px; font-weight:700;">Relevance: ${d.score}/5</div>` : '';
-            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>${scoreText}`);
+            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
             moveTooltip(event);
         }
 
@@ -347,17 +335,7 @@
             item.on('click', () => toggleCategory(cat));
         });
 
-        // Size legend
-        const sizeLegend = legend.append('div').style('margin-top','8px');
-        sizeLegend.append('div').style('font-size','12px').style('color','var(--text-light)').text('Node size = relevance to employer (1–5)');
-        const sizes = [2,3,5];
-        const sizeRow = sizeLegend.append('div').style('display','flex').style('gap','10px').style('align-items','center').style('margin-top','6px');
-        sizes.forEach(s => {
-            const r = 10 + (s * 4);
-            const box = sizeRow.append('div').style('display','flex').style('align-items','center').style('gap','6px');
-            box.append('svg').attr('width', r*2+6).attr('height', r*2+6).append('circle').attr('cx', r+3).attr('cy', r+3).attr('r', r).attr('fill', '#ddd').attr('stroke','#bbb');
-            box.append('div').style('font-size','12px').style('color','var(--text-light)').text(`${s}/5`);
-        });
+        // (Removed size legend — nodes are uniform size now)
 
         const hiddenCats = new Set();
         function toggleCategory(cat){
