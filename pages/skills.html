@@ -41,7 +41,7 @@
     <!-- Interactive Skills Map -->
     <section class="about-section" style="padding-bottom: 40px;">
         <div class="container">
-            <div id="skills-map" style="width:100%; height:720px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
+            <div id="skills-map" style="position:relative; width:100%; height:720px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
                 <!-- SVG injected by D3 -->
             </div>
             <div style="margin-top:12px; display:flex; gap:16px; align-items:center;">
@@ -57,15 +57,18 @@
         const width = document.getElementById('skills-map').clientWidth - 24;
         const height = document.getElementById('skills-map').clientHeight - 24;
 
-        const color = d3.scaleOrdinal()
-            .domain(['Languages','GenAI','MLOps','Data','Tools','Visualization','Other'])
-            .range(['var(--primary-color)','var(--secondary-color)','#43e97b','#f093fb','#4facfe','#f6b93b','#667eea']);
-
-        // Resolve CSS variables to actual color values
         const rootStyle = getComputedStyle(document.documentElement);
-        color.range(color.range().map(k => {
-            try { return rootStyle.getPropertyValue(k.trim()) || k; } catch(e) { return k; }
-        }));
+        const categoryColor = {
+            'Languages': rootStyle.getPropertyValue('--primary-color').trim() || '#667eea',
+            'GenAI': rootStyle.getPropertyValue('--secondary-color').trim() || '#764ba2',
+            'MLOps': '#43e97b',
+            'Data': '#f093fb',
+            'Tools': '#4facfe',
+            'Visualization': '#f6b93b',
+            'Other': '#667eea'
+        };
+
+        const color = d => categoryColor[d] || '#999';
 
         const nodes = [
             {id: 'Python', group: 'Languages'},
@@ -125,6 +128,13 @@
 
         const g = svg.append('g').attr('transform', 'translate(12,12)');
 
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance( d => 80 ))
+            .force('charge', d3.forceManyBody().strength(-220))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(d => radiusByGroup(d.group) + 6))
+            .on('tick', ticked);
+
         const link = g.append('g')
             .attr('stroke', '#ccc')
             .selectAll('line')
@@ -138,27 +148,36 @@
             .join('g')
             .call(drag(simulation));
 
+        function radiusByGroup(g){
+            switch(g){
+                case 'GenAI': return 34;
+                case 'Languages': return 30;
+                case 'MLOps': return 28;
+                case 'Data': return 26;
+                case 'Tools': return 24;
+                case 'Visualization': return 24;
+                default: return 22;
+            }
+        }
+
         node.append('circle')
-            .attr('r', 28)
+            .attr('r', d => radiusByGroup(d.group))
             .attr('fill', d => color(d.group))
             .attr('stroke', '#fff')
             .attr('stroke-width', 2)
-            .on('click', (event, d) => highlightNeighbors(d));
+            .on('click', (event, d) => highlightNeighbors(d))
+            .on('mouseover', showTooltip)
+            .on('mousemove', moveTooltip)
+            .on('mouseout', hideTooltip);
 
         node.append('text')
             .attr('dy', 4)
             .attr('x', 0)
             .attr('text-anchor', 'middle')
             .style('pointer-events', 'none')
-            .style('font-size', '11px')
+            .style('font-size', '10px')
+            .style('font-weight', 600)
             .text(d => d.id);
-
-        const simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(d => 80))
-            .force('charge', d3.forceManyBody().strength(-250))
-            .force('center', d3.forceCenter(width / 2, height / 2))
-            .force('collision', d3.forceCollide().radius(40))
-            .on('tick', ticked);
 
         function ticked() {
             link
@@ -207,6 +226,95 @@
             link.attr('stroke-opacity', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? 1 : 0.05)
                 .attr('stroke', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? '#333' : '#ccc');
             setTimeout(() => resetHighlight(), 4000);
+        }
+
+        // Tooltip element
+        const tooltip = d3.select('#skills-map').append('div')
+            .attr('id', 'skill-tooltip')
+            .style('position', 'absolute')
+            .style('pointer-events', 'none')
+            .style('background', 'white')
+            .style('border', '1px solid rgba(0,0,0,0.08)')
+            .style('padding', '8px 10px')
+            .style('border-radius', '8px')
+            .style('box-shadow', '0 6px 20px rgba(0,0,0,0.08)')
+            .style('display', 'none')
+            .style('font-size', '13px')
+            .style('color', 'var(--text-dark)');
+
+        const descriptions = {
+            'Python': 'General-purpose language for data engineering and ML workflows.',
+            'R': 'Statistical analysis and visualization workflows.',
+            'SQL': 'Analytical querying and data warehouse interaction (Snowflake, Postgres).',
+            'C++': 'Systems-level coding and performance-critical components.',
+            'JavaScript': 'Frontend integrations and lightweight tooling.',
+            'Unix': 'Shell scripting, automation, and system tools.',
+            'PyTorch': 'Primary deep learning framework for experiments and deployment.',
+            'TensorFlow': 'Alternative deep learning framework for select use-cases.',
+            'scikit-learn': 'Traditional ML tooling for baselines and pipelines.',
+            'LLM Inference': 'Optimization and serving for large language models.',
+            'RAG': 'Retrieval-augmented generation architectures and pipelines.',
+            'Multi-Agent': 'Agent orchestration and planner systems (LangGraph).',
+            'vLLM / KV-Cache': 'Key-value caching approaches to reduce LLM inference costs.',
+            'Docker': 'Containerization for reproducible environments.',
+            'Kubernetes': 'Orchestration for scalable deployments.',
+            'Argo / ArgoCD': 'GitOps and workflow orchestration for CI/CD.',
+            'Airflow': 'Scheduling and orchestrating ETL and training jobs.',
+            'Kafka': 'Real-time event streaming and ingestion.',
+            'Spark': 'Distributed data processing and streaming workloads.',
+            'Snowflake': 'Cloud data warehouse for analytics.',
+            'AWS': 'Cloud infrastructure (S3, SageMaker, EC2).',
+            'MinIO': 'S3-compatible object storage for local/dev environments.',
+            'MLflow': 'Experiment tracking and model registry.',
+            'Drift Detection': 'Monitoring data/model drift to maintain performance.',
+            'W&B': 'Experiment tracking and visualization.',
+            'Grafana': 'Observability and metrics dashboards.',
+            'Flask': 'Lightweight API and microservice development.',
+            'Streamlit': 'Rapid demos and data apps.',
+            'Plotly / Matplotlib': 'Interactive and static data visualization.',
+            'Power BI / Tableau': 'Business reporting and dashboards.'
+        };
+
+        function showTooltip(event, d){
+            const text = descriptions[d.id] || d.id;
+            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
+            moveTooltip(event);
+        }
+
+        function moveTooltip(event){
+            const map = document.getElementById('skills-map');
+            const rect = map.getBoundingClientRect();
+            const x = event.clientX - rect.left + 12;
+            const y = event.clientY - rect.top + 12;
+            tooltip.style('left', x + 'px').style('top', y + 'px');
+        }
+
+        function hideTooltip(){ tooltip.style('display', 'none'); }
+
+        // Legend (HTML overlay)
+        const legend = d3.select('#skills-map').append('div')
+            .attr('class', 'skills-legend')
+            .style('position', 'absolute')
+            .style('right', '18px')
+            .style('top', '18px')
+            .style('background', 'rgba(255,255,255,0.95)')
+            .style('padding', '8px 10px')
+            .style('border-radius', '10px')
+            .style('box-shadow', '0 6px 20px rgba(0,0,0,0.06)');
+
+        const categories = Object.keys(categoryColor);
+        categories.forEach(cat => {
+            const item = legend.append('div').style('display', 'flex').style('align-items','center').style('gap','8px').style('margin-bottom','6px').style('cursor','pointer');
+            item.append('div').style('width','12px').style('height','12px').style('border-radius','3px').style('background', categoryColor[cat]);
+            item.append('div').style('font-size','13px').style('color','var(--text-dark)').text(cat);
+            item.on('click', () => toggleCategory(cat));
+        });
+
+        const hiddenCats = new Set();
+        function toggleCategory(cat){
+            if (hiddenCats.has(cat)) hiddenCats.delete(cat); else hiddenCats.add(cat);
+            node.style('display', d => hiddenCats.has(d.group) ? 'none' : '');
+            link.style('display', l => (hiddenCats.has(l.source.group) || hiddenCats.has(l.target.group)) ? 'none' : '');
         }
 
         function resetHighlight(){
