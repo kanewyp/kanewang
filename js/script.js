@@ -5,10 +5,12 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-if (hamburger) {
+if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
+        const isOpen = navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
 
     // Close menu when a link is clicked
@@ -17,6 +19,8 @@ if (hamburger) {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open navigation menu');
         });
     });
 }
@@ -63,36 +67,49 @@ window.addEventListener('load', setActiveLink);
 // Project Filter Functionality
 // ============================================
 
-const filterButtons = document.querySelectorAll('.filter-btn');
+const typeFilterButtons = document.querySelectorAll('[data-filter-type]');
+const statusFilterButtons = document.querySelectorAll('[data-filter-status]');
 const projectCards = document.querySelectorAll('.project-card-large');
+const projectResultCount = document.getElementById('project-result-count');
 
-if (filterButtons.length > 0) {
-    filterButtons.forEach(button => {
+function updateProjectFilters() {
+    const selectedType = document.querySelector('[data-filter-type].active')?.dataset.filterType ?? 'all';
+    const selectedStatus = document.querySelector('[data-filter-status].active')?.dataset.filterStatus ?? 'all';
+    let visibleCount = 0;
+
+    projectCards.forEach(card => {
+        const matchesType = selectedType === 'all' || card.dataset.category === selectedType;
+        const matchesStatus = selectedStatus === 'all' || card.dataset.status === selectedStatus;
+        card.hidden = !(matchesType && matchesStatus);
+        if (!card.hidden) visibleCount += 1;
+    });
+
+    if (projectResultCount) {
+        projectResultCount.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
+    }
+}
+
+function activateFilter(button, groupButtons) {
+    groupButtons.forEach(filter => {
+        const isActive = filter === button;
+        filter.classList.toggle('active', isActive);
+        filter.setAttribute('aria-pressed', String(isActive));
+    });
+    updateProjectFilters();
+}
+
+if (typeFilterButtons.length > 0 || statusFilterButtons.length > 0) {
+    typeFilterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
-
-            const filterValue = button.getAttribute('data-filter');
-
-            // Filter projects
-            projectCards.forEach(card => {
-                if (filterValue === 'all') {
-                    card.style.display = 'grid';
-                    setTimeout(() => card.classList.add('show'), 10);
-                } else {
-                    if (card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'grid';
-                        setTimeout(() => card.classList.add('show'), 10);
-                    } else {
-                        card.style.display = 'none';
-                        card.classList.remove('show');
-                    }
-                }
-            });
+            activateFilter(button, typeFilterButtons);
         });
     });
+    statusFilterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            activateFilter(button, statusFilterButtons);
+        });
+    });
+    updateProjectFilters();
 }
 
 // ============================================
@@ -123,14 +140,35 @@ if (contactForm) {
             return;
         }
 
-        // Here you would typically send the form data to a server
-        // For now, we'll just show a success message
-        showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-
-        // Reset form
-        contactForm.reset();
+        const emailBody = `Hi Kane,\n\n${message.trim()}\n\nBest,\n${name.trim()}\n\nReply to: ${email.trim()}`;
+        const mailto = `mailto:yw4623@columbia.edu?subject=${encodeURIComponent(subject.trim())}&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = mailto;
+        showNotification('Your email app should open with a draft. If it does not, use the email link on this page.', 'info');
     });
 }
+
+document.querySelectorAll('[data-copy-email]').forEach(button => {
+    button.addEventListener('click', async () => {
+        const email = button.dataset.copyEmail;
+        if (!email) {
+            console.error('The copy-email button is missing its email address.');
+            showNotification('Email address is unavailable. Please use the email link on this page.', 'error');
+            return;
+        }
+        if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') {
+            showNotification('Copy is unavailable here. Please select the email address above.', 'error');
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(email);
+            showNotification('Email address copied.', 'success');
+        } catch (error) {
+            console.error('Unable to copy the email address.', error);
+            showNotification('Could not copy the address. Please select it from the email link.', 'error');
+        }
+    });
+});
 
 // ============================================
 // Newsletter Form Handling
@@ -168,6 +206,7 @@ function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
+    notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
 
     // Add styles
     notification.style.cssText = `
@@ -319,6 +358,8 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open navigation menu');
     }
 });
 

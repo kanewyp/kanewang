@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Your Portfolio</title>
+    <title>Projects - Kane Wang</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,19 +14,19 @@
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="primary-navigation">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="experience.html">Experience</a></li>
-                <li><a href="skills.html">Skills</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Toolkit</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
                 
     </nav>
@@ -34,8 +34,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Selected Projects</h1>
-            <p>Concise summaries, key highlights, and links to code or reports.</p>
+            <h1>Projects & Research</h1>
+            <p>Current work first, followed by earlier projects in reverse chronological order.</p>
         </div>
     </section>
 
@@ -43,15 +43,133 @@
     <section class="projects-showcase">
         <div class="container">
 
+            <div class="project-filters" aria-label="Filter projects">
+                <div class="filter-group" role="group" aria-label="Filter by field">
+                    <span class="filter-label">Field</span>
+                    <button class="filter-btn active" type="button" data-filter-type="all" aria-pressed="true">All</button>
+                    <button class="filter-btn" type="button" data-filter-type="ai" aria-pressed="false">Applied AI</button>
+                    <button class="filter-btn" type="button" data-filter-type="research" aria-pressed="false">Research</button>
+                    <button class="filter-btn" type="button" data-filter-type="mlops" aria-pressed="false">MLOps</button>
+                </div>
+                <div class="filter-group" role="group" aria-label="Filter by status">
+                    <span class="filter-label">Status</span>
+                    <button class="filter-btn active" type="button" data-filter-status="all" aria-pressed="true">All stages</button>
+                    <button class="filter-btn" type="button" data-filter-status="in-progress" aria-pressed="false">In progress</button>
+                    <button class="filter-btn" type="button" data-filter-status="completed" aria-pressed="false">Completed</button>
+                </div>
+                <p class="filter-result" id="project-result-count" aria-live="polite">Showing all projects</p>
+            </div>
+
             <!-- Personal Projects Tab -->
             <div class="tab-content active" id="personal-projects">
                 <div class="projects-grid-large">
-                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
-                <div class="project-card-large" data-category="ai" id="loomai">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">
-                        <img src="../images/loom_ai.png" alt="Loom AI" style="width: 100%; height: auto; border-radius: 8px;">
+                <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="steel-slag-slm">
+                    <div class="project-image-large project-diagram" role="img" aria-label="Steel-slag literature informs retrieval and a future small language model assistant">
+                        <span class="diagram-node">Steel-slag<br>literature</span>
+                        <span class="diagram-arrow" aria-hidden="true">→</span>
+                        <span class="diagram-node">Grounded<br>retrieval</span>
+                        <span class="diagram-arrow" aria-hidden="true">→</span>
+                        <span class="diagram-node">SLM<br>assistant</span>
                     </div>
                     <div class="project-info">
+                        <p class="project-status">In progress · Columbia University Data Science Capstone</p>
+                        <h3>Steel-Slag Literature Assistant</h3>
+                        <p class="project-date"><strong>September 2026–present</strong> | Team 30 · Carbon Negative Solutions</p>
+                        <p class="project-description">Exploring a specialized small-language-model assistant grounded in steel-slag research. The central question is when a material-performance prediction can be trusted, especially when a new slag differs from the model’s training data.</p>
+                        <details class="project-details">
+                            <summary>Approach and current progress</summary>
+                            <div class="project-highlights">
+                                <div class="highlight"><strong>Literature foundation:</strong> Collection, relevance screening, document extraction, and hybrid semantic/keyword retrieval are complete, according to the capstone brief.</div>
+                                <div class="highlight"><strong>Next steps:</strong> Develop a knowledge graph and a literature-grounded assistant, then evaluate retrieval, citation accuracy, hallucination, latency, and coverage.</div>
+                                <div class="highlight"><strong>Why it matters:</strong> Steel slag may partially replace cement, but variable chemistry can affect material performance. The assistant aims to make evidence and uncertainty easier to inspect.</div>
+                            </div>
+                        </details>
+                        <div class="project-tech">
+                            <span>Small Language Models</span>
+                            <span>RAG</span>
+                            <span>Hybrid Retrieval</span>
+                            <span>Construction Materials</span>
+                        </div>
+                        <p class="project-note">In progress · no public repository yet</p>
+                    </div>
+                </article>
+
+                <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="fme-bias-study">
+                    <div class="project-image-large project-diagram project-diagram-bias" role="img" aria-label="A large language model judge is distilled into a smaller judge and evaluated for bias">
+                        <span class="diagram-node">LLM<br>judge</span>
+                        <span class="diagram-arrow" aria-hidden="true">→</span>
+                        <span class="diagram-node">Distillation</span>
+                        <span class="diagram-arrow" aria-hidden="true">→</span>
+                        <span class="diagram-node">Bias<br>benchmark</span>
+                    </div>
+                    <div class="project-info">
+                        <p class="project-status">In progress · research study</p>
+                        <h3>Bias in, Bias Out? Auditing Bias Transfer in LLM Distillation</h3>
+                        <p class="project-date"><strong>FME Project Planning</strong> | Columbia University</p>
+                        <p class="project-description">A benchmark study asking whether distilling a large language-model judge into a smaller one transfers or changes its position, length, and self-preference biases.</p>
+                        <details class="project-details">
+                            <summary>Research question and study design</summary>
+                            <div class="project-highlights">
+                                <div class="highlight"><strong>Question:</strong> Does a smaller judge inherit a teacher’s systematic preferences—or can a bias-aware distillation recipe reduce them?</div>
+                                <div class="highlight"><strong>Planned comparison:</strong> Audit position, response-length, and model-family self-preference, with controlled bias injection and quality-aware controls.</div>
+                                <div class="highlight"><strong>Scope:</strong> This is a project plan; results and novelty claims have not been established.</div>
+                            </div>
+                        </details>
+                        <div class="project-tech">
+                            <span>LLM Evaluation</span>
+                            <span>Knowledge Distillation</span>
+                            <span>Bias Auditing</span>
+                            <span>Benchmarking</span>
+                        </div>
+                        <p class="project-note">In progress · no public repository yet</p>
+                    </div>
+                </article>
+
+                <article class="project-card-large" data-category="ai" data-status="in-progress" id="morningtide">
+                    <div class="project-image-large">
+                        <video class="project-video" controls preload="metadata" playsinline aria-label="MorningTide project demonstration">
+                            <source src="../videos/demo_MorningTide.mp4" type="video/mp4">
+                            Your browser does not support embedded video. <a href="../videos/demo_MorningTide.mp4">Open the MorningTide demo video.</a>
+                        </video>
+                    </div>
+                    <div class="project-info">
+                        <p class="project-status">Active personal project</p>
+                        <h3>MorningTide — RAG Journaling & Emotional-Pattern Assistant</h3>
+                        <p class="project-date"><strong>December 2025–present</strong> | New York, NY</p>
+                        <p class="project-description">A personal journaling project exploring emotional patterns and source-grounded prompts to help prepare for therapy conversations and self-reflection. It is a reflection aid, not a substitute for clinical care.</p>
+                        <div class="project-highlights">
+                            <div class="highlight"><strong>Emotion reflection:</strong> The project explores a fine-tuned emotion classifier to help surface patterns across journal entries.</div>
+                            <div class="highlight"><strong>Grounded preparation:</strong> A local RAG workflow brings journal context together with curated psychoeducation material to suggest discussion topics with source citations.</div>
+                            <div class="highlight"><strong>Personal motivation:</strong> Built as a tool for the maker’s own journaling and reflection, with privacy and care treated as part of the product design.</div>
+                        </div>
+                        <details class="project-details">
+                            <summary>How the project is designed</summary>
+                            <ol class="architecture-flow">
+                                <li>Journal entries and emotion reflections</li>
+                                <li>Retrieve related material from a curated psychoeducation library</li>
+                                <li>Generate discussion prompts with source citations</li>
+                            </ol>
+                        </details>
+                        <div class="project-tech">
+                            <span>RAG</span>
+                            <span>DistilBERT</span>
+                            <span>PyTorch</span>
+                            <span>Plotly</span>
+                            <span>Flask</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/kanewyp/MorningTide" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View repository</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
+                <div class="project-card-large" data-category="ai" data-status="completed" id="loomai">
+                    <div class="project-image-large">
+                        <img src="../images/loom_ai.png" alt="Loom AI" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-status">Completed project</p>
                         <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
                         <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
                         <p class="project-description">A compact multi-agent planner that turns a one-line goal into validated, scheduled plans. LLMs handle language (decomposition, critique, rationale) while deterministic Python handles scheduling and validation for correctness.</p>
@@ -59,9 +177,6 @@
                         <div class="project-highlights">
                             <div class="highlight">
                                 <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
-                            </div>
-                            <div class="highlight">
-                                <strong>Evaluation:</strong> 317-test eval harness and a 20-user study showed 85% users rating 4–5 stars, saving 30–60 minutes per planning task.
                             </div>
                             <div class="highlight">
                                 <strong>Hybrid Design:</strong> LLMs do decomposition, critique, and rationale; deterministic Python enforces time geometry, validation, and calendar writes to prevent hallucinated or invalid schedules.
@@ -86,11 +201,12 @@
                 </div>
 
                 <!-- Personal Project 1: KV-Cache (moved here chronologically) -->
-                <div class="project-card-large" data-category="research" id="kvcache">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
-                        <img src="../images/KV_cahe.png" alt="KV Cache Benchmarking" style="width: 100%; height: auto; border-radius: 8px;">
+                <div class="project-card-large" data-category="research" data-status="completed" id="kvcache">
+                    <div class="project-image-large">
+                        <img src="../images/KV_cahe.png" alt="KV Cache Benchmarking" loading="lazy">
                     </div>
                     <div class="project-info">
+                        <p class="project-status">Completed research project</p>
                         <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
                         <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
                         <p class="project-description">A unified benchmark of KV-cache strategies for long-context LLM inference. Measured memory, latency, and quality across single-request and concurrent workloads to find practical trade-offs.</p>
@@ -115,110 +231,20 @@
                             <span>Benchmarking</span>
                         </div>
                         <div class="project-actions">
-                            <a href="../pdfs/HPML_FINAL_REPORT.PDF" target="_blank" class="btn-small btn-primary" id="kvcache-pdf-btn">View Report (PDF)</a>
+                            <a href="../pdfs/HPML_FINAL_REPORT.PDF" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Report (PDF)</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Personal Project 1: MorningTide -->
-                <div class="project-card-large" data-category="ai" id="morningtide">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <img src="../images/morningtide.png" alt="MorningTide Project Image" style="width: 100%; height: auto; border-radius: 8px;">
-                    </div>
-                    <div class="project-info">
-                        <h3>MorningTide — RAG Journaling & Emotional-Pattern Assistant</h3>
-                        <p class="project-date"><strong>December 2025 - Present</strong> | New York, NY</p>
-                        <p class="project-description">A RAG-based journaling assistant that analyzes emotional patterns over time and surfaces actionable summaries for therapists and self-reflection.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Sentiment Engine:</strong> Implemented DistilBERT for emotional intensity analysis (valence scores over 20 emotions), retaining 96% of BERT performance while reducing inference latency 5x.
-                            </div>
-                            <div class="highlight">
-                                <strong>Content Analysis:</strong> Built sentence importance model achieving 95% accuracy in identifying high-impact journal entries for therapy-focused analytics.
-                            </div>
-                            <div class="highlight">
-                                <strong>Session Planning:</strong> Developed RAG indexing module analyzing weekly journals with therapy documents, achieving 60% reduction in manual prep time.
-                            </div>
-                            <div class="highlight">
-                                <strong>RAG Pipeline:</strong> Built a tool-calling RAG pipeline over journal segments for emotional pattern detection and long-range retrieval.
-                            </div>
-                            <div class="highlight">
-                                <strong>Distillation:</strong> Distilled a DistilBERT sentiment classifier via knowledge distillation, retaining 93% of teacher F1 at 50% of inference cost.
-                            </div>
-                            <div class="highlight">
-                                <strong>User Impact:</strong> Integrated insights into therapist workflows, reducing manual prep time and improving session quality.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>RAG</span>
-                            <span>DistilBERT</span>
-                            <span>PyTorch</span>
-                            <span>Plotly</span>
-                            <span>Flask</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="#" class="btn-small btn-outline">Full demo coming soon</a>
-                        </div>
-                    </div>
-                </div>
-
 
                 <!-- removed Fine-Tuned SLM here; will re-insert after KV-Cache to match requested order -->
 
-                <!-- Personal Project 2: Credit Card Fraud Detection -->
-                <div class="project-card-large" data-category="data" id="fraud">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                        <img src="../images/credit_card_fraud_detection.png" alt="Credit Card Fraud Detection MLOps Solution" style="width: 100%; height: auto; border-radius: 8px;">
+                <!-- Fine-Tuned Small Language Model for Children Story Generation -->
+                <div class="project-card-large" data-category="ai" data-status="completed">
+                    <div class="project-image-large">
+                        <img src="../images/children_story_generator.png" alt="Best Children Story Generator" loading="lazy">
                     </div>
                     <div class="project-info">
-                        <h3>Credit Card Fraud Detection MLOps Solution</h3>
-                        <p class="project-date"><strong>July 2025 - September 2025</strong> | Hong Kong, HK</p>
-                        <p class="project-description">Enterprise-grade, end-to-end MLOps system for real-time credit card fraud detection. Built a Kafka-to-Spark streaming pipeline processing 50k events/s with sub-70ms inference latency; orchestrated intraday training and model registration with Airflow and MLflow.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Real-Time Pipeline:</strong> Kafka-to-Spark streaming pipeline processing 50k events/s with sub-70ms end-to-end latency, enabling near-instant fraud scoring.
-                            </div>
-                            <div class="highlight">
-                                <strong>Model Ops:</strong> Orchestrated intraday training and model registration using Airflow and MLflow for continuous deployment.
-                            </div>
-                            <div class="highlight">
-                                <strong>Simulation:</strong> Synthetic event generation via Kafka harness to stress-test models across multiple fraud patterns.
-                            </div>
-                            <div class="highlight">
-                                <strong>Real-Time Pipeline (original):</strong> Apache Spark Structured Streaming processing 10,000+ transactions/second with sub-second latency, improving fraud detection rate by 15%.
-                            </div>
-                            <div class="highlight">
-                                <strong>ML Automation (original):</strong> Automated pipeline with MLflow achieving AUC-PR of 0.92, reducing training time by ~30% through optimized feature engineering.
-                            </div>
-                            <div class="highlight">
-                                <strong>Data Simulation (original):</strong> Confluent Kafka to continuously generate labeled synthetic transactions with multiple fraud patterns, enhancing model robustness.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>Apache Spark</span>
-                            <span>Confluent Kafka</span>
-                            <span>Apache Airflow</span>
-                            <span>MLflow</span>
-                            <span>PostgreSQL</span>
-                            <span>Docker</span>
-                            <span>Redis</span>
-                            <span>MinIO</span>
-                            <span>Boosting Models</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" class="btn-small btn-primary">View Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- removed duplicate KV-cache block (moved earlier for chronological ordering) -->
-
-                <!-- Re-inserted: Fine-Tuned Small Language Model for Children Story Generation -->
-                <div class="project-card-large" data-category="ai">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <img src="../images/children_story_generator.png" alt="Best Children Story Generator" style="width: 100%; height: auto; border-radius: 8px;">
-                    </div>
-                    <div class="project-info">
+                        <p class="project-status">Completed project</p>
                         <h3>Fine-Tuned Small Language Model for Children Story Generation</h3>
                         <p class="project-date"><strong>November 2025</strong> | New York, NY</p>
                         <p class="project-description">Fine-tuned Qwen3-1.7B small language model (SLM) for child-safe story generation. Targeted working parents needing quick, safe and creative bedtime stories. Achieved top 4 recognition among 50+ competing teams at AWS & AGI House Build Day.</p>
@@ -242,7 +268,39 @@
                         </div>
                         <div class="project-actions">
                             <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" class="btn-small btn-primary">View Code</a>
-                            <a href="#" class="btn-small btn-outline btn-proof-recognition">Proof of Recognition</a>
+                            <a href="../images/proof_of_recognition.png" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View recognition image</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Card Fraud Detection -->
+                <div class="project-card-large" data-category="mlops" data-status="completed" id="fraud">
+                    <div class="project-image-large">
+                        <img src="../images/credit_card_fraud_detection.png" alt="Credit Card Fraud Detection MLOps Solution" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-status">Completed prototype</p>
+                        <h3>Credit Card Fraud Detection MLOps Solution</h3>
+                        <p class="project-date"><strong>July 2025 - September 2025</strong> | Hong Kong, HK</p>
+                        <p class="project-description">An end-to-end fraud-detection MLOps project exploring streaming transaction scoring, scheduled model training, and model promotion using synthetic transaction data.</p>
+                        <div class="project-highlights">
+                            <div class="highlight"><strong>Streaming path:</strong> Kafka ingestion and Spark Structured Streaming for transaction scoring.</div>
+                            <div class="highlight"><strong>Training workflow:</strong> Airflow and MLflow support scheduled training, experiment tracking, and model promotion.</div>
+                            <div class="highlight"><strong>Evaluation boundary:</strong> Synthetic data is useful for exercising the pipeline, but does not establish real-world fraud performance.</div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Apache Spark</span>
+                            <span>Confluent Kafka</span>
+                            <span>Apache Airflow</span>
+                            <span>MLflow</span>
+                            <span>PostgreSQL</span>
+                            <span>Docker</span>
+                            <span>Redis</span>
+                            <span>MinIO</span>
+                            <span>Boosting Models</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Code</a>
                         </div>
                     </div>
                 </div>
@@ -250,11 +308,12 @@
                 <!-- removed duplicate Loom AI block (moved to top) -->
 
                 <!-- Personal Project 3: Deep Learning News Recommender -->
-                <div class="project-card-large" data-category="ai" id="news">
-                    <div class="project-image-large" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <img src="../images/news.png" alt="Deep Learning News Recommendation System" style="width: 100%; height: auto; border-radius: 8px;">
+                <div class="project-card-large" data-category="ai" data-status="completed" id="news">
+                    <div class="project-image-large">
+                        <img src="../images/news.png" alt="Deep Learning News Recommendation System" loading="lazy">
                     </div>
                     <div class="project-info">
+                        <p class="project-status">Completed project</p>
                         <h3>Deep Learning News Recommendation System</h3>
                         <p class="project-date"><strong>July 2025 - August 2025</strong> | Hong Kong, HK</p>
                         <p class="project-description">NLP-based news recommendation engine using comparative deep learning architectures. Deployed as scalable Streamlit application supporting 500+ concurrent users with sub-second latency.</p>
@@ -320,67 +379,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Yipeng Wang. All rights reserved.</p>
+                <p>&copy; 2026 Kane Wang. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <!-- Recognition Modal -->
-    <div id="recognitionModal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; overflow:auto; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
-      <span class="modal-close" style="position:absolute; top:30px; right:40px; color:#fff; font-size:2.5rem; font-weight:700; cursor:pointer;">&times;</span>
-      <img src="../images/proof_of_recognition.png" alt="Proof of Recognition" style="max-width:90vw; max-height:80vh; display:block; margin:60px auto 0 auto; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.3); background:#fff;" />
-    </div>
-        <!-- PDF Modal -->
-        <div id="pdfModal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; overflow:auto; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
-            <span class="pdf-modal-close" style="position:absolute; top:20px; right:30px; color:#fff; font-size:2rem; font-weight:700; cursor:pointer;">&times;</span>
-            <iframe id="pdfFrame" src="" style="width:80vw; height:80vh; border-radius:8px; border:0; background:#fff; margin:40px auto 0 auto;"></iframe>
-        </div>
-    <script>
-    // Modal open/close logic
-    const modal = document.getElementById('recognitionModal');
-    const closeBtn = modal ? modal.querySelector('.modal-close') : null;
-    const proofBtns = document.querySelectorAll('.btn-proof-recognition');
-    if (proofBtns.length && modal && closeBtn) {
-      proofBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          modal.style.display = 'flex';
-        });
-      });
-      closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
-      window.addEventListener('click', function(e) {
-        if (e.target === modal) modal.style.display = 'none';
-      });
-    }
-        // PDF modal logic with existence check
-        const pdfBtn = document.getElementById('kvcache-pdf-btn');
-        const pdfModal = document.getElementById('pdfModal');
-        const pdfClose = pdfModal ? pdfModal.querySelector('.pdf-modal-close') : null;
-        const pdfFrame = document.getElementById('pdfFrame');
-        if (pdfBtn && pdfModal && pdfClose && pdfFrame) {
-            pdfBtn.addEventListener('click', async function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                try {
-                    const res = await fetch(href, { method: 'HEAD' });
-                    if (!res.ok) throw new Error('not found');
-                    pdfFrame.src = href;
-                    pdfModal.style.display = 'flex';
-                } catch (err) {
-                    alert('Report not found at ' + href + '.\nPlease add HPML_FINAL_REPORT.PDF to the repository root (same folder as index.html), then refresh the page.');
-                }
-            });
-            pdfClose.addEventListener('click', function() {
-                pdfModal.style.display = 'none';
-                pdfFrame.src = '';
-            });
-            window.addEventListener('click', function(e) {
-                if (e.target === pdfModal) { pdfModal.style.display = 'none'; pdfFrame.src = ''; }
-            });
-        }
-    </script>
 
     <script src="../js/script.js"></script>
 </body>
