@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Kane Wang</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
@@ -18,7 +21,7 @@
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="experience.html">Experience</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About</a></li>
                 <li><a href="skills.html">Toolkit</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -30,21 +33,23 @@
         </div>
     </nav>
 
-    <!-- About Section -->
-    <section class="page-header">
-        <div class="container">
-            <h1>About Me</h1>
-            <p>2 minutes of your time</p>
-        </div>
-    </section>
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <h1>About Me</h1>
+                <p>2 minutes of your time</p>
+            </div>
+        </header>
 
-    <!-- About Content -->
-    <section class="about-section">
-        <div class="container">
-            <!-- My Story Tab -->
-            <div class="tab-content active" id="my-story">
-                <div class="about-grid single-column">
-                    <div class="about-details" style="max-width: 1000px; margin: 0 auto; padding: 0 24px; text-align: center; box-sizing: border-box;">
+        <!-- About Content -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-layout">
+                    <figure class="about-portrait">
+                        <img src="../images/profile.png" alt="Kane Wang" width="433" height="414">
+                    </figure>
+                    <article class="about-story">
                         <h2>Curiosity + Perseverance + Passion = VITALITY</h2>
                         <p>My path into data science didn't start in a classroom. It started at my first full time job, where I spent a lot of time cleaning up and moving messy data around. I found I liked the part everyone else avoided: making something tangled actually usable. One side project led to the next, and eventually I applied to the M.S. in Data Science at Columbia.</p>
 
@@ -55,34 +60,38 @@
                         <p>At Cypress Creek Energy I spent the summer working in production MLOps. I contributed to the development of a production ML pipeline that handled training and daily inference for roughly 450 solar sites, and addressed a cold-start problem for new sites using credibility-weighted fleet pooling. I also engineered a drift detection system that identified abnormal site behavior before it impacted forecasts. This work reinforced how architectural and operational considerations are as important as modeling, which I found genuinely satisfying.</p>
 
                         <p>I'm proud of my progress in the past year, and there's still a lot I want to learn and do. My Columbia capstone is exploring a small language model for steel-slag research, while another project asks how bias can travel through LLM distillation. Outside the work, tending plants and making room for quiet, Zen-inspired routines helps me stay grounded. Curiosity got me here, perseverance kept me going, and passion is what makes the work worth doing. The journey continues.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
+        </section>
 
-            <!-- Core Skills removed to keep About focused on writing -->
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-inner">
+                    <div>
+                        <h2>Let's Work Together</h2>
+                        <p>If you're interested in collaborating or learning more about my work, feel free to reach out!</p>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
 
-            <!-- Work Experience removed from About (see pages/experience.html for full timeline) -->
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Let's Work Together</h2>
-            <p>If you're interested in collaborating or learning more about my work, feel free to reach out!</p>
-            <a href="contact.html" class="btn btn-primary">Get In Touch</a>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

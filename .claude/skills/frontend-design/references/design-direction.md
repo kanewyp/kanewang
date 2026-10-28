@@ -13,6 +13,7 @@
 - Use an editorial, magazine-like composition with generous whitespace, strong typography, and relevant project imagery.
 - Completed-project illustrations should be compact, uncropped thumbnails, not full-height panels. Use a contrasting pale slate surround and a light frame to separate earthy artwork from the text; leave active-project demos prominent.
 - Use plant-inspired marks as accents, not wallpaper. Avoid loud gradients, excessive glass effects, or a generic corporate dashboard aesthetic.
+- Keep the layout uncluttered enough to satisfy a seasoned UI designer: one consistent spacing scale, hairline dividers rather than heavy shadows or boxed cards, one accent color, a serif display face (Fraunces) paired with a clean sans (Inter), and clear alignment between pages.
 - Favor subtle, purposeful transitions. Respect reduced-motion settings and keep the site comfortable on mobile.
 
 ## Content hierarchy

@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Kane Wang</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
@@ -20,7 +23,7 @@
                 <li><a href="experience.html">Experience</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="skills.html">Toolkit</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
             </ul>
             <button class="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
                 <span></span>
@@ -30,117 +33,125 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Get In Touch</h1>
-            <p>Let's connect and explore opportunities to work together on impactful projects</p>
-        </div>
-    </section>
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Get In Touch</h1>
+                <p>Let's connect and explore opportunities to work together on impactful projects</p>
+            </div>
+        </header>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="contact-grid">
-                <!-- Contact Form -->
-                <div class="contact-form-container">
-                    <h2>Start a conversation</h2>
-                    <p class="contact-form-note">This opens a draft in your email app; the website does not send or store your message.</p>
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <h2>Start a conversation</h2>
+                        <p class="contact-form-note">This opens a draft in your email app; the website does not send or store your message.</p>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" autocomplete="name" required>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" autocomplete="email" required>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">Open email draft</button>
-                    </form>
-                </div>
+                            <button type="submit" class="btn btn-primary">Open email draft</button>
+                        </form>
+                    </div>
 
-                <!-- Contact Info -->
-                <div class="contact-info-container">
-                    <h2>Contact Information</h2>
+                    <!-- Contact Info -->
+                    <div class="contact-info-container">
+                        <h2>Contact Information</h2>
                     
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p><a href="mailto:yw4623@columbia.edu">yw4623@columbia.edu</a></p>
+                                <button type="button" class="copy-email-btn" data-copy-email="yw4623@columbia.edu">Copy email address</button>
+                            </div>
                         </div>
-                        <div class="info-content">
-                            <h3>Email</h3>
-                            <p><a href="mailto:yw4623@columbia.edu">yw4623@columbia.edu</a></p>
-                            <button type="button" class="copy-email-btn" data-copy-email="yw4623@columbia.edu">Copy email address</button>
-                        </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-phone"></i>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Phone</h3>
+                                <p><a href="tel:+13476155702">+1 (347) 615-5702</a></p>
+                            </div>
                         </div>
-                        <div class="info-content">
-                            <h3>Phone</h3>
-                            <p><a href="tel:+13476155702">+1 (347) 615-5702</a></p>
-                        </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Location</h3>
+                                <p>New York, United States</p>
+                            </div>
                         </div>
-                        <div class="info-content">
-                            <h3>Location</h3>
-                            <p>New York, United States</p>
-                        </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-clock"></i>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Response Time</h3>
+                                <p>I typically respond within 24 hours</p>
+                            </div>
                         </div>
-                        <div class="info-content">
-                            <h3>Response Time</h3>
-                            <p>I typically respond within 24 hours</p>
-                        </div>
-                    </div>
 
-                    <h3 style="margin-top: 40px; margin-bottom: 20px;">Connect With Me</h3>
-                    <div class="social-links-large">
-                        <a href="https://github.com/kanewyp" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
+                        <h3 class="contact-connect-title">Connect With Me</h3>
+                        <div class="social-links-large">
+                            <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

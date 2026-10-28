@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience - Kane Wang</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
@@ -17,7 +20,7 @@
             <ul class="nav-menu" id="primary-navigation">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
-                <li><a href="experience.html" class="active">Experience</a></li>
+                <li><a href="experience.html" class="active" aria-current="page">Experience</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="skills.html">Toolkit</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -30,212 +33,199 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Professional Experience</h1>
-            <p>My journey across data science, ML engineering, and enterprise solutions</p>
-        </div>
-    </section>
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Professional Experience</h1>
+                <p>My journey across data science, ML engineering, and enterprise solutions</p>
+            </div>
+        </header>
 
-    <!-- Experience Section -->
-    <section class="about-section">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px;">Work Roles & Impact</h2>
-            
-            <div class="timeline" style="max-width: 900px; margin: 0 auto;">
-                <!-- Experience 0: Cypress Creek Energy -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> ML Engineering Intern - Cypress Creek Energy</h4>
-                        <p class="timeline-date">June–August 2026 | Chicago, IL</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Built scalable MLOps solutions for solar site forecasting and monitoring</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+        <!-- Experience Section -->
+        <section class="experience-section">
+            <div class="container">
+                <h2>Work Roles &amp; Impact</h2>
+
+                <ol class="timeline">
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">June–August 2026</p>
+                            <p class="timeline-place">Chicago, IL</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">ML Engineering Intern</h3>
+                            <p class="timeline-org">Cypress Creek Energy</p>
+                            <p class="timeline-summary">Built scalable MLOps solutions for solar site forecasting and monitoring</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>MLOps:</strong> Established the company's first Argo-based MLOps pipeline, automating training and inference across ~450 solar sites</li>
                                 <li><strong>Cold-start:</strong> Solved cold-start with feature refinement and credibility-weighted pooling; improved new-site R<sup>2</sup> by +0.23 over baseline</li>
                                 <li><strong>Drift Detection:</strong> Engineered PR drift detection to track post-PIS failures, flagging ~75% abnormality seen in post-hoc reports</li>
                                 <li><strong>Automation:</strong> Automated hyperparameter tuning trigger on model rejection; reduced time-to-approval for ~60–70% of sites</li>
                                 <li><strong>Infra:</strong> Reorganized AWS S3 artifacts, removing redundant scans and cutting pipeline fetch latency by 30%</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Argo Workflows, MLOps orchestration, drift detection, AWS S3, model automation</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Argo Workflows, MLOps orchestration, drift detection, AWS S3, model automation
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 1: Columbia University DSI Scholars Program -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> Student Researcher - Columbia University DSI Scholars Program</h4>
-                        <p class="timeline-date">January 2026 - May 2026 | New York, NY</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Research on entity extraction and sentiment analysis using transformer models</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">January 2026 - May 2026</p>
+                            <p class="timeline-place">New York, NY</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Student Researcher</h3>
+                            <p class="timeline-org">Columbia University DSI Scholars Program</p>
+                            <p class="timeline-summary">Research on entity extraction and sentiment analysis using transformer models</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>NER & Finetuning:</strong> Fine-tuned RoBERTa via BIO tagging on an annotated gold set, achieving 95% F1 across 20+ entity types</li>
                                 <li><strong>Sentiment Clustering:</strong> Built entity sentiment clusters analyzing 120,000+ sentences to surface trends</li>
                                 <li><strong>Visualization:</strong> Visualized mention networks and cluster metrics using Plotly for exploratory analysis</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> RoBERTa finetuning, BIO tagging, entity sentiment analysis, Plotly visualization</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> RoBERTa finetuning, BIO tagging, entity sentiment analysis, Plotly visualization
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 2: Originalis AI -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> Data Science Intern - Originalis AI (Columbia Business School Co-op Program)</h4>
-                        <p class="timeline-date">September 2025 - December 2025 | New York, NY</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">NYC-based tech startup providing composable operating systems for private capital markets</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">September 2025 - December 2025</p>
+                            <p class="timeline-place">New York, NY</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Data Science Intern</h3>
+                            <p class="timeline-org">Originalis AI (Columbia Business School Co-op Program)</p>
+                            <p class="timeline-summary">NYC-based tech startup providing composable operating systems for private capital markets</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>Data Pipeline:</strong> Built a real-time data ingestion system to surface early-stage funding opportunities</li>
                                 <li><strong>Schema Validation:</strong> Leveraged Pydantic to normalize unstructured data from 30+ sources; 95% transformation accuracy</li>
                                 <li><strong>Recommender System:</strong> Evaluated company fit using transformer-based embedding alignments; 14/19 positive feedbacks</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Web scraping, data validation, stakeholder management, git & version control</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Web scraping, data validation, stakeholder management, git & version control
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 2: Quantumera AI -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> Data Scientist Intern - Quantumera AI</h4>
-                        <p class="timeline-date">November 2025 - January 2026 | New York, NY (Remote)</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Advanced time-series forecasting and data optimization for congestion prediction</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">November 2025 - January 2026</p>
+                            <p class="timeline-place">New York, NY (Remote)</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Data Scientist Intern</h3>
+                            <p class="timeline-org">Quantumera AI</p>
+                            <p class="timeline-summary">Advanced time-series forecasting and data optimization for congestion prediction</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>SQL Optimization:</strong> Optimized data pipelines via schema optimization and query refactoring; reduced latency by 15%</li>
                                 <li><strong>Data Analysis:</strong> Conducted exploratory analysis and preprocessing delivering 20% forecasting accuracy improvement</li>
                                 <li><strong>Model Development:</strong> Evaluated time-series, tree-based, and clustering models to predict congestion</li>
                                 <li><strong>Visualization:</strong> Built Tableau dashboards visualizing data patterns, model outputs, and KPIs for real-time decision-making</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Time-series forecasting, SQL optimization, Tableau visualization, predictive modeling, data pipeline management</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Time-series forecasting, SQL optimization, Tableau visualization, predictive modeling, data pipeline management
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 3: CLP Power -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> Data Migration Analyst - CLP Power Hong Kong Limited</h4>
-                        <p class="timeline-date">June 2024 - June 2025 | Hong Kong, HK</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">FDM Group Consultant on large-scale SAP to Oracle ERM migration</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">June 2024 - June 2025</p>
+                            <p class="timeline-place">Hong Kong, HK</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Data Migration Analyst</h3>
+                            <p class="timeline-org">CLP Power Hong Kong Limited</p>
+                            <p class="timeline-summary">FDM Group Consultant on large-scale SAP to Oracle ERM migration</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>ETL Optimization:</strong> Optimized ETL schedules for 8 data objects; achieved 90%+ success in production migration</li>
                                 <li><strong>Data Quality:</strong> Enhanced VBA-based validation for 30 validators; boosted inspection efficiency by 400%</li>
                                 <li><strong>Defect Management:</strong> Built PowerBI dashboard with Jira integration; reduced feedback cycle to 1 day</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Business acumen, technical communication, leadership, cross-functional collaboration</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Business acumen, technical communication, leadership, cross-functional collaboration
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 4: HKUST Research -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-briefcase"></i> Research Intern - HKUST StatML Group</h4>
-                        <p class="timeline-date">June 2023 - December 2023 | Hong Kong, HK</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Led by Professor Tong Zhang, focusing on LLM evaluation frameworks</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">June 2023 - December 2023</p>
+                            <p class="timeline-place">Hong Kong, HK</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Research Intern</h3>
+                            <p class="timeline-org">HKUST StatML Group</p>
+                            <p class="timeline-summary">Led by Professor Tong Zhang, focusing on LLM evaluation frameworks</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>Data Generation:</strong> Synthetic dialogue pipeline with 60% efficiency improvement under API constraints</li>
                                 <li><strong>Evaluation Framework:</strong> Designed modular LLM-as-judge for GPT-3.5, GPT-4, and Llama models</li>
                                 <li><strong>Algorithm Implementation:</strong> Replicated paper pseudocode into practical Python implementations</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Research communication, algorithm implementation, LLM evaluation</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Research communication, algorithm implementation, LLM evaluation
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 4: Leadership -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-heart"></i> Head Coach - HKUST Fitness Club</h4>
-                        <p class="timeline-date">February 2023 - December 2023 | Hong Kong, HK</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Leadership role promoting health and fitness</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">February 2023 - December 2023</p>
+                            <p class="timeline-place">Hong Kong, HK</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Head Coach</h3>
+                            <p class="timeline-org">HKUST Fitness Club</p>
+                            <p class="timeline-summary">Leadership role promoting health and fitness</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>Competition:</strong> 1st place in Open Classic Physique (Asian National Bodybuilding Federation)</li>
                                 <li><strong>Training Programs:</strong> Designed customized plans for students based on physical levels; 75% continued use after 3 months</li>
                                 <li><strong>Community Impact:</strong> Organized weekly classes for 70+ students</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Adaptive communication, resilience, leadership, team building</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Adaptive communication, resilience, leadership, team building
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Experience 5: ACEIB Tutors -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h4><i class="fas fa-star"></i> Co-Founder - ACEIB Tutors</h4>
-                        <p class="timeline-date">October 2019 - December 2021 | Hong Kong, HK</p>
-                        <p style="margin-top: 12px; font-weight: 500; color: var(--primary-color);">Global peer-mentoring platform for International Baccalaureate students</p>
-                        <div style="margin-top: 15px; background: var(--bg-light); padding: 15px; border-radius: 8px;">
-                            <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">Key Achievements:</p>
-                            <ul style="list-style-position: inside; color: var(--text-light); line-height: 2;">
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-meta">
+                            <p class="timeline-date">October 2019 - December 2021</p>
+                            <p class="timeline-place">Hong Kong, HK</p>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Co-Founder</h3>
+                            <p class="timeline-org">ACEIB Tutors</p>
+                            <p class="timeline-summary">Global peer-mentoring platform for International Baccalaureate students</p>
+                            <p class="achievements-label">Key Achievements:</p>
+                            <ul class="achievements">
                                 <li><strong>Growth:</strong> Secured 200+ students from 10+ countries; 92% satisfaction rate</li>
                                 <li><strong>Pivoting:</strong> Adapted to COVID-19 with online strategies; 72% growth 2 months into the pandemic</li>
                                 <li><strong>Partnerships:</strong> Collaborated with complementary businesses; reached 150+ participants in joint seminars</li>
                             </ul>
+                            <p class="timeline-skills"><strong>Skills Developed:</strong> Entrepreneurship, business development, market analysis, scaling</p>
                         </div>
-                        <p style="margin-top: 12px; color: var(--text-light); font-size: 0.95rem;">
-                            <strong>Skills Developed:</strong> Entrepreneurship, business development, market analysis, scaling
-                        </p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-inner">
+                    <div>
+                        <h2>Let's Collaborate</h2>
+                        <p>Interested in my experience or want to discuss potential opportunities?</p>
                     </div>
+                    <a href="contact.html" class="btn btn-primary">Get In Touch</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Let's Collaborate</h2>
-            <p>Interested in my experience or want to discuss potential opportunities?</p>
-            <a href="contact.html" class="btn btn-primary">Get In Touch</a>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

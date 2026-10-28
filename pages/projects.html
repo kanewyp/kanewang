@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Kane Wang</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
-            <div class="container">
+    <nav class="navbar" aria-label="Primary">
+        <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
             </div>
             <ul class="nav-menu" id="primary-navigation">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
+                <li><a href="projects.html" class="active" aria-current="page">Projects</a></li>
                 <li><a href="experience.html">Experience</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="skills.html">Toolkit</a></li>
@@ -28,349 +31,339 @@
                 <span></span>
             </button>
         </div>
-                
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Projects & Research</h1>
-            <p>Current work first, followed by earlier projects in reverse chronological order.</p>
-        </div>
-    </section>
-
-    <!-- Projects Showcase -->
-    <section class="projects-showcase">
-        <div class="container">
-
-            <div class="project-filters" aria-label="Filter projects">
-                <div class="filter-group" role="group" aria-label="Filter by field">
-                    <span class="filter-label">Field</span>
-                    <button class="filter-btn active" type="button" data-filter-type="all" aria-pressed="true">All</button>
-                    <button class="filter-btn" type="button" data-filter-type="ai" aria-pressed="false">Applied AI</button>
-                    <button class="filter-btn" type="button" data-filter-type="research" aria-pressed="false">Research</button>
-                    <button class="filter-btn" type="button" data-filter-type="mlops" aria-pressed="false">MLOps</button>
-                </div>
-                <div class="filter-group" role="group" aria-label="Filter by status">
-                    <span class="filter-label">Status</span>
-                    <button class="filter-btn active" type="button" data-filter-status="all" aria-pressed="true">All stages</button>
-                    <button class="filter-btn" type="button" data-filter-status="in-progress" aria-pressed="false">In progress</button>
-                    <button class="filter-btn" type="button" data-filter-status="completed" aria-pressed="false">Completed</button>
-                </div>
-                <p class="filter-result" id="project-result-count" aria-live="polite">Showing all projects</p>
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Projects & Research</h1>
+                <p>Current work first, followed by earlier projects in reverse chronological order.</p>
             </div>
+        </header>
 
-            <!-- Personal Projects Tab -->
-            <div class="tab-content active" id="personal-projects">
+        <!-- Projects Showcase -->
+        <section class="projects-showcase">
+            <div class="container">
+                <div class="project-filters" role="group" aria-label="Filter projects">
+                    <div class="filter-group" role="group" aria-label="Filter by field">
+                        <span class="filter-label">Field</span>
+                        <button class="filter-btn active" type="button" data-filter-type="all" aria-pressed="true">All</button>
+                        <button class="filter-btn" type="button" data-filter-type="ai" aria-pressed="false">Applied AI</button>
+                        <button class="filter-btn" type="button" data-filter-type="research" aria-pressed="false">Research</button>
+                        <button class="filter-btn" type="button" data-filter-type="mlops" aria-pressed="false">MLOps</button>
+                    </div>
+                    <div class="filter-group" role="group" aria-label="Filter by status">
+                        <span class="filter-label">Status</span>
+                        <button class="filter-btn active" type="button" data-filter-status="all" aria-pressed="true">All stages</button>
+                        <button class="filter-btn" type="button" data-filter-status="in-progress" aria-pressed="false">In progress</button>
+                        <button class="filter-btn" type="button" data-filter-status="completed" aria-pressed="false">Completed</button>
+                    </div>
+                    <p class="filter-result" id="project-result-count" aria-live="polite">Showing all projects</p>
+                </div>
+
                 <div class="projects-grid-large">
-                <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="steel-slag-slm">
-                    <div class="project-image-large project-diagram" role="img" aria-label="Steel-slag literature informs retrieval and a future small language model assistant">
-                        <span class="diagram-node">Steel-slag<br>literature</span>
-                        <span class="diagram-arrow" aria-hidden="true">→</span>
-                        <span class="diagram-node">Grounded<br>retrieval</span>
-                        <span class="diagram-arrow" aria-hidden="true">→</span>
-                        <span class="diagram-node">SLM<br>assistant</span>
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">In progress · Columbia University Data Science Capstone</p>
-                        <h3>Steel-Slag Literature Assistant</h3>
-                        <p class="project-date"><strong>September 2026–present</strong> | Team 30 · Carbon Negative Solutions</p>
-                        <p class="project-description">Exploring a specialized small-language-model assistant grounded in steel-slag research. The central question is when a material-performance prediction can be trusted, especially when a new slag differs from the model’s training data.</p>
-                        <details class="project-details">
-                            <summary>Approach and current progress</summary>
+                    <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="steel-slag-slm">
+                        <div class="project-image-large project-diagram" role="img" aria-label="Steel-slag literature informs retrieval and a future small language model assistant">
+                            <span class="diagram-node">Steel-slag<br>literature</span>
+                            <span class="diagram-arrow" aria-hidden="true">→</span>
+                            <span class="diagram-node">Grounded<br>retrieval</span>
+                            <span class="diagram-arrow" aria-hidden="true">→</span>
+                            <span class="diagram-node">SLM<br>assistant</span>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">In progress · Columbia University Data Science Capstone</p>
+                            <h3>Steel-Slag Literature Assistant</h3>
+                            <p class="project-date"><strong>September 2026–present</strong> | Team 30 · Carbon Negative Solutions</p>
+                            <p class="project-description">Exploring a specialized small-language-model assistant grounded in steel-slag research. The central question is when a material-performance prediction can be trusted, especially when a new slag differs from the model’s training data.</p>
+                            <details class="project-details">
+                                <summary>Approach and current progress</summary>
+                                <div class="project-highlights">
+                                    <div class="highlight"><strong>Literature foundation:</strong> Collection, relevance screening, document extraction, and hybrid semantic/keyword retrieval are complete, according to the capstone brief.</div>
+                                    <div class="highlight"><strong>Next steps:</strong> Develop a knowledge graph and a literature-grounded assistant, then evaluate retrieval, citation accuracy, hallucination, latency, and coverage.</div>
+                                    <div class="highlight"><strong>Why it matters:</strong> Steel slag may partially replace cement, but variable chemistry can affect material performance. The assistant aims to make evidence and uncertainty easier to inspect.</div>
+                                </div>
+                            </details>
+                            <div class="project-tech">
+                                <span>Small Language Models</span>
+                                <span>RAG</span>
+                                <span>Hybrid Retrieval</span>
+                                <span>Construction Materials</span>
+                            </div>
+                            <p class="project-note">In progress · no public repository yet</p>
+                        </div>
+                    </article>
+
+                    <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="fme-bias-study">
+                        <div class="project-image-large project-diagram project-diagram-bias" role="img" aria-label="A large language model judge is distilled into a smaller judge and evaluated for bias">
+                            <span class="diagram-node">LLM<br>judge</span>
+                            <span class="diagram-arrow" aria-hidden="true">→</span>
+                            <span class="diagram-node">Distillation</span>
+                            <span class="diagram-arrow" aria-hidden="true">→</span>
+                            <span class="diagram-node">Bias<br>benchmark</span>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">In progress · research study</p>
+                            <h3>Bias in, Bias Out? Auditing Bias Transfer in LLM Distillation</h3>
+                            <p class="project-date"><strong>FME Project Planning</strong> | Columbia University</p>
+                            <p class="project-description">A benchmark study asking whether distilling a large language-model judge into a smaller one transfers or changes its position, length, and self-preference biases.</p>
+                            <details class="project-details">
+                                <summary>Research question and study design</summary>
+                                <div class="project-highlights">
+                                    <div class="highlight"><strong>Question:</strong> Does a smaller judge inherit a teacher’s systematic preferences—or can a bias-aware distillation recipe reduce them?</div>
+                                    <div class="highlight"><strong>Planned comparison:</strong> Audit position, response-length, and model-family self-preference, with controlled bias injection and quality-aware controls.</div>
+                                    <div class="highlight"><strong>Scope:</strong> This is a project plan; results and novelty claims have not been established.</div>
+                                </div>
+                            </details>
+                            <div class="project-tech">
+                                <span>LLM Evaluation</span>
+                                <span>Knowledge Distillation</span>
+                                <span>Bias Auditing</span>
+                                <span>Benchmarking</span>
+                            </div>
+                            <p class="project-note">In progress · no public repository yet</p>
+                        </div>
+                    </article>
+
+                    <article class="project-card-large" data-category="ai" data-status="in-progress" id="morningtide">
+                        <div class="project-image-large">
+                            <video class="project-video" controls preload="metadata" playsinline aria-label="MorningTide project demonstration">
+                                <source src="../videos/demo_MorningTide.mp4" type="video/mp4">
+                                Your browser does not support embedded video. <a href="../videos/demo_MorningTide.mp4">Open the MorningTide demo video.</a>
+                            </video>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">Active personal project</p>
+                            <h3>MorningTide — RAG Journaling & Emotional-Pattern Assistant</h3>
+                            <p class="project-date"><strong>December 2025–present</strong> | New York, NY</p>
+                            <p class="project-description">A personal journaling project exploring emotional patterns and source-grounded prompts to help prepare for therapy conversations and self-reflection. It is a reflection aid, not a substitute for clinical care.</p>
                             <div class="project-highlights">
-                                <div class="highlight"><strong>Literature foundation:</strong> Collection, relevance screening, document extraction, and hybrid semantic/keyword retrieval are complete, according to the capstone brief.</div>
-                                <div class="highlight"><strong>Next steps:</strong> Develop a knowledge graph and a literature-grounded assistant, then evaluate retrieval, citation accuracy, hallucination, latency, and coverage.</div>
-                                <div class="highlight"><strong>Why it matters:</strong> Steel slag may partially replace cement, but variable chemistry can affect material performance. The assistant aims to make evidence and uncertainty easier to inspect.</div>
+                                <div class="highlight"><strong>Emotion reflection:</strong> The project explores a fine-tuned emotion classifier to help surface patterns across journal entries.</div>
+                                <div class="highlight"><strong>Grounded preparation:</strong> A local RAG workflow brings journal context together with curated psychoeducation material to suggest discussion topics with source citations.</div>
+                                <div class="highlight"><strong>Personal motivation:</strong> Built as a tool for the maker’s own journaling and reflection, with privacy and care treated as part of the product design.</div>
                             </div>
-                        </details>
-                        <div class="project-tech">
-                            <span>Small Language Models</span>
-                            <span>RAG</span>
-                            <span>Hybrid Retrieval</span>
-                            <span>Construction Materials</span>
+                            <details class="project-details">
+                                <summary>How the project is designed</summary>
+                                <ol class="architecture-flow">
+                                    <li>Journal entries and emotion reflections</li>
+                                    <li>Retrieve related material from a curated psychoeducation library</li>
+                                    <li>Generate discussion prompts with source citations</li>
+                                </ol>
+                            </details>
+                            <div class="project-tech">
+                                <span>RAG</span>
+                                <span>DistilBERT</span>
+                                <span>PyTorch</span>
+                                <span>Plotly</span>
+                                <span>Flask</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/kanewyp/MorningTide" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View repository</a>
+                            </div>
                         </div>
-                        <p class="project-note">In progress · no public repository yet</p>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="project-card-large project-card-current" data-category="research" data-status="in-progress" id="fme-bias-study">
-                    <div class="project-image-large project-diagram project-diagram-bias" role="img" aria-label="A large language model judge is distilled into a smaller judge and evaluated for bias">
-                        <span class="diagram-node">LLM<br>judge</span>
-                        <span class="diagram-arrow" aria-hidden="true">→</span>
-                        <span class="diagram-node">Distillation</span>
-                        <span class="diagram-arrow" aria-hidden="true">→</span>
-                        <span class="diagram-node">Bias<br>benchmark</span>
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">In progress · research study</p>
-                        <h3>Bias in, Bias Out? Auditing Bias Transfer in LLM Distillation</h3>
-                        <p class="project-date"><strong>FME Project Planning</strong> | Columbia University</p>
-                        <p class="project-description">A benchmark study asking whether distilling a large language-model judge into a smaller one transfers or changes its position, length, and self-preference biases.</p>
-                        <details class="project-details">
-                            <summary>Research question and study design</summary>
+                    <article class="project-card-large" data-category="ai" data-status="completed" id="loomai">
+                        <div class="project-image-large">
+                            <img src="../images/loom_ai.png" alt="Loom AI" width="1024" height="1024" loading="lazy">
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">Completed project</p>
+                            <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
+                            <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
+                            <p class="project-description">A compact multi-agent planner that turns a one-line goal into validated, scheduled plans. LLMs handle language (decomposition, critique, rationale) while deterministic Python handles scheduling and validation for correctness.</p>
+
                             <div class="project-highlights">
-                                <div class="highlight"><strong>Question:</strong> Does a smaller judge inherit a teacher’s systematic preferences—or can a bias-aware distillation recipe reduce them?</div>
-                                <div class="highlight"><strong>Planned comparison:</strong> Audit position, response-length, and model-family self-preference, with controlled bias injection and quality-aware controls.</div>
-                                <div class="highlight"><strong>Scope:</strong> This is a project plan; results and novelty claims have not been established.</div>
+                                <div class="highlight">
+                                    <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Hybrid Design:</strong> LLMs do decomposition, critique, and rationale; deterministic Python enforces time geometry, validation, and calendar writes to prevent hallucinated or invalid schedules.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Scheduling Strategies:</strong> Implements three heuristics—deadline-first, min-fragmentation, and energy-aware—to offer diverse valid plans.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Safety & UX:</strong> Checkpointed human approval prevents automatic calendar edits; deterministic validators check overlap, out-of-hours, and deadline violations.
+                                </div>
                             </div>
-                        </details>
-                        <div class="project-tech">
-                            <span>LLM Evaluation</span>
-                            <span>Knowledge Distillation</span>
-                            <span>Bias Auditing</span>
-                            <span>Benchmarking</span>
+                            <div class="project-tech">
+                                <span>LangGraph</span>
+                                <span>Multi-Agent Systems</span>
+                                <span>Node.js</span>
+                                <span>Redis</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/kanewyp/calendar_planning_agent" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Repository</a>
+                            </div>
                         </div>
-                        <p class="project-note">In progress · no public repository yet</p>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="project-card-large" data-category="ai" data-status="in-progress" id="morningtide">
-                    <div class="project-image-large">
-                        <video class="project-video" controls preload="metadata" playsinline aria-label="MorningTide project demonstration">
-                            <source src="../videos/demo_MorningTide.mp4" type="video/mp4">
-                            Your browser does not support embedded video. <a href="../videos/demo_MorningTide.mp4">Open the MorningTide demo video.</a>
-                        </video>
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Active personal project</p>
-                        <h3>MorningTide — RAG Journaling & Emotional-Pattern Assistant</h3>
-                        <p class="project-date"><strong>December 2025–present</strong> | New York, NY</p>
-                        <p class="project-description">A personal journaling project exploring emotional patterns and source-grounded prompts to help prepare for therapy conversations and self-reflection. It is a reflection aid, not a substitute for clinical care.</p>
-                        <div class="project-highlights">
-                            <div class="highlight"><strong>Emotion reflection:</strong> The project explores a fine-tuned emotion classifier to help surface patterns across journal entries.</div>
-                            <div class="highlight"><strong>Grounded preparation:</strong> A local RAG workflow brings journal context together with curated psychoeducation material to suggest discussion topics with source citations.</div>
-                            <div class="highlight"><strong>Personal motivation:</strong> Built as a tool for the maker’s own journaling and reflection, with privacy and care treated as part of the product design.</div>
+                    <article class="project-card-large" data-category="research" data-status="completed" id="kvcache">
+                        <div class="project-image-large">
+                            <img src="../images/KV_cahe.png" alt="KV Cache Benchmarking" width="1024" height="1024" loading="lazy">
                         </div>
-                        <details class="project-details">
-                            <summary>How the project is designed</summary>
-                            <ol class="architecture-flow">
-                                <li>Journal entries and emotion reflections</li>
-                                <li>Retrieve related material from a curated psychoeducation library</li>
-                                <li>Generate discussion prompts with source citations</li>
-                            </ol>
-                        </details>
-                        <div class="project-tech">
-                            <span>RAG</span>
-                            <span>DistilBERT</span>
-                            <span>PyTorch</span>
-                            <span>Plotly</span>
-                            <span>Flask</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/MorningTide" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View repository</a>
-                        </div>
-                    </div>
-                </article>
+                        <div class="project-info">
+                            <p class="project-status">Completed research project</p>
+                            <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
+                            <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
+                            <p class="project-description">A unified benchmark of KV-cache strategies for long-context LLM inference. Measured memory, latency, and quality across single-request and concurrent workloads to find practical trade-offs.</p>
 
-                <!-- Personal Project: Loom AI - Multi-Agent Calendar Planning Agent -->
-                <div class="project-card-large" data-category="ai" data-status="completed" id="loomai">
-                    <div class="project-image-large">
-                        <img src="../images/loom_ai.png" alt="Loom AI" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Completed project</p>
-                        <h3>Loom AI — Multi-Agent Calendar Planning Agent</h3>
-                        <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
-                        <p class="project-description">A compact multi-agent planner that turns a one-line goal into validated, scheduled plans. LLMs handle language (decomposition, critique, rationale) while deterministic Python handles scheduling and validation for correctness.</p>
-                        
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Agent Orchestration:</strong> Multi-node LangGraph agent coordinating tool-calls and deterministic schedulers for reliable planning.
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <strong>Throughput Harness:</strong> 500-request Poisson trace replay on vLLM to simulate heterogeneous concurrent traffic and stress KV memory.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Findings:</strong> Identified KV memory as the dominant throughput bottleneck (observed utilization 18.7% → 79.7%). v0-eager delivered best single-GPU throughput and lowest tail latency among configs tested.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Quality vs Memory:</strong> StreamingLLM can reduce KV memory dramatically on short tasks (up to ~198×) while PagedAttention preserves full-cache quality on long-form generation.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Reproducibility:</strong> Experiments run on Qwen2.5-7B with fixed seeds, pinned package versions, and committed per-run JSON artifacts for analysis.
+                                </div>
                             </div>
-                            <div class="highlight">
-                                <strong>Hybrid Design:</strong> LLMs do decomposition, critique, and rationale; deterministic Python enforces time geometry, validation, and calendar writes to prevent hallucinated or invalid schedules.
+                            <div class="project-tech">
+                                <span>vLLM</span>
+                                <span>KV-Cache</span>
+                                <span>Benchmarking</span>
                             </div>
-                            <div class="highlight">
-                                <strong>Scheduling Strategies:</strong> Implements three heuristics—deadline-first, min-fragmentation, and energy-aware—to offer diverse valid plans.
-                            </div>
-                            <div class="highlight">
-                                <strong>Safety & UX:</strong> Checkpointed human approval prevents automatic calendar edits; deterministic validators check overlap, out-of-hours, and deadline violations.
+                            <div class="project-actions">
+                                <a href="../pdfs/HPML_FINAL_REPORT.PDF" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Report (PDF)</a>
                             </div>
                         </div>
-                        <div class="project-tech">
-                            <span>LangGraph</span>
-                            <span>Multi-Agent Systems</span>
-                            <span>Node.js</span>
-                            <span>Redis</span>
+                    </article>
+
+                    <article class="project-card-large" data-category="ai" data-status="completed" id="story-generator">
+                        <div class="project-image-large">
+                            <img src="../images/children_story_generator.png" alt="Best Children Story Generator" width="1024" height="1024" loading="lazy">
                         </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/calendar_planning_agent" target="_blank" class="btn-small btn-primary">View Repository</a>
+                        <div class="project-info">
+                            <p class="project-status">Completed project</p>
+                            <h3>Fine-Tuned Small Language Model for Children Story Generation</h3>
+                            <p class="project-date"><strong>November 2025</strong> | New York, NY</p>
+                            <p class="project-description">Fine-tuned Qwen3-1.7B small language model (SLM) for child-safe story generation. Targeted working parents needing quick, safe and creative bedtime stories. Achieved top 4 recognition among 50+ competing teams at AWS & AGI House Build Day.</p>
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <strong>Model Fine-Tuning:</strong> Trained Qwen3-1.7B on TinyStories dataset (2.2M+ stories) using LoRA fine-tuning techniques.
+                                </div>
+                                <div class="highlight">
+                                    <strong>AWS Optimization:</strong> Leveraged AWS Trainium and Optimum Neuron for 1-day delivery requirement, balancing speed with stability.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Safety & Reliability:</strong> Implemented content safety filters ensuring child-friendly output; surpassed LLMs by 20% in generation reliability via human evaluation.
+                                </div>
+                            </div>
+                            <div class="project-tech">
+                                <span>Small Language Model</span>
+                                <span>LoRA Fine-Tuning</span>
+                                <span>AWS Trainium</span>
+                                <span>Optimum Neuron</span>
+                                <span>PyTorch</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Code</a>
+                                <a href="../images/proof_of_recognition.png" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View recognition image</a>
+                            </div>
                         </div>
-                    </div>
+                    </article>
+
+                    <article class="project-card-large" data-category="mlops" data-status="completed" id="fraud">
+                        <div class="project-image-large">
+                            <img src="../images/credit_card_fraud_detection.png" alt="Credit Card Fraud Detection MLOps Solution" width="1024" height="1024" loading="lazy">
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">Completed prototype</p>
+                            <h3>Credit Card Fraud Detection MLOps Solution</h3>
+                            <p class="project-date"><strong>July 2025 - September 2025</strong> | Hong Kong, HK</p>
+                            <p class="project-description">An end-to-end fraud-detection MLOps project exploring streaming transaction scoring, scheduled model training, and model promotion using synthetic transaction data.</p>
+                            <div class="project-highlights">
+                                <div class="highlight"><strong>Streaming path:</strong> Kafka ingestion and Spark Structured Streaming for transaction scoring.</div>
+                                <div class="highlight"><strong>Training workflow:</strong> Airflow and MLflow support scheduled training, experiment tracking, and model promotion.</div>
+                                <div class="highlight"><strong>Evaluation boundary:</strong> Synthetic data is useful for exercising the pipeline, but does not establish real-world fraud performance.</div>
+                            </div>
+                            <div class="project-tech">
+                                <span>Apache Spark</span>
+                                <span>Confluent Kafka</span>
+                                <span>Apache Airflow</span>
+                                <span>MLflow</span>
+                                <span>PostgreSQL</span>
+                                <span>Docker</span>
+                                <span>Redis</span>
+                                <span>MinIO</span>
+                                <span>Boosting Models</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Code</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card-large" data-category="ai" data-status="completed" id="news">
+                        <div class="project-image-large">
+                            <img src="../images/news.png" alt="Deep Learning News Recommendation System" width="1024" height="1024" loading="lazy">
+                        </div>
+                        <div class="project-info">
+                            <p class="project-status">Completed project</p>
+                            <h3>Deep Learning News Recommendation System</h3>
+                            <p class="project-date"><strong>July 2025 - August 2025</strong> | Hong Kong, HK</p>
+                            <p class="project-description">NLP-based news recommendation engine using comparative deep learning architectures. Deployed as scalable Streamlit application supporting 500+ concurrent users with sub-second latency.</p>
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <strong>EDA & Optimization:</strong> Conducted exploratory data analysis on user engagement using NumPy, pandas, and matplotlib; improved dataset quality by removing 20% redundant features.
+                                </div>
+                                <div class="highlight">
+                                    <strong>Architecture Comparison:</strong> Evaluated CNN, RNN and transformer-based architecture, achieved best AUC of 0.86 (24% better than CNN baseline).
+                                </div>
+                                <div class="highlight">
+                                    <strong>Production Deployment:</strong> AWS-hosted Streamlit application with optimized UI, serving 500+ concurrent users with sub-second prediction latency.
+                                </div>
+                            </div>
+                            <div class="project-tech">
+                                <span>PyTorch</span>
+                                <span>CNN/RNN</span>
+                                <span>Transformers</span>
+                                <span>Streamlit</span>
+                                <span>AWS</span>
+                                <span>pandas</span>
+                                <span>GloVe/Word2Vec</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/kanewyp/end2end-news-recommendation-system" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Code</a>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-
-                <!-- Personal Project 1: KV-Cache (moved here chronologically) -->
-                <div class="project-card-large" data-category="research" data-status="completed" id="kvcache">
-                    <div class="project-image-large">
-                        <img src="../images/KV_cahe.png" alt="KV Cache Benchmarking" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Completed research project</p>
-                        <h3>Benchmarking KV-Cache Management for LLM Inference</h3>
-                        <p class="project-date"><strong>January 2026 - May 2026</strong> | New York, NY</p>
-                        <p class="project-description">A unified benchmark of KV-cache strategies for long-context LLM inference. Measured memory, latency, and quality across single-request and concurrent workloads to find practical trade-offs.</p>
-                        
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Throughput Harness:</strong> 500-request Poisson trace replay on vLLM to simulate heterogeneous concurrent traffic and stress KV memory.
-                            </div>
-                            <div class="highlight">
-                                <strong>Findings:</strong> Identified KV memory as the dominant throughput bottleneck (observed utilization 18.7% → 79.7%). v0-eager delivered best single-GPU throughput and lowest tail latency among configs tested.
-                            </div>
-                            <div class="highlight">
-                                <strong>Quality vs Memory:</strong> StreamingLLM can reduce KV memory dramatically on short tasks (up to ~198×) while PagedAttention preserves full-cache quality on long-form generation.
-                            </div>
-                            <div class="highlight">
-                                <strong>Reproducibility:</strong> Experiments run on Qwen2.5-7B with fixed seeds, pinned package versions, and committed per-run JSON artifacts for analysis.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>vLLM</span>
-                            <span>KV-Cache</span>
-                            <span>Benchmarking</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="../pdfs/HPML_FINAL_REPORT.PDF" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Report (PDF)</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- removed Fine-Tuned SLM here; will re-insert after KV-Cache to match requested order -->
-
-                <!-- Fine-Tuned Small Language Model for Children Story Generation -->
-                <div class="project-card-large" data-category="ai" data-status="completed">
-                    <div class="project-image-large">
-                        <img src="../images/children_story_generator.png" alt="Best Children Story Generator" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Completed project</p>
-                        <h3>Fine-Tuned Small Language Model for Children Story Generation</h3>
-                        <p class="project-date"><strong>November 2025</strong> | New York, NY</p>
-                        <p class="project-description">Fine-tuned Qwen3-1.7B small language model (SLM) for child-safe story generation. Targeted working parents needing quick, safe and creative bedtime stories. Achieved top 4 recognition among 50+ competing teams at AWS & AGI House Build Day.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>Model Fine-Tuning:</strong> Trained Qwen3-1.7B on TinyStories dataset (2.2M+ stories) using LoRA fine-tuning techniques.
-                            </div>
-                            <div class="highlight">
-                                <strong>AWS Optimization:</strong> Leveraged AWS Trainium and Optimum Neuron for 1-day delivery requirement, balancing speed with stability.
-                            </div>
-                            <div class="highlight">
-                                <strong>Safety & Reliability:</strong> Implemented content safety filters ensuring child-friendly output; surpassed LLMs by 20% in generation reliability via human evaluation.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>Small Language Model</span>
-                            <span>LoRA Fine-Tuning</span>
-                            <span>AWS Trainium</span>
-                            <span>Optimum Neuron</span>
-                            <span>PyTorch</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/ChildrenStoryGenerator" target="_blank" class="btn-small btn-primary">View Code</a>
-                            <a href="../images/proof_of_recognition.png" target="_blank" rel="noopener noreferrer" class="btn-small btn-outline">View recognition image</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Credit Card Fraud Detection -->
-                <div class="project-card-large" data-category="mlops" data-status="completed" id="fraud">
-                    <div class="project-image-large">
-                        <img src="../images/credit_card_fraud_detection.png" alt="Credit Card Fraud Detection MLOps Solution" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Completed prototype</p>
-                        <h3>Credit Card Fraud Detection MLOps Solution</h3>
-                        <p class="project-date"><strong>July 2025 - September 2025</strong> | Hong Kong, HK</p>
-                        <p class="project-description">An end-to-end fraud-detection MLOps project exploring streaming transaction scoring, scheduled model training, and model promotion using synthetic transaction data.</p>
-                        <div class="project-highlights">
-                            <div class="highlight"><strong>Streaming path:</strong> Kafka ingestion and Spark Structured Streaming for transaction scoring.</div>
-                            <div class="highlight"><strong>Training workflow:</strong> Airflow and MLflow support scheduled training, experiment tracking, and model promotion.</div>
-                            <div class="highlight"><strong>Evaluation boundary:</strong> Synthetic data is useful for exercising the pipeline, but does not establish real-world fraud performance.</div>
-                        </div>
-                        <div class="project-tech">
-                            <span>Apache Spark</span>
-                            <span>Confluent Kafka</span>
-                            <span>Apache Airflow</span>
-                            <span>MLflow</span>
-                            <span>PostgreSQL</span>
-                            <span>Docker</span>
-                            <span>Redis</span>
-                            <span>MinIO</span>
-                            <span>Boosting Models</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/fraud-detection-mlops" target="_blank" rel="noopener noreferrer" class="btn-small btn-primary">View Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- removed duplicate Loom AI block (moved to top) -->
-
-                <!-- Personal Project 3: Deep Learning News Recommender -->
-                <div class="project-card-large" data-category="ai" data-status="completed" id="news">
-                    <div class="project-image-large">
-                        <img src="../images/news.png" alt="Deep Learning News Recommendation System" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-status">Completed project</p>
-                        <h3>Deep Learning News Recommendation System</h3>
-                        <p class="project-date"><strong>July 2025 - August 2025</strong> | Hong Kong, HK</p>
-                        <p class="project-description">NLP-based news recommendation engine using comparative deep learning architectures. Deployed as scalable Streamlit application supporting 500+ concurrent users with sub-second latency.</p>
-                        <div class="project-highlights">
-                            <div class="highlight">
-                                <strong>EDA & Optimization:</strong> Conducted exploratory data analysis on user engagement using NumPy, pandas, and matplotlib; improved dataset quality by removing 20% redundant features.
-                            </div>
-                            <div class="highlight">
-                                <strong>Architecture Comparison:</strong> Evaluated CNN, RNN and transformer-based architecture, achieved best AUC of 0.86 (24% better than CNN baseline).
-                            </div>
-                            <div class="highlight">
-                                <strong>Production Deployment:</strong> AWS-hosted Streamlit application with optimized UI, serving 500+ concurrent users with sub-second prediction latency.
-                            </div>
-                        </div>
-                        <div class="project-tech">
-                            <span>PyTorch</span>
-                            <span>CNN/RNN</span>
-                            <span>Transformers</span>
-                            <span>Streamlit</span>
-                            <span>AWS</span>
-                            <span>pandas</span>
-                            <span>GloVe/Word2Vec</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/kanewyp/end2end-news-recommendation-system" target="_blank" class="btn-small btn-primary">View Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                
             </div>
-            <!-- End Personal Projects Grid -->
-            
-            
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-inner">
+                    <div>
+                        <h2>Interested in Working Together?</h2>
+                        <p>Let's collaborate and create something amazing!</p>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary">Start a Project</a>
+                </div>
             </div>
-            <!-- End Personal Projects Tab -->
+        </section>
 
-            
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Interested in Working Together?</h2>
-            <p>Let's collaborate and create something amazing!</p>
-            <a href="contact.html" class="btn btn-primary">Start a Project</a>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

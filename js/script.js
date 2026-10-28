@@ -207,56 +207,14 @@ function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
-
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-        color: white;
-        padding: 16px 24px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 9999;
-        animation: slideIn 0.3s ease;
-        font-weight: 500;
-    `;
-
     document.body.appendChild(notification);
-
-    // Add animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 
     // Remove notification after 4 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
+        notification.classList.add('is-leaving');
         setTimeout(() => {
             notification.remove();
-        }, 300);
+        }, 250);
     }, 4000);
 }
 
@@ -264,59 +222,39 @@ function showNotification(message, type = 'info') {
 // Scroll Animation for Elements
 // ============================================
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     });
-}, observerOptions);
 
-// Observe project cards and blog cards
-document.querySelectorAll('.project-card, .blog-card, .skill-item').forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'all 0.6s ease';
-    observer.observe(element);
-});
+    // Observe home project cards
+    document.querySelectorAll('.project-card, .feature').forEach(element => {
+        element.classList.add('reveal');
+        observer.observe(element);
+    });
+}
 
 // ============================================
-// Navbar Background on Scroll
+// Navbar Border on Scroll
 // ============================================
 
 const navbar = document.querySelector('.navbar');
 
 if (navbar) {
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)';
-        }
-    });
+    const updateNavbar = () => navbar.classList.toggle('is-scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    updateNavbar();
 }
-
-// ============================================
-// Read More Links Enhancement
-// ============================================
-
-const readMoreLinks = document.querySelectorAll('.read-more, .project-link');
-
-readMoreLinks.forEach(link => {
-    link.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateX(8px)';
-    });
-
-    link.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateX(0)';
-    });
-});
 
 // ============================================
 // Image Lazy Loading

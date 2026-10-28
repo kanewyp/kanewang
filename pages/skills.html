@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toolkit - Kane Wang</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="container">
             <div class="nav-brand">
                 <a href="../index.html">Kane Wang</a>
@@ -19,7 +22,7 @@
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="experience.html">Experience</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="skills.html" class="active">Toolkit</a></li>
+                <li><a href="skills.html" class="active" aria-current="page">Toolkit</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
@@ -30,386 +33,397 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Toolkit & Interactive Skills Map</h1>
-            <p>Explore related skills by proximity — drag nodes, zoom, and hover for details.</p>
-        </div>
-    </section>
-
-    <!-- Interactive Skills Map -->
-    <section class="about-section" style="padding-bottom: 40px;">
-        <div class="container">
-            <div id="skills-map" style="position:relative; width:100%; height:880px; background:var(--white); border-radius:12px; box-shadow:var(--shadow); padding:12px;">
-                <!-- SVG injected by D3 -->
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Toolkit &amp; Interactive Skills Map</h1>
+                <p>Explore related skills by proximity — drag nodes, zoom, and hover for details.</p>
             </div>
-            <div style="margin-top:12px; display:flex; gap:16px; align-items:center;">
-                <small style="color:var(--text-light);">Tip: Drag nodes to rearrange. Scroll or pinch to zoom. Click a node to highlight its neighbors.</small>
+        </header>
+
+        <!-- Interactive Skills Map -->
+        <section class="toolkit-section">
+            <div class="container">
+                <div id="skills-map">
+                    <!-- SVG injected by D3 -->
+                </div>
+                <p class="skills-tip"><small>Tip: Drag nodes to rearrange. Scroll or pinch to zoom. Click a node to highlight its neighbors.</small></p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- D3 and Diagram Script -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script>
-    (function() {
-        const width = document.getElementById('skills-map').clientWidth - 24;
-        const height = document.getElementById('skills-map').clientHeight - 24;
+        <!-- D3 and Diagram Script -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script>
+        (function() {
+            const width = document.getElementById('skills-map').clientWidth - 24;
+            const height = document.getElementById('skills-map').clientHeight - 24;
 
-        const rootStyle = getComputedStyle(document.documentElement);
-        const categoryColor = {
-            'Languages': rootStyle.getPropertyValue('--primary-color').trim() || '#667eea',
-            'GenAI': rootStyle.getPropertyValue('--secondary-color').trim() || '#764ba2',
-            'MLOps': '#43e97b',
-            'Data': '#f093fb',
-            'Tools': '#4facfe',
-            'Visualization': '#f6b93b',
-            'Other': '#667eea'
-        };
+            // Muted earth tones, light enough for dark labels inside each node
+            const categoryColor = {
+                'Languages': '#b4c6aa',
+                'GenAI': '#dcc1a4',
+                'MLOps': '#bccbc7',
+                'Data': '#e6d4a8',
+                'Tools': '#cdbfcf',
+                'Visualization': '#ecc7b0',
+                'Other': '#d6cfc0'
+            };
 
-        const color = d => categoryColor[d] || '#999';
+            const color = d => categoryColor[d] || '#999';
 
-        // Nodes strictly follow the skills listed on your resume
-        const nodes = [
-            // Languages & packages (resume)
-            {id: 'Python', group: 'Languages', score:5},
-            {id: 'NumPy', group: 'Languages', score:5},
-            {id: 'pandas', group: 'Languages', score:5},
-            {id: 'matplotlib', group: 'Visualization', score:4},
-            {id: 'seaborn', group: 'Visualization', score:4},
-            {id: 'scipy', group: 'Languages', score:4},
-            {id: 'scikit-learn', group: 'Languages', score:4},
-            {id: 'PyTorch', group: 'GenAI', score:5},
-            {id: 'TensorFlow', group: 'GenAI', score:4},
-            {id: 'keras', group: 'GenAI', score:3},
-            {id: 'R', group: 'Languages', score:4},
-            {id: 'C++', group: 'Languages', score:3},
-            {id: 'SQL', group: 'Data', score:5},
-            {id: 'Unix', group: 'Other', score:4},
-            {id: 'VBA', group: 'Other', score:3},
-            {id: 'JavaScript', group: 'Languages', score:3},
-            {id: 'CSS', group: 'Other', score:3},
+            // Nodes strictly follow the skills listed on your resume
+            const nodes = [
+                // Languages & packages (resume)
+                {id: 'Python', group: 'Languages', score:5},
+                {id: 'NumPy', group: 'Languages', score:5},
+                {id: 'pandas', group: 'Languages', score:5},
+                {id: 'matplotlib', group: 'Visualization', score:4},
+                {id: 'seaborn', group: 'Visualization', score:4},
+                {id: 'scipy', group: 'Languages', score:4},
+                {id: 'scikit-learn', group: 'Languages', score:4},
+                {id: 'PyTorch', group: 'GenAI', score:5},
+                {id: 'TensorFlow', group: 'GenAI', score:4},
+                {id: 'keras', group: 'GenAI', score:3},
+                {id: 'R', group: 'Languages', score:4},
+                {id: 'C++', group: 'Languages', score:3},
+                {id: 'SQL', group: 'Data', score:5},
+                {id: 'Unix', group: 'Other', score:4},
+                {id: 'VBA', group: 'Other', score:3},
+                {id: 'JavaScript', group: 'Languages', score:3},
+                {id: 'CSS', group: 'Other', score:3},
 
-            // GenAI & LLMs (resume)
-            // LLM inference optimization removed; functionality consolidated into related nodes
-            {id: 'vLLM', group: 'GenAI', score:5},
-            {id: 'PagedAttention', group: 'GenAI', score:4},
-            {id: 'H2O', group: 'GenAI', score:3},
-            {id: 'RAG', group: 'GenAI', score:5},
-            {id: 'Multi-agent systems', group: 'GenAI', score:4},
-            {id: 'LangGraph', group: 'GenAI', score:4},
+                // GenAI & LLMs (resume)
+                // LLM inference optimization removed; functionality consolidated into related nodes
+                {id: 'vLLM', group: 'GenAI', score:5},
+                {id: 'PagedAttention', group: 'GenAI', score:4},
+                {id: 'H2O', group: 'GenAI', score:3},
+                {id: 'RAG', group: 'GenAI', score:5},
+                {id: 'Multi-agent systems', group: 'GenAI', score:4},
+                {id: 'LangGraph', group: 'GenAI', score:4},
 
-            // MLOps & Infra (resume)
-            {id: 'Argo Workflows', group: 'MLOps', score:4},
-            {id: 'Argo CD', group: 'MLOps', score:3},
-            {id: 'Kubernetes', group: 'MLOps', score:3},
-            {id: 'Docker', group: 'MLOps', score:4},
-            {id: 'MLflow', group: 'MLOps', score:4},
-            {id: 'Airflow', group: 'MLOps', score:4},
-            {id: 'AWS SageMaker', group: 'Data', score:4},
-            {id: 'S3', group: 'Data', score:4},
-            {id: 'MinIO', group: 'Data', score:3},
-            {id: 'Snowflake', group: 'Data', score:4},
-            {id: 'Spark', group: 'Data', score:4},
-            {id: 'Kafka', group: 'Data', score:4},
-            {id: 'Grafana', group: 'Tools', score:3},
-            {id: 'Weights & Biases', group: 'Tools', score:3},
-            {id: 'CI/CD', group: 'MLOps', score:4}
+                // MLOps & Infra (resume)
+                {id: 'Argo Workflows', group: 'MLOps', score:4},
+                {id: 'Argo CD', group: 'MLOps', score:3},
+                {id: 'Kubernetes', group: 'MLOps', score:3},
+                {id: 'Docker', group: 'MLOps', score:4},
+                {id: 'MLflow', group: 'MLOps', score:4},
+                {id: 'Airflow', group: 'MLOps', score:4},
+                {id: 'AWS SageMaker', group: 'Data', score:4},
+                {id: 'S3', group: 'Data', score:4},
+                {id: 'MinIO', group: 'Data', score:3},
+                {id: 'Snowflake', group: 'Data', score:4},
+                {id: 'Spark', group: 'Data', score:4},
+                {id: 'Kafka', group: 'Data', score:4},
+                {id: 'Grafana', group: 'Tools', score:3},
+                {id: 'Weights & Biases', group: 'Tools', score:3},
+                {id: 'CI/CD', group: 'MLOps', score:4}
             
-        ];
+            ];
 
-        // create links by connecting nodes within same group and a few cross links
-        const links = [];
-        const groupMap = d3.group(nodes, d => d.group);
-        for (const [g, arr] of groupMap) {
-            for (let i=0;i<arr.length;i++){
-                for (let j=i+1;j<arr.length;j++){
-                    links.push({source: arr[i].id, target: arr[j].id, value: 1});
+            // create links by connecting nodes within same group and a few cross links
+            const links = [];
+            const groupMap = d3.group(nodes, d => d.group);
+            for (const [g, arr] of groupMap) {
+                for (let i=0;i<arr.length;i++){
+                    for (let j=i+1;j<arr.length;j++){
+                        links.push({source: arr[i].id, target: arr[j].id, value: 1});
+                    }
                 }
             }
-        }
-        // add intentional cross-links
-        const cross = [
-            ['Python','NumPy'], ['Python','pandas'], ['Python','scikit-learn'],
-            // R packages removed: consolidate under single `R` node
-            ['SQL','Snowflake'], ['SQL','Spark'], ['Spark','Kafka'], ['Kafka','AWS SageMaker'],
-            ['Docker','Kubernetes'], ['Argo Workflows','Argo CD'], ['MLflow','Weights & Biases'],
-            ['RAG','LangGraph'], ['RAG','vLLM']
-        ];
-        cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
+            // add intentional cross-links
+            const cross = [
+                ['Python','NumPy'], ['Python','pandas'], ['Python','scikit-learn'],
+                // R packages removed: consolidate under single `R` node
+                ['SQL','Snowflake'], ['SQL','Spark'], ['Spark','Kafka'], ['Kafka','AWS SageMaker'],
+                ['Docker','Kubernetes'], ['Argo Workflows','Argo CD'], ['MLflow','Weights & Biases'],
+                ['RAG','LangGraph'], ['RAG','vLLM']
+            ];
+            cross.forEach(([s,t]) => links.push({source:s, target:t, value:1}));
 
-        const svg = d3.select('#skills-map').append('svg')
-            .attr('width', width + 24)
-            .attr('height', height + 24)
-            .call(d3.zoom().scaleExtent([0.5, 3]).on('zoom', (event) => {
-                g.attr('transform', event.transform);
-            }));
+            const svg = d3.select('#skills-map').append('svg')
+                .attr('width', width + 24)
+                .attr('height', height + 24)
+                .call(d3.zoom().scaleExtent([0.5, 3]).on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                }));
 
-        const g = svg.append('g').attr('transform', 'translate(12,12)');
+            const g = svg.append('g').attr('transform', 'translate(12,12)');
 
-        const simulation = d3.forceSimulation(nodes)
-            // bring linked nodes closer and strengthen links for tighter groups
-            .force('link', d3.forceLink(links).id(d => d.id).distance( d => 40 ).strength(1.2))
-            // reduce overall repulsion so clusters form more compactly
-            .force('charge', d3.forceManyBody().strength(-40))
-            .force('center', d3.forceCenter(width / 2, height / 2))
-            // temporary collision radius; will be updated after measuring label sizes
-            .force('collision', d3.forceCollide().radius(32))
-            // per-group positioning forces to nudge certain groups apart (MLOps vs Tools)
-            .force('groupX', d3.forceX(d => {
-                if (d.group === 'MLOps') return width * 0.26;
-                if (d.group === 'Tools') return width * 0.80;
-                return width / 2;
-            }).strength(0.06))
-            .force('groupY', d3.forceY(d => {
-                if (d.group === 'MLOps') return height * 0.55;
-                if (d.group === 'Tools') return height * 0.45;
-                return height / 2;
-            }).strength(0.02))
-            .on('tick', ticked);
+            const simulation = d3.forceSimulation(nodes)
+                // bring linked nodes closer and strengthen links for tighter groups
+                .force('link', d3.forceLink(links).id(d => d.id).distance( d => 40 ).strength(1.2))
+                // reduce overall repulsion so clusters form more compactly
+                .force('charge', d3.forceManyBody().strength(-40))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                // temporary collision radius; will be updated after measuring label sizes
+                .force('collision', d3.forceCollide().radius(32))
+                // per-group positioning forces to nudge certain groups apart (MLOps vs Tools)
+                .force('groupX', d3.forceX(d => {
+                    if (d.group === 'MLOps') return width * 0.26;
+                    if (d.group === 'Tools') return width * 0.80;
+                    return width / 2;
+                }).strength(0.06))
+                .force('groupY', d3.forceY(d => {
+                    if (d.group === 'MLOps') return height * 0.55;
+                    if (d.group === 'Tools') return height * 0.45;
+                    return height / 2;
+                }).strength(0.02))
+                .on('tick', ticked);
 
-        // no central person node — keep nodes free for layout
+            // no central person node — keep nodes free for layout
 
-        const link = g.append('g')
-            .attr('stroke', '#ccc')
-            .selectAll('line')
-            .data(links)
-            .join('line')
-            .attr('stroke-width', d => Math.sqrt(d.value));
+            const link = g.append('g')
+                .attr('stroke', '#e1dbcd')
+                .selectAll('line')
+                .data(links)
+                .join('line')
+                .attr('stroke-width', d => Math.sqrt(d.value));
 
-        const node = g.append('g')
-            .selectAll('g')
-            .data(nodes)
-            .join('g');
+            const node = g.append('g')
+                .selectAll('g')
+                .data(nodes)
+                .join('g');
 
-        // After labels are added we compute a radius per node so long labels fit inside the circle.
-        function computeRadii(){
-            node.each(function(d){
-                const textEl = d3.select(this).select('text').node();
-                const bbox = textEl.getBBox();
-                const r = Math.max(28, Math.max(bbox.width / 2 + 12, bbox.height / 2 + 8));
-                d.r = r;
-                d3.select(this).select('circle').attr('r', r);
+            // After labels are added we compute a radius per node so long labels fit inside the circle.
+            function computeRadii(){
+                node.each(function(d){
+                    const textEl = d3.select(this).select('text').node();
+                    const bbox = textEl.getBBox();
+                    const r = Math.max(28, Math.max(bbox.width / 2 + 12, bbox.height / 2 + 8));
+                    d.r = r;
+                    d3.select(this).select('circle').attr('r', r);
+                });
+                simulation.force('collision', d3.forceCollide().radius(d => (d.r || 28) + 4));
+                simulation.alpha(0.3).restart();
+            }
+
+            node.append('circle')
+                .attr('r', d => d.r || 28)
+                .attr('fill', d => color(d.group))
+                .attr('stroke', '#fdfcf8')
+                .attr('stroke-width', 2)
+                .on('click', (event, d) => highlightNeighbors(d))
+                .on('mouseover', showTooltip)
+                .on('mousemove', moveTooltip)
+                .on('mouseout', hideTooltip);
+
+            node.append('text')
+                .attr('dy', 4)
+                .attr('x', 0)
+                .attr('text-anchor', 'middle')
+                .style('pointer-events', 'none')
+                .style('font-size', '12px')
+                .style('font-weight', 500)
+                .style('font-family', 'Inter, sans-serif')
+                .style('fill', 'var(--text-dark)')
+                .text(d => d.id);
+
+            // compute radii now that text elements are in the DOM
+            computeRadii();
+
+            // --- Home forces: remember an initial layout and softly pull nodes back to it after drag ---
+            // start with zero strength; we'll capture positions shortly and enable a gentle pull
+            simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0));
+            simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0));
+
+            // capture a canonical layout shortly after initial stabilization
+            setTimeout(() => {
+                nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+                // enable a stronger home force so nodes return more quickly to their original spots
+                simulation.force('homeX', d3.forceX(d => d.x0).strength(0.12));
+                simulation.force('homeY', d3.forceY(d => d.y0).strength(0.12));
+                simulation.alpha(0.3).restart();
+            }, 900);
+
+            function ticked() {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            }
+
+            // dragging disabled by user request
+
+            // neighbor highlighting
+            const adjacency = {};
+            links.forEach(d => {
+                adjacency[`${d.source},${d.target}`] = true;
+                adjacency[`${d.target},${d.source}`] = true;
             });
-            simulation.force('collision', d3.forceCollide().radius(d => (d.r || 28) + 4));
-            simulation.alpha(0.3).restart();
-        }
 
-        node.append('circle')
-            .attr('r', d => d.r || 28)
-            .attr('fill', d => color(d.group))
-            .attr('stroke', '#fff')
-            .attr('stroke-width', 2)
-            .on('click', (event, d) => highlightNeighbors(d))
-            .on('mouseover', showTooltip)
-            .on('mousemove', moveTooltip)
-            .on('mouseout', hideTooltip);
+            function highlightNeighbors(nodeData){
+                node.selectAll('circle').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
+                node.selectAll('text').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
+                link.attr('stroke-opacity', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? 1 : 0.05)
+                    .attr('stroke', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? '#4d564c' : '#e1dbcd');
+                setTimeout(() => resetHighlight(), 4000);
+            }
 
-        node.append('text')
-            .attr('dy', 4)
-            .attr('x', 0)
-            .attr('text-anchor', 'middle')
-            .style('pointer-events', 'none')
-            .style('font-size', '12px')
-            .style('font-weight', 700)
-            .style('fill', 'var(--text-dark)')
-            .text(d => d.id);
+            // Tooltip element
+            const tooltip = d3.select('#skills-map').append('div')
+                .attr('id', 'skill-tooltip')
+                .style('position', 'absolute')
+                .style('pointer-events', 'none')
+                .style('background', 'var(--surface)')
+                .style('border', '1px solid var(--line)')
+                .style('padding', '10px 12px')
+                .style('border-radius', '10px')
+                .style('box-shadow', '0 12px 28px rgba(31,38,31,0.10)')
+                .style('max-width', '300px')
+                .style('line-height', '1.5')
+                .style('display', 'none')
+                .style('font-size', '13px')
+                .style('color', 'var(--text-dark)');
 
-        // compute radii now that text elements are in the DOM
-        computeRadii();
+            const descriptions = {
+                'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs. Comfortable productionizing models and writing reproducible data pipelines.',
+                'R': 'Statistical analysis, visualization and modeling workflows (tidyverse, ggplot2, plotly, tidymodels); building reproducible analysis pipelines and interactive dashboards. Applied R for exploratory analysis, reporting and lightweight web demos.',
+                'H2O': 'H2O.ai tools and AutoML for scalable model development and experimentation. Used for quick prototyping, distributed training, and automated model selection in production workflows.',
+                'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices. Experienced in query optimization and cost-aware schema design.',
+                'C++': 'Systems-level implementations and performance-focused components when low-level control is required. Used for high-performance libraries and native integrations.',
+                'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs. Comfortable building small interactive visualizations and prototypes.',
+                'Unix': 'Shell scripting, automation, cron/CI tasks, and general system tooling. Regularly use shells for job orchestration and environment setup.',
+                'PyTorch': 'Experiment development, model training loops, custom modules, and conversion for serving. Applied to research, prototyping and production model training pipelines.',
+                'TensorFlow': 'Model prototyping and select production workflows. Experienced in TF model conversion and serving when appropriate.',
+                'scikit-learn': 'Baseline modelling, pipelines, feature transforms and model evaluation. Used extensively for traditional ML baselines and quick iterations.',
+                'LLM Inference': 'Throughput and latency optimization, batching, kv-cache strategies, and serving best practices. I apply quantization, operator fusion and caching to reduce inference cost while preserving model quality.',
+                'RAG': 'Designing retrieval-augmented generation pipelines combining dense retrieval with contextual prompt engineering. Implemented vector indexing, chunking strategies, and hybrid retrieval to improve factuality and latency in long-context applications.',
+                'Multi-Agent': 'LangGraph-style agent orchestration, tool-calling coordination, and deterministic validators for planning systems. Built prototype multi-agent flows for orchestration and testing.',
+                'vLLM': 'vLLM: a high-performance LLM inference runtime focused on throughput and efficient memory usage. Used to benchmark KV-cache strategies and scale multi-instance low-latency deployments.',
+                'PagedAttention': 'PagedAttention: attention strategies that reduce memory footprint for long-context models. Applied in experiments to enable longer context windows with acceptable resource costs.',
+                'vLLM / KV-Cache': 'Implementing and benchmarking KV-cache strategies to reduce memory while preserving quality on LLM inference. Focused on practical tradeoffs between memory, latency and throughput.',
+                'Docker': 'Containerizing services, building multi-stage images, and local reproducible environments. Used extensively for dev/prod parity and CI pipeline images.',
+                'Kubernetes': 'Deployments, services, and basic rollout strategies for scaling model services. Experience with manifests, probes and rollout strategies for model endpoints.',
+                'Argo / ArgoCD': 'GitOps deployment workflows and Argo Workflows for ML pipeline automation. Built ML pipeline orchestration using Argo Workflows for retraining and batch jobs.',
+                'Airflow': 'Authoring DAGs for ETL and scheduled training; managing dependencies and alerts. Implemented monitoring and retry strategies for robust pipelines.',
+                'Kafka': 'Designing producer/consumer pipelines, topic partitioning, and streaming ingestion for real-time features. Used in feature pipelines and streaming ingestion for near-real-time models.',
+                'Spark': 'Distributed ETL and structured streaming for large-scale data processing. Applied for large-scale transformations and streaming feature engineering.',
+                'Snowflake': 'Data warehouse schema design, performance tuning, and cost-conscious querying. Experienced in leveraging Snowflake for analytical workloads and data sharing patterns.',
+                'AWS': 'S3-first storage patterns, SageMaker experiments, EC2 hosting and infra alignment for ML workloads. Familiar with IAM, cost management and scaling patterns.',
+                'MinIO': 'S3-compatible local/dev object storage and testing environments. Useful for local testing and CI workflows that mimic S3.',
+                'MLflow': 'Experiment tracking, model versioning and registry-driven deployment workflows. Used MLflow to track experiments and manage model lifecycle.',
+                'Drift Detection': 'Implementing statistical and model-based monitors to detect covariate/label drift and trigger retraining. Built alerting hooks and sample re-training flows.',
+                'W&B': 'Experiment tracking, metric dashboards and run comparisons. Used W&B for visualizing experiments and comparing runs across hyperparameters.',
+                'Grafana': 'Instrumentation dashboards and alerting for pipeline and model health. Created dashboards for latency, throughput and error monitoring.',
+                'Flask': 'Designing small REST APIs to serve models and tools. Built lightweight serving endpoints and internal tooling APIs.',
+                'Streamlit': 'Rapid demos and internal tools for model exploration and stakeholder demos. Useful for quick interactive prototypes.',
+                'Plotly / Matplotlib': 'Interactive visualizations and static plots for analysis and reporting. Used for exploratory analysis and stakeholder visualizations.',
+                'Power BI / Tableau': 'Business-facing dashboards and scheduled reporting. Built scheduled reports and dashboards for stakeholders.'
+            };
 
-        // --- Home forces: remember an initial layout and softly pull nodes back to it after drag ---
-        // start with zero strength; we'll capture positions shortly and enable a gentle pull
-        simulation.force('homeX', d3.forceX(d => d.x0 || width/2).strength(0));
-        simulation.force('homeY', d3.forceY(d => d.y0 || height/2).strength(0));
+            function ensureTwoSentences(text){
+                const parts = text.split('.').map(s => s.trim()).filter(Boolean);
+                if (parts.length >= 2) return text;
+                return text + (text.endsWith('.') ? ' ' : '. ') + 'Applied in production and research projects.';
+            }
 
-        // capture a canonical layout shortly after initial stabilization
-        setTimeout(() => {
-            nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
-            // enable a stronger home force so nodes return more quickly to their original spots
-            simulation.force('homeX', d3.forceX(d => d.x0).strength(0.12));
-            simulation.force('homeY', d3.forceY(d => d.y0).strength(0.12));
-            simulation.alpha(0.3).restart();
-        }, 900);
+            function showTooltip(event, d){
+                const raw = descriptions[d.id] || descriptions[d.id.replace(/\s*\(.*\)/,'')] || d.id;
+                const text = ensureTwoSentences(raw);
+                tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
+                moveTooltip(event);
+            }
 
-        function ticked() {
-            link
-                .attr('x1', d => d.source.x)
-                .attr('y1', d => d.source.y)
-                .attr('x2', d => d.target.x)
-                .attr('y2', d => d.target.y);
+            function moveTooltip(event){
+                const map = document.getElementById('skills-map');
+                const rect = map.getBoundingClientRect();
+                const x = event.clientX - rect.left + 12;
+                const y = event.clientY - rect.top + 12;
+                tooltip.style('left', x + 'px').style('top', y + 'px');
+            }
 
-            node.attr('transform', d => `translate(${d.x},${d.y})`);
-        }
+            function hideTooltip(){ tooltip.style('display', 'none'); }
 
-        // dragging disabled by user request
+            // Legend (HTML overlay)
+            const legend = d3.select('#skills-map').append('div')
+                .attr('class', 'skills-legend')
+                .style('position', 'absolute')
+                .style('right', '18px')
+                .style('top', '18px')
+                .style('background', 'rgba(253,252,248,0.95)')
+                .style('padding', '10px 12px')
+                .style('border', '1px solid var(--line)')
+                .style('border-radius', '10px');
 
-        // neighbor highlighting
-        const adjacency = {};
-        links.forEach(d => {
-            adjacency[`${d.source},${d.target}`] = true;
-            adjacency[`${d.target},${d.source}`] = true;
-        });
+            const categories = Object.keys(categoryColor);
+            categories.forEach(cat => {
+                const item = legend.append('div').style('display', 'flex').style('align-items','center').style('gap','8px').style('margin-bottom','6px').style('cursor','pointer');
+                item.append('div').style('width','12px').style('height','12px').style('border-radius','3px').style('background', categoryColor[cat]);
+                item.append('div').style('font-size','13px').style('color','var(--text-dark)').text(cat);
+                item.on('click', () => toggleCategory(cat));
+            });
 
-        function highlightNeighbors(nodeData){
-            node.selectAll('circle').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
-            node.selectAll('text').attr('opacity', d => (d.id === nodeData.id || adjacency[`${nodeData.id},${d.id}`]) ? 1 : 0.15);
-            link.attr('stroke-opacity', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? 1 : 0.05)
-                .attr('stroke', d => (d.source.id === nodeData.id || d.target.id === nodeData.id) ? '#333' : '#ccc');
-            setTimeout(() => resetHighlight(), 4000);
-        }
+            // (Removed size legend — nodes are uniform size now)
 
-        // Tooltip element
-        const tooltip = d3.select('#skills-map').append('div')
-            .attr('id', 'skill-tooltip')
-            .style('position', 'absolute')
-            .style('pointer-events', 'none')
-            .style('background', 'white')
-            .style('border', '1px solid rgba(0,0,0,0.08)')
-            .style('padding', '8px 10px')
-            .style('border-radius', '8px')
-            .style('box-shadow', '0 6px 20px rgba(0,0,0,0.08)')
-            .style('display', 'none')
-            .style('font-size', '14px')
-            .style('color', 'var(--text-dark)');
+            const hiddenCats = new Set();
+            function toggleCategory(cat){
+                if (hiddenCats.has(cat)) hiddenCats.delete(cat); else hiddenCats.add(cat);
+                node.style('display', d => hiddenCats.has(d.group) ? 'none' : '');
+                link.style('display', l => (hiddenCats.has(l.source.group) || hiddenCats.has(l.target.group)) ? 'none' : '');
+            }
 
-        const descriptions = {
-            'Python': 'Experienced with NumPy, pandas, and scripting for ETL/data pipelines; PyTorch and TensorFlow for model development; building reproducible workflows and lightweight APIs. Comfortable productionizing models and writing reproducible data pipelines.',
-            'R': 'Statistical analysis, visualization and modeling workflows (tidyverse, ggplot2, plotly, tidymodels); building reproducible analysis pipelines and interactive dashboards. Applied R for exploratory analysis, reporting and lightweight web demos.',
-            'H2O': 'H2O.ai tools and AutoML for scalable model development and experimentation. Used for quick prototyping, distributed training, and automated model selection in production workflows.',
-            'SQL': 'Analytical query tuning, CTEs and window functions, clustering/partitioning strategies, and Snowflake performance practices. Experienced in query optimization and cost-aware schema design.',
-            'C++': 'Systems-level implementations and performance-focused components when low-level control is required. Used for high-performance libraries and native integrations.',
-            'JavaScript': 'Frontend integration, DOM manipulation, and wiring REST APIs for demos and small UIs. Comfortable building small interactive visualizations and prototypes.',
-            'Unix': 'Shell scripting, automation, cron/CI tasks, and general system tooling. Regularly use shells for job orchestration and environment setup.',
-            'PyTorch': 'Experiment development, model training loops, custom modules, and conversion for serving. Applied to research, prototyping and production model training pipelines.',
-            'TensorFlow': 'Model prototyping and select production workflows. Experienced in TF model conversion and serving when appropriate.',
-            'scikit-learn': 'Baseline modelling, pipelines, feature transforms and model evaluation. Used extensively for traditional ML baselines and quick iterations.',
-            'LLM Inference': 'Throughput and latency optimization, batching, kv-cache strategies, and serving best practices. I apply quantization, operator fusion and caching to reduce inference cost while preserving model quality.',
-            'RAG': 'Designing retrieval-augmented generation pipelines combining dense retrieval with contextual prompt engineering. Implemented vector indexing, chunking strategies, and hybrid retrieval to improve factuality and latency in long-context applications.',
-            'Multi-Agent': 'LangGraph-style agent orchestration, tool-calling coordination, and deterministic validators for planning systems. Built prototype multi-agent flows for orchestration and testing.',
-            'vLLM': 'vLLM: a high-performance LLM inference runtime focused on throughput and efficient memory usage. Used to benchmark KV-cache strategies and scale multi-instance low-latency deployments.',
-            'PagedAttention': 'PagedAttention: attention strategies that reduce memory footprint for long-context models. Applied in experiments to enable longer context windows with acceptable resource costs.',
-            'vLLM / KV-Cache': 'Implementing and benchmarking KV-cache strategies to reduce memory while preserving quality on LLM inference. Focused on practical tradeoffs between memory, latency and throughput.',
-            'Docker': 'Containerizing services, building multi-stage images, and local reproducible environments. Used extensively for dev/prod parity and CI pipeline images.',
-            'Kubernetes': 'Deployments, services, and basic rollout strategies for scaling model services. Experience with manifests, probes and rollout strategies for model endpoints.',
-            'Argo / ArgoCD': 'GitOps deployment workflows and Argo Workflows for ML pipeline automation. Built ML pipeline orchestration using Argo Workflows for retraining and batch jobs.',
-            'Airflow': 'Authoring DAGs for ETL and scheduled training; managing dependencies and alerts. Implemented monitoring and retry strategies for robust pipelines.',
-            'Kafka': 'Designing producer/consumer pipelines, topic partitioning, and streaming ingestion for real-time features. Used in feature pipelines and streaming ingestion for near-real-time models.',
-            'Spark': 'Distributed ETL and structured streaming for large-scale data processing. Applied for large-scale transformations and streaming feature engineering.',
-            'Snowflake': 'Data warehouse schema design, performance tuning, and cost-conscious querying. Experienced in leveraging Snowflake for analytical workloads and data sharing patterns.',
-            'AWS': 'S3-first storage patterns, SageMaker experiments, EC2 hosting and infra alignment for ML workloads. Familiar with IAM, cost management and scaling patterns.',
-            'MinIO': 'S3-compatible local/dev object storage and testing environments. Useful for local testing and CI workflows that mimic S3.',
-            'MLflow': 'Experiment tracking, model versioning and registry-driven deployment workflows. Used MLflow to track experiments and manage model lifecycle.',
-            'Drift Detection': 'Implementing statistical and model-based monitors to detect covariate/label drift and trigger retraining. Built alerting hooks and sample re-training flows.',
-            'W&B': 'Experiment tracking, metric dashboards and run comparisons. Used W&B for visualizing experiments and comparing runs across hyperparameters.',
-            'Grafana': 'Instrumentation dashboards and alerting for pipeline and model health. Created dashboards for latency, throughput and error monitoring.',
-            'Flask': 'Designing small REST APIs to serve models and tools. Built lightweight serving endpoints and internal tooling APIs.',
-            'Streamlit': 'Rapid demos and internal tools for model exploration and stakeholder demos. Useful for quick interactive prototypes.',
-            'Plotly / Matplotlib': 'Interactive visualizations and static plots for analysis and reporting. Used for exploratory analysis and stakeholder visualizations.',
-            'Power BI / Tableau': 'Business-facing dashboards and scheduled reporting. Built scheduled reports and dashboards for stakeholders.'
-        };
+            function resetHighlight(){
+                node.selectAll('circle').attr('opacity', 1);
+                node.selectAll('text').attr('opacity', 1);
+                link.attr('stroke-opacity', 1).attr('stroke', '#e1dbcd');
+            }
 
-        function ensureTwoSentences(text){
-            const parts = text.split('.').map(s => s.trim()).filter(Boolean);
-            if (parts.length >= 2) return text;
-            return text + (text.endsWith('.') ? ' ' : '. ') + 'Applied in production and research projects.';
-        }
+            // responsive on resize
+            window.addEventListener('resize', () => {
+                const w = document.getElementById('skills-map').clientWidth - 24;
+                const h = document.getElementById('skills-map').clientHeight - 24;
+                svg.attr('width', w + 24).attr('height', h + 24);
+                simulation.force('center', d3.forceCenter(w/2, h/2));
+                // update groupX/groupY targets on resize so group separation scales with viewport
+                simulation.force('groupX', d3.forceX(d => {
+                    if (d.group === 'MLOps') return w * 0.28;
+                    if (d.group === 'Tools') return w * 0.78;
+                    return w / 2;
+                }).strength(0.12));
+                simulation.force('groupY', d3.forceY(d => {
+                    if (d.group === 'MLOps') return h * 0.55;
+                    if (d.group === 'Tools') return h * 0.45;
+                    return h / 2;
+                }).strength(0.03));
+                simulation.alpha(0.3).restart();
+            });
 
-        function showTooltip(event, d){
-            const raw = descriptions[d.id] || descriptions[d.id.replace(/\s*\(.*\)/,'')] || d.id;
-            const text = ensureTwoSentences(raw);
-            tooltip.style('display', 'block').html(`<strong>${d.id}</strong><div style="margin-top:6px; color:var(--text-light);">${text}</div>`);
-            moveTooltip(event);
-        }
+            // overlays removed per user request
 
-        function moveTooltip(event){
-            const map = document.getElementById('skills-map');
-            const rect = map.getBoundingClientRect();
-            const x = event.clientX - rect.left + 12;
-            const y = event.clientY - rect.top + 12;
-            tooltip.style('left', x + 'px').style('top', y + 'px');
-        }
+        })();
+        </script>
 
-        function hideTooltip(){ tooltip.style('display', 'none'); }
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-inner">
+                    <div>
+                        <h2>Ready to Work Together?</h2>
+                        <p>Let's leverage these skills to build impactful solutions.</p>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary">Contact Me</a>
+                </div>
+            </div>
+        </section>
 
-        // Legend (HTML overlay)
-        const legend = d3.select('#skills-map').append('div')
-            .attr('class', 'skills-legend')
-            .style('position', 'absolute')
-            .style('right', '18px')
-            .style('top', '18px')
-            .style('background', 'rgba(255,255,255,0.95)')
-            .style('padding', '8px 10px')
-            .style('border-radius', '10px')
-            .style('box-shadow', '0 6px 20px rgba(0,0,0,0.06)');
-
-        const categories = Object.keys(categoryColor);
-        categories.forEach(cat => {
-            const item = legend.append('div').style('display', 'flex').style('align-items','center').style('gap','8px').style('margin-bottom','6px').style('cursor','pointer');
-            item.append('div').style('width','12px').style('height','12px').style('border-radius','3px').style('background', categoryColor[cat]);
-            item.append('div').style('font-size','13px').style('color','var(--text-dark)').text(cat);
-            item.on('click', () => toggleCategory(cat));
-        });
-
-        // (Removed size legend — nodes are uniform size now)
-
-        const hiddenCats = new Set();
-        function toggleCategory(cat){
-            if (hiddenCats.has(cat)) hiddenCats.delete(cat); else hiddenCats.add(cat);
-            node.style('display', d => hiddenCats.has(d.group) ? 'none' : '');
-            link.style('display', l => (hiddenCats.has(l.source.group) || hiddenCats.has(l.target.group)) ? 'none' : '');
-        }
-
-        function resetHighlight(){
-            node.selectAll('circle').attr('opacity', 1);
-            node.selectAll('text').attr('opacity', 1);
-            link.attr('stroke-opacity', 1).attr('stroke', '#ccc');
-        }
-
-        // responsive on resize
-        window.addEventListener('resize', () => {
-            const w = document.getElementById('skills-map').clientWidth - 24;
-            const h = document.getElementById('skills-map').clientHeight - 24;
-            svg.attr('width', w + 24).attr('height', h + 24);
-            simulation.force('center', d3.forceCenter(w/2, h/2));
-            // update groupX/groupY targets on resize so group separation scales with viewport
-            simulation.force('groupX', d3.forceX(d => {
-                if (d.group === 'MLOps') return w * 0.28;
-                if (d.group === 'Tools') return w * 0.78;
-                return w / 2;
-            }).strength(0.12));
-            simulation.force('groupY', d3.forceY(d => {
-                if (d.group === 'MLOps') return h * 0.55;
-                if (d.group === 'Tools') return h * 0.45;
-                return h / 2;
-            }).strength(0.03));
-            simulation.alpha(0.3).restart();
-        });
-
-        // overlays removed per user request
-
-    })();
-    </script>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Work Together?</h2>
-            <p>Let's leverage these skills to build impactful solutions.</p>
-            <a href="contact.html" class="btn btn-primary">Contact Me</a>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

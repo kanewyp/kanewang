@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kane Wang | Data Science &amp; Applied AI</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">Kane Wang</a>
             </div>
             <ul class="nav-menu" id="primary-navigation">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="pages/projects.html">Projects</a></li>
                 <li><a href="pages/experience.html">Experience</a></li>
                 <li><a href="pages/about.html">About</a></li>
@@ -30,82 +33,88 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content" style="display: flex; flex-direction: column; align-items: center; gap: 30px;">
-            <div class="image-placeholder">
-                <img src="images/profile.png" alt="Kane Wang" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+    <main>
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <h1 class="hero-title">Kane Wang</h1>
+                    <p class="hero-subtitle">Live, love, laugh and leverage AI for something cool and meaningful</p>
+                    <div class="hero-buttons">
+                        <a href="pages/projects.html" class="btn btn-primary">Explore my work</a>
+                        <a href="pages/experience.html" class="btn btn-secondary">Experience</a>
+                        <a href="pages/about.html" class="text-link">A little about me</a>
+                    </div>
+                </div>
+                <figure class="hero-portrait">
+                    <img src="images/profile.png" alt="Kane Wang" width="433" height="414">
+                </figure>
             </div>
-            <h1 class="hero-title">Kane Wang</h1>
-            <p class="hero-subtitle">Live, love, laugh and leverage AI for something cool and meaningful</p>
-            <div class="hero-buttons">
-                <a href="pages/projects.html" class="btn btn-primary">Explore my work</a>
-                <a href="pages/experience.html" class="btn btn-secondary">Experience</a>
-                <a href="pages/about.html" class="text-link">A little about me</a>
-            </div>
-        </div>
-        <div class="hero-background">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
-            <div class="blob blob-3"></div>
-        </div>
-    </section>
+        </header>
 
+        <!-- Featured Projects Section -->
+        <section class="section featured-projects">
+            <div class="container">
+                <header class="section-head">
+                    <p class="section-eyebrow">On my desk now</p>
+                    <h2>Current work, growing in different directions</h2>
+                </header>
 
-    <!-- Featured Projects Section -->
-    <section class="featured-projects">
-        <div class="container">
-            <p class="section-eyebrow">On my desk now</p>
-            <h2>Current work, growing in different directions</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
+                <article class="feature project-card-featured">
+                    <div class="feature-media">
                         <video class="featured-demo" controls preload="metadata" playsinline aria-label="MorningTide project demonstration">
                             <source src="videos/demo_MorningTide.mp4" type="video/mp4">
                             Your browser does not support embedded video. <a href="videos/demo_MorningTide.mp4">Open the MorningTide demo video.</a>
                         </video>
                     </div>
-                    <p class="project-status">Active personal project</p>
-                    <h3>MorningTide</h3>
-                    <p>A personal journaling tool exploring emotional patterns and source-grounded prompts for preparing for therapy conversations.</p>
-                    <a href="pages/projects.html#morningtide" class="project-link">See the project and demo →</a>
-                </div>
-                <div class="project-card">
-                    <div class="project-image project-image-illustration" aria-hidden="true">
-                        <span>Steel slag · literature · small language models</span>
+                    <div class="feature-body">
+                        <p class="project-status">Active personal project</p>
+                        <h3>MorningTide</h3>
+                        <p>A personal journaling tool exploring emotional patterns and source-grounded prompts for preparing for therapy conversations.</p>
+                        <a href="pages/projects.html#morningtide" class="project-link">See the project and demo →</a>
                     </div>
-                    <p class="project-status">In progress · Columbia capstone</p>
-                    <h3>Steel-slag SLM</h3>
-                    <p>Exploring a literature-grounded assistant for understanding when steel-slag material predictions can be trusted.</p>
-                    <a href="pages/projects.html#steel-slag-slm" class="project-link">Follow the capstone →</a>
-                </div>
-                <div class="project-card">
-                    <div class="project-image project-image-illustration" aria-hidden="true">
-                        <span>Teacher judge → distilled judge → bias audit</span>
-                    </div>
-                    <p class="project-status">In progress · research</p>
-                    <h3>Bias in LLM distillation</h3>
-                    <p>A planned benchmark study of how position, length, and self-preference bias may transfer when LLM judges are distilled.</p>
-                    <a href="pages/projects.html#fme-bias-study" class="project-link">Explore the research question →</a>
-                </div>
-            </div>
-            <div class="section-action">
-                <a href="pages/projects.html" class="btn btn-secondary">Browse all projects</a>
-            </div>
-        </div>
-    </section>
+                </article>
 
-    
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="project-image project-image-illustration" aria-hidden="true">
+                            <span>Steel slag · literature · small language models</span>
+                        </div>
+                        <p class="project-status">In progress · Columbia capstone</p>
+                        <h3>Steel-slag SLM</h3>
+                        <p>Exploring a literature-grounded assistant for understanding when steel-slag material predictions can be trusted.</p>
+                        <a href="pages/projects.html#steel-slag-slm" class="project-link">Follow the capstone →</a>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-image project-image-illustration" aria-hidden="true">
+                            <span>Teacher judge → distilled judge → bias audit</span>
+                        </div>
+                        <p class="project-status">In progress · research</p>
+                        <h3>Bias in LLM distillation</h3>
+                        <p>A planned benchmark study of how position, length, and self-preference bias may transfer when LLM judges are distilled.</p>
+                        <a href="pages/projects.html#fme-bias-study" class="project-link">Explore the research question →</a>
+                    </article>
+                </div>
+
+                <div class="section-action">
+                    <a href="pages/projects.html" class="btn btn-secondary">Browse all projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    <p class="footer-brand">Kane Wang</p>
+                </div>
+                <div class="footer-section">
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="https://github.com/kanewyp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kanewyp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/kanewang822" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
